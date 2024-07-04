@@ -1,6 +1,6 @@
 export const ENV = {
-    //API_URL: 'https://lizard-server.vercel.app',
-    API_URL: 'https://dwiserver.vercel.app',
+    API_URL: 'http://localhost:3000',
+    //API_URL: 'https://dwiserver.vercel.app',
     ENDPOINTS:{
         LOGIN: 'api/auth/signin',
         REGISTER: 'api/auth/signup',

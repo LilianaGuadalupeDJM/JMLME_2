@@ -23,7 +23,7 @@ const changePassword = async (token, currentPassword, newPassword) => {
     try {
         const decoded = jwtDecode(token);
         const userId = decoded.id;
-        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${userId}/change-password`;
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/change-password/${userId}`;
 
 
         const response = await authFetch(url, {
