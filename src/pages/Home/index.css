@@ -1,0 +1,65 @@
+/* Reset de estilos básico para el cuerpo y el margen */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para el layout principal */
+.home-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el encabezado de Home */
+.home-header {
+    background: #001529;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrar contenido horizontalmente */
+    flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+    color: white;
+}
+
+.home-header .logo-container {
+    text-align: center; /* Centrar el logo */
+    margin-bottom: 16px; /* Espacio debajo del logo */
+}
+
+.home-header .logo {
+    width: 160px; /* Ajustar el tamaño del logo */
+    height: auto; /* Mantener la proporción */
+    margin-right: 20px; /* Espacio entre el logo y el texto si es necesario */
+}
+
+.home-greeting {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+}
+
+/* Estilos para el contenido */
+.home-content {
+    padding: 24px;
+    text-align: center; /* Centrar el contenido */
+}
+
+/* Estilos para el carrusel */
+.carousel {
+    display: flex;
+    overflow-x: auto; /* Permitir desplazamiento horizontal */
+}
+
+.carousel img {
+    flex: 0 0 auto; /* No permitir que las imágenes se redimensionen */
+    width: 1500px; /* Ajustar el ancho máximo de las imágenes */
+    margin-right: 0px; /* Espacio entre cada imagen */
+    height: 350px;
+}
+
+/* Estilos específicos para el logo de Nav */
+.nav-header .logo {
+    width: 80px; /* Tamaño del logo en Nav */
+    height: auto; /* Mantener la proporción */
+}

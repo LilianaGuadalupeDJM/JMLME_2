@@ -1,0 +1,12 @@
+.login-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajusta el alto según necesites */
+}
+
+.responsive-card {
+    width: 300px; /* Ancho del card */
+    margin: auto; /* Centra el card horizontalmente */
+    padding: 20px; /* Añade un poco de espacio interno */
+}

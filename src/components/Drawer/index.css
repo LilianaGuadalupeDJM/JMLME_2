@@ -1,0 +1,8 @@
+.drawer-content {
+    color: #000; /* Color negro para el texto */
+}
+
+.drawer-content p {
+    margin: 0;
+    padding: 10px 0; /* Añade un poco de espacio entre los párrafos */
+}
