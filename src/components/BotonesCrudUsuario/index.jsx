@@ -4,14 +4,14 @@ import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant
 import { useNavigate } from 'react-router-dom';
 //import { DropUser } from '../../services/users'; 
 
-const BotonesCrud = ({ selectedUserId }) => {
+const BotonesCrudUsuario = ({ selectedUserId }) => {
 
     
 
     const BajaUser = async () => {
         if (selectedUserId) {
             try {
-                const response = await DropUser(selectedUserId);
+                //const response = await DropUser(selectedUserId);
                 console.log('Eliminación exitosa', response.data);
                 notification.success({
                     message: 'Usuario Eliminado',
@@ -90,7 +90,6 @@ const BotonesCrud = ({ selectedUserId }) => {
             </Space>
 
             <Modal title="Alta de Usuario" open={isModalAlta} onOk={handleOk} onCancel={handleCancel}>
-                <AddUser />
             </Modal>
             <Modal title="Editar Usuario" open={isModalCambio} onOk={handleCambioOk} onCancel={handleCambioCancel}>
                 {selectedUserId && <EditUser id={selectedUserId} onClose={handleCancel} />}
@@ -99,4 +98,4 @@ const BotonesCrud = ({ selectedUserId }) => {
     );
 };
 
-export default BotonesCrud;
+export default BotonesCrudUsuario;

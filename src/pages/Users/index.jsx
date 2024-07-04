@@ -5,6 +5,9 @@ import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
 //import getAllUsers
+import { usersService } from '../../services/users';
+
+
 const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
@@ -34,10 +37,7 @@ const Usuarios = () => {
             title: 'Nombre de Usuario',
             dataIndex: 'username'
         },
-        {
-            title: 'Contraseña',
-            dataIndex: 'password'
-        },
+        
         {
             title: 'Correo Electrónico',
             dataIndex: 'email'
@@ -47,14 +47,18 @@ const Usuarios = () => {
             dataIndex: 'roles',
             render: (roles, record) => (
                 <span>
-                    {roles.map(role => (
-                        <Tag color={getColor(role._id)} key={role._id}>
-                            {getRoleName(role._id)}
-                        </Tag>
-                    ))}
+                    {roles.length > 0 ? (
+                        roles.map(role => (
+                            <Tag color={getColor(role._id)} key={role._id}>
+                                {getRoleName(role._id)}
+                            </Tag>
+                        ))
+                    ) : (
+                        <Tag color="red">sin usuario</Tag>
+                    )}
                 </span>
             ),
-        },
+        },        
         {
             title: 'Fecha de Creación',
             dataIndex: 'createdAt'
@@ -89,7 +93,7 @@ const Usuarios = () => {
 
     const fetchUsers = async () => {
         try {
-            const data = await getAllUsers(token);
+            const data = await usersService.getAllUsers(token);
             const usersWithKey = data.map(user => ({
                 ...user,
                 key: user._id,
@@ -100,6 +104,7 @@ const Usuarios = () => {
             console.error('Error al obtener usuarios', error);
         }
     };
+    
 
     useEffect(() => {
         fetchUsers();
@@ -113,6 +118,8 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
+            <BotonesCrudUsuario/>
+
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
