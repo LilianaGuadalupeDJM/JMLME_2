@@ -13,6 +13,12 @@
     padding-top: 10px;
 }
 
+.header-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 .header-right {
     display: flex;
     align-items: center;
@@ -55,4 +61,15 @@
 .profesores-button:hover {
     background-color: #d1e0e0;
     color: #01859a;
+}
+
+.avatar-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.username {
+    margin-left: 10px;
+    color: #fff; /* Color del texto */
 }
