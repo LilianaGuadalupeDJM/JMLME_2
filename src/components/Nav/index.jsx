@@ -36,8 +36,8 @@ const Nav = ({ greeting }) => {
                 {user ? (
                     <div className="avatar-dropdown">
                         <Button
-                            className={`nav-button ${location.pathname === '/perfil' ? 'active' : ''}`}
-                            onClick={() => handleClick('/perfil')}
+                            className={`nav-button ${location.pathname === '/cambiar-datos' ? 'active' : ''}`}
+                            onClick={() => handleClick('/cambiar-datos')}
                         >
                             Perfil
                         </Button>

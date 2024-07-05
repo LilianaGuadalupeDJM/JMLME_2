@@ -5,7 +5,6 @@ import authService from '../../services/auth';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import { storageController } from '../../services/token';
-import './EditarUsuario.css';
 
 const EditarUsuario = () => {
     const { user, logout, updateUser } = useAuth();
@@ -36,12 +35,9 @@ const EditarUsuario = () => {
             message.error('Hubo un problema al guardar los cambios. Por favor, intenta nuevamente.');
         }
     };
-   
 
     return (
         <>
-       
-           
             
             <div className="change-user-form">
             <h2 style={{ color: 'black' }}>Editar Usuario</h2>
@@ -71,8 +67,6 @@ const EditarUsuario = () => {
             </div>
         </>
     );
-   
 };
-
 
 export default EditarUsuario;
