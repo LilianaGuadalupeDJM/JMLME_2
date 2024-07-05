@@ -29,7 +29,7 @@ const ChangePassword = () => {
     }}>
       <EditarUsuario/>
       <Button type="primary" onClick={showModal}>
-        Cambiar contraseña
+        Cambiar contraseña 
       </Button>
       <Modal
         title="Cambiar contraseña"

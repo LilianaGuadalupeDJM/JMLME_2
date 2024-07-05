@@ -1,14 +1,78 @@
 .regis-component {
+    width: 80vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ajusta el alto según necesites */
+    background-color: #ffffff; /* Fondo principal */
 }
 
-.responsive-card{
+.responsive-card {
+    width: 400px; /* Ajuste del ancho de la tarjeta */
+    background-color: #166A79;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.23); /* Sombra 3D */
+   
+}
+
+.register-form {
+    padding: 50px 35px;
+}
+
+.register-form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
     text-align: center;
-    width: 80%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    color: #ffffff; /* Texto del título */
+    text-shadow: 2px 2px 5px rgba(223, 208, 208, 0.5); /* Sombra para el texto */
+}
+
+.register-form-item {
+    margin-top: 30px;
+}
+
+
+
+
+
+.register-form-item input::placeholder {
+    color: #e5e5e5; /* Color del placeholder */
+}
+
+.register-form-button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #0a0909; /* Color de fondo del botón */
+    color: #dfddf1; /* Color del texto del botón */
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para el botón */
+    transition: all 0.3s ease; /* Suavizado para la animación de hover */
+}
+
+.register-form-button:hover {
+    background-color: #ffffff; /* Color de fondo del botón al pasar el mouse */
+    color: #080710; /* Color del texto del botón al pasar el mouse */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra aumentada al pasar el mouse */
+}
+
+.register-form-error {
+    color: red; /* Color del mensaje de error */
+}
+
+.register-form-register {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ffffff; /* Color del texto del enlace de registro */
+}
+
+.register-form-register a {
+    color: #f09819; /* Color del enlace de registro */
+}
+
+.register-form-register a:hover {
+    color: #f09819; /* Color del enlace de registro al pasar el mouse */
 }

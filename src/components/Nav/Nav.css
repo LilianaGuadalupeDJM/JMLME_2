@@ -2,15 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    background-color: #01859a;
-    height: 80px;
-}
-
-.logo {
-    height: 70px;
-    width: auto;
-    padding-top: 10px;
+    padding: 10px 20px;
+    color: white; /* Color del texto */
 }
 
 .header-right {
@@ -18,41 +11,43 @@
     align-items: center;
 }
 
-.header-right h2 {
-    margin-left: 10px;
-    color: #fff;
+.logo {
+    width: 90px;
+    height: auto;
 }
 
-.logout-button, .login-button {
-    background-color: #ffffff;
-    color: #000000; /* Color de texto negro */
+.username {
+    margin: 0 10px;
+}
+
+.nav-button {
+    margin-left: 15px;
+    color: white;
     border: none;
-    margin-left: 20px;
+    background-color: transparent;
 }
 
-.logout-button:hover, .login-button:hover {
-    background-color: #d1e0e0;
-    color: #000000; /* Cambia el color de texto al pasar el mouse */
+.nav-button:hover,
+.nav-button:focus,
+.nav-button:active {
+    color: #166A79; /* Color azul al pasar el mouse, al estar enfocado y al ser clickeado */
 }
 
-.nav-link {
-    margin-left: 20px;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    color: #d1e0e0;
-}
-
-.profesores-button {
-    background-color: #ffffff;
-    color: #01859a;
+.profesores {
+    margin-left: 15px;
+    color: white;
     border: none;
-    margin-left: 20px;
+    background-color: transparent;
 }
 
-.profesores-button:hover {
-    background-color: #d1e0e0;
-    color: #01859a;
+.profesores:hover,
+.profesores:focus,
+.profesores:active {
+    color: #166A79; /* Color azul al pasar el mouse, al estar enfocado y al ser clickeado */
+}
+
+/* Clase para el botón activo */
+.nav-button.active,
+.profesores.active {
+    color: #166A79;
 }

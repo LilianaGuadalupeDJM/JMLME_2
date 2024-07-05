@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import smile from '../../assets/logo.png';
+import smile from '../../assets/logo equipo.jpg';
 
 const ImageLogin = () => {
     const navigate = useNavigate();
