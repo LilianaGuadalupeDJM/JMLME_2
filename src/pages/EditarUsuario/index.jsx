@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import { storageController } from '../../services/token';
+import './EditarUsuario.css';
+import FormChangePassword from "../../components/FormChangePassword"; // Asegúrate de ajustar la ruta según la estructura de tu proyecto
 
 const EditarUsuario = () => {
     const { user, logout, updateUser } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
     const onFinish = async (values) => {
         const token = await storageController.getToken();
@@ -38,10 +53,11 @@ const EditarUsuario = () => {
 
     return (
         <>
-            
+            <Nav   greeting={`Hola, ${user ? user.username : 'Visitante'}`} /> 
+
             <div className="change-user-form">
-            <h2 style={{ color: 'black' }}>Editar Usuario</h2>
-            <Form
+                <h2 style={{ color: 'black' }}>Editar Usuario</h2>
+                <Form
                     name="edit_user"
                     initialValues={{ username: user.username, email: user.email }}
                     onFinish={onFinish}
@@ -65,6 +81,28 @@ const EditarUsuario = () => {
                     </Form.Item>
                 </Form>
             </div>
+
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '20px'
+            }}>
+                <Button type="primary" onClick={showModal}>
+                    Cambiar contraseña
+                </Button>
+            </div>
+
+            <Modal
+                title="Cambiar contraseña"
+                visible={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={null}
+                width={650}
+            >
+                <FormChangePassword closeModal={handleCancel} />
+            </Modal>
         </>
     );
 };

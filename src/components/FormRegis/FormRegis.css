@@ -37,7 +37,7 @@
 
 
 .register-form-item input::placeholder {
-    color: #e5e5e5; /* Color del placeholder */
+    color: #000000; /* Color del placeholder */
 }
 
 .register-form-button {

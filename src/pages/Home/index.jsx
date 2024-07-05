@@ -20,7 +20,7 @@ const Home = () => {
 
     return (
         <>
-            <Nav     />
+            <Nav    greeting={`Hola, ${user ? user.username : 'Visitante'}`}   />
             <div className="home-layout">
                 <header className="home-header">
                     <h1 className="home-greeting">Bienvenido {user.username}</h1>
