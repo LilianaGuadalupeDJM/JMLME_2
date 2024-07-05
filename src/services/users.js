@@ -45,9 +45,29 @@ const changePassword = async (token, currentPassword, newPassword) => {
         throw error;
     }
 }
+const getAllUsers = async (token) => {
+    try {
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}`;
+        const response = await authFetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` // Corregido aquí
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error al traer los usuarios', error); // Corregido aquí
+        throw error;
+    }
+};
+
 
 export const usersService = {
     getMe,
     changePassword,
-    
+    getAllUsers,
 }
