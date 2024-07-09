@@ -1,8 +1,38 @@
+
 .drawer-content {
     color: #000; /* Color negro para el texto */
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en una columna */
+    height: 100%; /* Asegura que el contenedor use el alto completo del drawer */
+}
+
+.drawer-main {
+    flex: 1; /* Ocupa el espacio disponible */
 }
 
 .drawer-content p {
     margin: 0;
     padding: 10px 0; /* Añade un poco de espacio entre los párrafos */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.drawer-content .label {
+    font-weight: bold; /* Resalta el texto en negritas */
+}
+
+.modify-button {
+    background-color: #13c2c2; /* Color de fondo inicial del botón */
+    border-color: #10b4b4; /* Color del borde del botón */
+    margin-top: 10px; /* Espacio superior para el botón */
+}
+
+.modify-button:hover {
+    background-color:#00676e; /* Color de fondo del botón al pasar el mouse */
+    border-color: #006d75; /* Color del borde del botón al pasar el mouse */
+}
+
+.logout-button {
+    background-color: #d1090c; /* Color de fondo inicial para el botón de cerrar sesión */
+    border-color: #d1090c;  /* Color del borde del botón de cerrar sesión */
+    margin-top: auto; /* Empuja el botón hacia la parte inferior */
 }

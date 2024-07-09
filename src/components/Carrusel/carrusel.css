@@ -1,0 +1,17 @@
+.carousel-container {
+    width: 80%; /* Ajusta el ancho del contenedor según sea necesario */
+    max-width: 700px; /* Ancho máximo para el contenedor del carrusel */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+
+.carousel .slick-slide {
+    display: flex;
+    justify-content: center; /* Centra los items del carrusel */
+}
+
+.carousel-item img {
+    width: 100%; /* Ajusta la imagen al ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto */
+    object-fit: cover; /* Mantiene la calidad y recorta si es necesario */
+    border-radius: 8px; /* Bordes redondeados (opcional) */
+}
