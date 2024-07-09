@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Menu, Dropdown, Avatar } from 'antd';
+import { Button, Menu, Dropdown, Avatar, Modal } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/logo.png';
 import avatarImage from '../../assets/lili4.jpg'; // Importa la imagen del avatar
@@ -11,18 +11,17 @@ const Nav = ({ greeting }) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
-    const showModal= () => {
+    const handleLoginClick = () => {
+        navigate('/login');
+    };
+
+    const showModal = () => {
         navigate('/contra');
     };
 
     const handleLogoutClick = () => {
         logout();
-        navigate('/contra');
-    };
-
-    const handleLogoutProfile = () => {
-        logout();
-        navigate('/contra'); // Cambiado a '/profile' en minúsculas para coincidir con la ruta definida
+        navigate('/login');
     };
 
     const handleOpenChangePasswordModal = () => {
@@ -33,14 +32,25 @@ const Nav = ({ greeting }) => {
         });
     };
 
+    const tabNames = [
+       // { key: 'home', label: 'Home', path: '/' },
+        { key: 'profesores', label: 'Profesor', path: '/profesores'},
+        { key: 'usuario', label: 'Usuario', path: '/usuarios' },
+    ];
+
+    const tabNamesMenu = [
+        { key: 'perfil', label: 'Perfil', onClick: showModal },
+        //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
+        { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
+    ];
+
     const menu = (
         <Menu>
-            <Menu.Item key="perfil" onClick={showModal}>
-                Perfil
-            </Menu.Item>
-            <Menu.Item key="cerrarSesion" onClick={handleLogoutClick}>
-                Cerrar Sesión
-            </Menu.Item>
+            {tabNamesMenu.map(tab => (
+                <Menu.Item key={tab.key} onClick={tab.onClick}>
+                    {tab.label}
+                </Menu.Item>
+            ))}
         </Menu>
     );
 
@@ -49,6 +59,13 @@ const Nav = ({ greeting }) => {
             <Link to="/">
                 <img src={logo} alt="Logo" className="logo" />
             </Link>
+            <div className="header-center">
+                {tabNames.map(tab => (
+                    <Link key={tab.key} to={tab.path} className="nav-link">
+                        {tab.label}
+                    </Link>
+                ))}
+            </div>
             <div className="header-right">
                 <h2>{greeting}</h2>
                 {user ? (
