@@ -5,8 +5,10 @@ import { useAuth } from "../../hooks/useAuth";
 import Nav from "../../components/Nav";
 import { useNavigate } from 'react-router-dom';
 import './index.css';
-import Carrusel from "../../components/Carrusel";
-import Cards from "../../components/Card";
+import Carrusel from '../../components/Carrusel/Carrusel';
+import Cards from '../../components/Card/Cards';
+//import Carrusel from "../../components/Carrusel";
+//import Cards from "../../components/Card";
 
 const { Header, Content, Footer } = Layout;
 

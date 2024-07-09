@@ -3,10 +3,9 @@ import { Form, Input, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth';
 import { useAuth } from '../../hooks/useAuth';
-import Nav from '../../components/Nav';
 import { storageController } from '../../services/token';
 
-const EditarUsuario = () => {
+const EditarUsuario = ({ onModalCancel }) => {
     const { user, logout, updateUser } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -27,6 +26,9 @@ const EditarUsuario = () => {
                     setLoading(false);
                     navigate('/');
                     logout(); // Cerrar sesión automáticamente después de unos segundos
+                    if (onModalCancel) {
+                        onModalCancel(); // Cerrar el modal si la función está disponible
+                    }
                 }, 3000); // Tiempo en milisegundos antes de cerrar sesión automáticamente
             }
         } catch (error) {
@@ -38,10 +40,9 @@ const EditarUsuario = () => {
 
     return (
         <>
-            
             <div className="change-user-form">
-            <h2 style={{ color: 'black' }}>Editar Usuario</h2>
-            <Form
+                <h2 style={{ color: 'black' }}>Editar Usuario</h2>
+                <Form
                     name="edit_user"
                     initialValues={{ username: user.username, email: user.email }}
                     onFinish={onFinish}

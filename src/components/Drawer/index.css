@@ -31,8 +31,35 @@
     border-color: #006d75; /* Color del borde del botón al pasar el mouse */
 }
 
-.logout-button {
-    background-color: #d1090c; /* Color de fondo inicial para el botón de cerrar sesión */
-    border-color: #d1090c;  /* Color del borde del botón de cerrar sesión */
-    margin-top: auto; /* Empuja el botón hacia la parte inferior */
+
+
+.a-button {
+    background-color: #096dd9; /* Color de fondo inicial del botón */
+    border-color: #055ebc;
+     /* Color del borde del botón */
+    margin-top: 10px; /* Espacio superior para el botón */
+    color: white;
+
 }
+
+
+.a-button:hover {
+    background-color:#3d3d3d; /* Color de fondo del botón al pasar el mouse */
+    border-color: #7d7e7e; /* Color del borde del botón al pasar el mouse */
+}
+
+.logout-button {
+    background-color: #262626; /* Color de fondo inicial para el botón de cerrar sesión */
+    border-color: #313131;  /* Color del borde del botón de cerrar sesión */
+    margin-top: auto; /* Empuja el botón hacia la parte inferior */
+    color: white;
+
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
