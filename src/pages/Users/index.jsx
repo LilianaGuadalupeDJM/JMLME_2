@@ -4,15 +4,13 @@ import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
-//import getAllUsers
 import { usersService } from '../../services/users';
-
 
 const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [selectionType, setSelectionType] = useState('radio'); // Cambiado a radio
+    const [selectionType, setSelectionType] = useState('radio');
 
     const token = storageController.getToken();
 
@@ -29,23 +27,13 @@ const Usuarios = () => {
     };
 
     const columns = [
-        {
-            title: 'ID',
-            dataIndex: '_id'
-        },
-        {
-            title: 'Nombre de Usuario',
-            dataIndex: 'username'
-        },
-        
-        {
-            title: 'Correo Electrónico',
-            dataIndex: 'email'
-        },
+        { title: 'ID', dataIndex: '_id' },
+        { title: 'Nombre de Usuario', dataIndex: 'username' },
+        { title: 'Correo Electrónico', dataIndex: 'email' },
         {
             title: 'Roles',
             dataIndex: 'roles',
-            render: (roles, record) => (
+            render: (roles) => (
                 <span>
                     {roles.length > 0 ? (
                         roles.map(role => (
@@ -58,15 +46,9 @@ const Usuarios = () => {
                     )}
                 </span>
             ),
-        },        
-        {
-            title: 'Fecha de Creación',
-            dataIndex: 'createdAt'
         },
-        {
-            title: 'Fecha de Actualización',
-            dataIndex: 'updatedAt'
-        },
+        { title: 'Fecha de Creación', dataIndex: 'createdAt' },
+        { title: 'Fecha de Actualización', dataIndex: 'updatedAt' },
     ];
 
     const getRoleName = (roleId) => {
@@ -97,14 +79,13 @@ const Usuarios = () => {
             const usersWithKey = data.map(user => ({
                 ...user,
                 key: user._id,
-                roles: user.roles.map(role => ({_id: role, name: [role] }))
+                roles: user.roles.map(role => ({ _id: role, name: [role] }))
             }));
             setUsers(usersWithKey);
         } catch (error) {
             console.error('Error al obtener usuarios', error);
         }
     };
-    
 
     useEffect(() => {
         fetchUsers();
@@ -118,15 +99,13 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
-            <BotonesCrudUsuario/>
-
+                <BotonesCrudUsuario selectedUserId={selectedUserId} />
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={users}
                     scroll={{ y: 400 }}
                 />
-                {token && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
             </div>
         </div>
     );

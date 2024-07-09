@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 import { ENV } from "../utils/constants";
 import { authFetch } from "../utils/authFetch";
+import axios from 'axios';
+
 
 const getMe = async (token) => {
 
@@ -64,6 +66,18 @@ const getAllUsers = async (token) => {
         throw error;
     }
 };
+
+export const DropUsuario = async (UsuarioId) => {
+    try {
+        const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${UsuarioId}`);
+        console.log("usuario borrasdo: ", response);
+        return response.data;
+
+    } catch (error) {
+        console.error('error al borrar usuario: ', error);
+        throw error;
+    }
+}
 
 
 export const usersService = {
