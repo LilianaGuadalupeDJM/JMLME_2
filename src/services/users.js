@@ -65,9 +65,30 @@ const getAllUsers = async (token) => {
     }
 };
 
+const updateUser = async (token, userId, data) => {
+    try {
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${userId}`;
+        const response = await authFetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error al actualizar el usuario', error);
+        throw error;
+    }
+};
 
 export const usersService = {
     getMe,
     changePassword,
     getAllUsers,
-}
+    updateUser, 
+};
