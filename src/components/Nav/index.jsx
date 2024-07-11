@@ -41,9 +41,18 @@ const Nav = ({ greeting }) => {
         setDrawerVisible(false); // Cierra el drawer
     };
 
-    const handleClick = () => {
-        navigate('/profesores');
-    };
+    const tabNames = [
+        // { key: 'home', label: 'Home', path: '/' },
+         { key: 'profesores', label: 'Profesor', path: '/profesores'},
+         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
+     ];
+ 
+     const tabNamesMenu = [
+         { key: 'perfil', label: 'Perfil', onClick: showModal },
+         //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
+         { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
+     ];
+ 
 
     return (
         <div className="header-content">
@@ -58,7 +67,6 @@ const Nav = ({ greeting }) => {
                 ))}
             </div>
             <div className="header-right">
-                <a className="profesores-button" onClick={handleClick}>Profesores</a>
                 <h2 className="greeting">{greeting}</h2>
                 {user ? (
                     <div className="avatar-dropdown">
