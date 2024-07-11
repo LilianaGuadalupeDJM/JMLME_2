@@ -13,13 +13,15 @@ const Nav = ({ greeting }) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
-    const showModal= () => {
+   
+
+    const showModal = () => {
         navigate('/contra');
     };
 
     const handleLogoutClick = () => {
         logout();
-        navigate('/contra');
+        navigate('/login');
     };
 
     const handleLogoutProfile = () => {
@@ -27,12 +29,8 @@ const Nav = ({ greeting }) => {
         navigate('/profile'); // Cambiado a '/profile' en minúsculas para coincidir con la ruta definida
     };
 
-    const handleOpenChangePasswordModal = () => {
-        Modal.info({
-            title: 'Cambiar contraseña',
-            content: <ChangePassword />,
-            width: 650,
-        });
+    const handleClick = (path) => {
+        navigate(path);
     };
 
     const handleAvatarClick = () => {
@@ -52,6 +50,13 @@ const Nav = ({ greeting }) => {
             <Link to="/">
                 <img src={logo} alt="Logo" className="logo" />
             </Link>
+            <div className="header-center">
+                {tabNames.map(tab => (
+                    <Link key={tab.key} to={tab.path} className="nav-link">
+                        {tab.label}
+                    </Link>
+                ))}
+            </div>
             <div className="header-right">
                 <a className="profesores-button" onClick={handleClick}>Profesores</a>
                 <h2 className="greeting">{greeting}</h2>
