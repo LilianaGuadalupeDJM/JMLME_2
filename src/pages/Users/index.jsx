@@ -4,7 +4,7 @@ import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
-//import getAllUsers
+
 import { usersService } from '../../services/users';
 
 
