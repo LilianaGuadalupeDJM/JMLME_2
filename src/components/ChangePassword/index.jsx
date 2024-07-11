@@ -32,7 +32,7 @@ const ChangePassword = () => {
         Cambiar contraseña 
       </Button>
       <Modal
-        title="Cambiar contraseña"
+        title="Cambiarrr contraseña"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

@@ -40,8 +40,6 @@ const Home = () => {
                         </div>
                     </Carousel>
 
-                    {/* Botón para navegar a la ruta '/profesores' */}
-                   
                 </div>
             </div>
         </>

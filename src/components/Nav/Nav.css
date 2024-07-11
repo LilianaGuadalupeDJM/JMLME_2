@@ -6,6 +6,12 @@
     color: white; /* Color del texto */
 }
 
+.header-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 .header-right {
     display: flex;
     align-items: center;
@@ -50,4 +56,15 @@
 .nav-button.active,
 .profesores.active {
     color: #166A79;
+}
+
+.avatar-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.username {
+    margin-left: 10px;
+    color: #fff; /* Color del texto */
 }
