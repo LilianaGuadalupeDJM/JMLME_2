@@ -10,7 +10,8 @@ const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [selectionType, setSelectionType] = useState('radio');
+    const [selectedUser, setSelectedUser] = useState(null); // New state to hold selected user data
+    const [selectionType] = useState('radio');
 
     const token = storageController.getToken();
 
@@ -20,16 +21,27 @@ const Usuarios = () => {
             console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             if (selectedRows.length > 0) {
                 setSelectedUserId(selectedRows[0]._id);
+                setSelectedUser(selectedRows[0]); // Store the selected user data
             } else {
                 setSelectedUserId(null);
+                setSelectedUser(null);
             }
         },
     };
 
     const columns = [
-        { title: 'ID', dataIndex: '_id' },
-        { title: 'Nombre de Usuario', dataIndex: 'username' },
-        { title: 'Correo Electrónico', dataIndex: 'email' },
+        {
+            title: 'ID',
+            dataIndex: '_id'
+        },
+        {
+            title: 'Nombre de Usuario',
+            dataIndex: 'username'
+        },
+        {
+            title: 'Correo Electrónico',
+            dataIndex: 'email'
+        },
         {
             title: 'Roles',
             dataIndex: 'roles',
@@ -46,6 +58,14 @@ const Usuarios = () => {
                     )}
                 </span>
             ),
+        },
+        {
+            title: 'Fecha de Creación',
+            dataIndex: 'createdAt'
+        },
+        {
+            title: 'Fecha de Actualización',
+            dataIndex: 'updatedAt'
         },
         { title: 'Fecha de Creación', dataIndex: 'createdAt' },
         { title: 'Fecha de Actualización', dataIndex: 'updatedAt' },
@@ -79,7 +99,7 @@ const Usuarios = () => {
             const usersWithKey = data.map(user => ({
                 ...user,
                 key: user._id,
-                roles: user.roles.map(role => ({ _id: role, name: [role] }))
+                roles: user.roles.map(role => ({ _id: role, name: getRoleName(role) }))
             }));
             setUsers(usersWithKey);
         } catch (error) {
@@ -99,7 +119,7 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
-                <BotonesCrudUsuario selectedUserId={selectedUserId} />
+                <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
