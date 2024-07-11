@@ -96,6 +96,32 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
         setIsModalCambioOpen(false);
     };
 
+    const BajaUsuario = async () => {
+        if (selectedUserId) {
+            try {
+                const response = await DropUsuario(selectedUserId);
+                console.log('Eliminación exitosa');
+                notification.success({
+                    message: 'Usuario Eliminado',
+                    description: 'Los datos del usuario han sido eliminados correctamente.',
+                });
+                window.location.reload();
+            } catch (error) {
+                console.error(error);
+                notification.error({
+                    message: 'Usuario No Eliminado.',
+                    description: 'Error al eliminar usuario.',
+                });
+            }
+        } else {
+            alert("Selecciona un usuario para eliminar.");
+        }
+    };
+
+    const Reload = () => {
+        window.location.reload();
+    };
+
     return (
         <>
             <Space>
@@ -113,7 +139,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 <Button
                     type="text"
                     icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-                    onClick={BajaUser}
+                    onClick={BajaUsuario}
                     disabled={!selectedUserId}
                 />
                 <Button

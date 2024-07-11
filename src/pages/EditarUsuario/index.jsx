@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import { storageController } from '../../services/token';
+import './EditarUsuario.css';
+import FormChangePassword from "../../components/FormChangePassword"; // Asegúrate de ajustar la ruta según la estructura de tu proyecto
 
 const EditarUsuario = () => {
-  const { user, logout, updateUser } = useAuth();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+    const { user, logout, updateUser } = useAuth();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
   const onFinish = async (values) => {
     const token = await storageController.getToken();

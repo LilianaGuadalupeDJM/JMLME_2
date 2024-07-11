@@ -67,6 +67,8 @@ const Usuarios = () => {
             title: 'Fecha de Actualización',
             dataIndex: 'updatedAt'
         },
+        { title: 'Fecha de Creación', dataIndex: 'createdAt' },
+        { title: 'Fecha de Actualización', dataIndex: 'updatedAt' },
     ];
 
     const getRoleName = (roleId) => {
