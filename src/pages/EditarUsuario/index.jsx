@@ -14,13 +14,7 @@ const EditarUsuario = () => {
     const [loading, setLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
+   
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -56,9 +50,9 @@ const EditarUsuario = () => {
     navigate('/cambiar-contraseña');
   };
 
-  const handleCancel = () => {
+  /*const handleCancel = () => {
     navigate(-1); // Regresar a la página anterior
-  };
+  }*/;
 
   return (
     <>

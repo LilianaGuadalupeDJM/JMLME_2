@@ -118,9 +118,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
         }
     };
 
-    const Reload = () => {
-        window.location.reload();
-    };
+
 
     return (
         <>

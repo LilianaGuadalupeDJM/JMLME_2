@@ -9,11 +9,8 @@ import logo from '../../assets/logo equipo.jpg';
 const Nav = ({ greeting }) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
-    const location = useLocation();
 
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
+   
 
     const showModal = () => {
         navigate('/contra');
