@@ -3,6 +3,7 @@ import { Button, Space, notification, Modal, Form, Input } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { usersService } from '../../services/users';
 import { storageController } from '../../services/token';
+import { DropUsuario } from '../../services/users';
 
 const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
