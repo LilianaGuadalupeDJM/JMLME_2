@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Menu, Dropdown, Avatar, Modal } from 'antd';
+import { Button, Avatar, Modal } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
+import logo from '../../assets/log.jpeg';
+import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
 import './Nav.css'; // Importa los estilos
 import ChangePassword from '../ChangePassword';
-import logo from '../../assets/logo equipo.jpg';
+import DrawerComponent from '../Drawer';
 
 const Nav = ({ greeting }) => {
+    const [drawerVisible, setDrawerVisible] = useState(false); // Estado para controlar el drawer
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
@@ -21,35 +24,26 @@ const Nav = ({ greeting }) => {
         navigate('/login');
     };
 
-    const handleLoginClick = () => {
-        navigate('/login');
+    const handleLogoutProfile = () => {
+        logout();
+        navigate('/profile'); // Cambiado a '/profile' en minúsculas para coincidir con la ruta definida
     };
 
     const handleClick = (path) => {
         navigate(path);
     };
 
-    const tabNames = [
-       // { key: 'home', label: 'Home', path: '/' },
-        { key: 'profesores', label: 'Profesor', path: '/profesores'},
-        { key: 'usuario', label: 'Usuario', path: '/usuarios' },
-    ];
+    const handleAvatarClick = () => {
+        setDrawerVisible(true); // Abre el drawer
+    };
 
-    const tabNamesMenu = [
-        { key: 'perfil', label: 'Perfil', onClick: showModal },
-        //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
-        { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
-    ];
+    const handleDrawerClose = () => {
+        setDrawerVisible(false); // Cierra el drawer
+    };
 
-    const menu = (
-        <Menu>
-            {tabNamesMenu.map(tab => (
-                <Menu.Item key={tab.key} onClick={tab.onClick}>
-                    {tab.label}
-                </Menu.Item>
-            ))}
-        </Menu>
-    );
+    const handleClick = () => {
+        navigate('/profesores');
+    };
 
     return (
         <div className="header-content">
@@ -64,33 +58,18 @@ const Nav = ({ greeting }) => {
                 ))}
             </div>
             <div className="header-right">
-                <h2>{greeting}</h2>
+                <a className="profesores-button" onClick={handleClick}>Profesores</a>
+                <h2 className="greeting">{greeting}</h2>
                 {user ? (
                     <div className="avatar-dropdown">
-                        <Button
-                            className={`nav-button ${location.pathname === '/cambiar-datos' ? 'active' : ''}`}
-                            onClick={() => handleClick('/cambiar-datos')}
-                        >
-                            Perfil
-                        </Button>
-                        <Button
-                            className={`profesores ${location.pathname === '/profesores' ? 'active' : ''}`}
-                            onClick={() => handleClick('/profesores')}
-                        >
-                            Profesores
-                        </Button>
-                        <Button
-                            className="nav-button"
-                            onClick={handleLogoutClick}
-                        >
-                            Cerrar Sesión
-                        </Button>
+                        <span className="username">Bienvenido {user.username}</span>
+                        <DrawerComponent
+                            visible={drawerVisible}
+                            onClose={handleDrawerClose}
+                        />
                     </div>
                 ) : (
-                    <Button
-                        className={`nav-button ${location.pathname === '/login' ? 'active' : ''}`}
-                        onClick={handleLoginClick}
-                    >
+                    <Button className="login-button" onClick={() => navigate('/login')}>
                         Iniciar Sesión
                     </Button>
                 )}
@@ -100,3 +79,4 @@ const Nav = ({ greeting }) => {
 };
 
 export default Nav;
+

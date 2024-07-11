@@ -13,6 +13,47 @@ body, html {
 
 /* Estilos para el encabezado de Home */
 .home-header {
+    /* Estilos para el carrusel */
+    .carousel {
+        margin: 0 auto; /* Centrar el carrusel en el contenedor */
+        max-width: 100%; /* Asegurarse de que el carrusel no exceda el ancho del contenedor */
+        overflow: hidden; /* Ocultar cualquier desbordamiento */
+    }
+    
+    .carousel img {
+        width: 100%; /* Asegurarse de que las imágenes ocupen el 100% del ancho del carrusel */
+        height: auto; /* Mantener la proporción de la imagen */
+    }
+    
+    /* Ajustes para los botones */
+    .profesores-button {
+        margin-top: 20px;
+    }
+    
+    /* Otros estilos */
+    .h1 {
+        margin: 0;
+        font-size: 37px;
+        color: #000000;
+    }
+    
+    .p {
+        margin: 20px 0; /* Espacio superior e inferior */
+        font-size: 20px;
+        color: #111111;
+    }
+    
+    .p2 {
+        margin: 14px 0; /* Espacio superior e inferior */
+        font-size: 20px;
+        color: #111111;
+    }
+    /* Asegúrate de que el contenido pueda desplazarse */
+    html, body, #root {
+        height: 100%;
+        overflow: auto;
+    }
+    
     background: #001529;
     padding: 24px;
     display: flex;
