@@ -2,14 +2,14 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Menu, Dropdown, Avatar, Modal } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
-import logo from '../../assets/logo.png';
-import avatarImage from '../../assets/lili4.jpg'; // Importa la imagen del avatar
 import './Nav.css'; // Importa los estilos
 import ChangePassword from '../ChangePassword';
+import logo from '../../assets/logo equipo.jpg';
 
 const Nav = ({ greeting }) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
+    const location = useLocation();
 
     const handleLoginClick = () => {
         navigate('/login');
@@ -24,12 +24,12 @@ const Nav = ({ greeting }) => {
         navigate('/login');
     };
 
-    const handleOpenChangePasswordModal = () => {
-        Modal.info({
-            title: 'Cambiar contraseña',
-            content: <ChangePassword />,
-            width: 650,
-        });
+    const handleLoginClick = () => {
+        navigate('/login');
+    };
+
+    const handleClick = (path) => {
+        navigate(path);
     };
 
     const tabNames = [
@@ -69,14 +69,31 @@ const Nav = ({ greeting }) => {
             <div className="header-right">
                 <h2>{greeting}</h2>
                 {user ? (
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <div className="avatar-dropdown">
-                            <Avatar size={50} src={avatarImage} />
-                            <span className="username">{user.username}</span>
-                        </div>
-                    </Dropdown>
+                    <div className="avatar-dropdown">
+                        <Button
+                            className={`nav-button ${location.pathname === '/cambiar-datos' ? 'active' : ''}`}
+                            onClick={() => handleClick('/cambiar-datos')}
+                        >
+                            Perfil
+                        </Button>
+                        <Button
+                            className={`profesores ${location.pathname === '/profesores' ? 'active' : ''}`}
+                            onClick={() => handleClick('/profesores')}
+                        >
+                            Profesores
+                        </Button>
+                        <Button
+                            className="nav-button"
+                            onClick={handleLogoutClick}
+                        >
+                            Cerrar Sesión
+                        </Button>
+                    </div>
                 ) : (
-                    <Button className="login-button" onClick={handleLoginClick}>
+                    <Button
+                        className={`nav-button ${location.pathname === '/login' ? 'active' : ''}`}
+                        onClick={handleLoginClick}
+                    >
                         Iniciar Sesión
                     </Button>
                 )}
