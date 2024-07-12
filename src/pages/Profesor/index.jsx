@@ -37,7 +37,7 @@ const EditProfessor = ({ id, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            console.log('Registro exitoso', response.data);
+            console.log('Registro exitoso felicidades ', response.data);
             notification.success({
                 message: 'Profesor actualizado',
                 description: 'Los datos del profesor han sido actualizados correctamente.',
