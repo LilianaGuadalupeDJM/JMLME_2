@@ -1,27 +1,41 @@
-import { Divider, Table, Tag } from 'antd';
+import { Divider, Table, Tag, Button } from 'antd';
+import { FilePdfOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
 import { usersService } from '../../services/users';
+import RepPDF from '../../utils/RepPDF';
 
 const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [selectedUser, setSelectedUser] = useState(null); // New state to hold selected user data
-    const [selectionType] = useState('radio');
-
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
+    const [filteredUsers, setFilteredUsers] = useState([]);
     const token = storageController.getToken();
 
+    const handleRepPDF = () => {
+        RepPDF(filteredUsers, user.username);
+    };
+
+    const handleTableChange = (pagination, filters, sorter) => {
+        const { current, pageSize } = pagination;
+        setPagination({ current, pageSize });
+
+        const startIndex = (current - 1) * pageSize;
+        const endIndex = current * pageSize;
+        setFilteredUsers(users.slice(startIndex, endIndex));
+    };
+
     const rowSelection = {
-        type: selectionType,
+        type: 'radio',
         onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             if (selectedRows.length > 0) {
                 setSelectedUserId(selectedRows[0]._id);
-                setSelectedUser(selectedRows[0]); // Store the selected user data
+                setSelectedUser(selectedRows[0]);
             } else {
                 setSelectedUserId(null);
                 setSelectedUser(null);
@@ -67,8 +81,6 @@ const Usuarios = () => {
             title: 'Fecha de Actualización',
             dataIndex: 'updatedAt'
         },
-        { title: 'Fecha de Creación', dataIndex: 'createdAt' },
-        { title: 'Fecha de Actualización', dataIndex: 'updatedAt' },
     ];
 
     const getRoleName = (roleId) => {
@@ -102,6 +114,12 @@ const Usuarios = () => {
                 roles: user.roles.map(role => ({ _id: role, name: getRoleName(role) }))
             }));
             setUsers(usersWithKey);
+
+            // Update filteredUsers based on initial pagination
+            const { current, pageSize } = pagination;
+            const startIndex = (current - 1) * pageSize;
+            const endIndex = current * pageSize;
+            setFilteredUsers(usersWithKey.slice(startIndex, endIndex));
         } catch (error) {
             console.error('Error al obtener usuarios', error);
         }
@@ -119,11 +137,18 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
-                <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />
+                <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />  
+               
+                <Button onClick={handleRepPDF}  style={{ color: '#01859a' }} >
+                    <FilePdfOutlined />Generar
+                </Button>
+
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={users}
+                    pagination={pagination}
+                    onChange={handleTableChange}
                     scroll={{ y: 400 }}
                 />
             </div>
