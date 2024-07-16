@@ -1,0 +1,85 @@
+/* AdmisionesPage.css */
+
+/* Estilo general para la página */
+.admisiones-page {
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+  }
+  
+  /* Título de la página */
+  .admisiones-page h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Botón principal para agregar admisiones */
+  .admisiones-page .ant-btn-primary {
+    margin-bottom: 20px;
+    background-color: #1890ff;
+    border-color: #1890ff;
+  }
+  
+  .admisiones-page .ant-btn-primary:hover,
+  .admisiones-page .ant-btn-primary:focus {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+  }
+  
+  /* Tabla de admisiones */
+  .admisiones-page .ant-table {
+    background: #fff;
+  }
+  
+  .admisiones-page .ant-table-thead > tr > th {
+    background-color: #fafafa;
+    font-weight: bold;
+  }
+  
+  .admisiones-page .ant-table-tbody > tr > td {
+    background-color: #fff;
+  }
+  
+  .admisiones-page .ant-table-tbody > tr:hover > td {
+    background-color: #e6f7ff;
+  }
+  
+  /* Botones de acciones */
+  .admisiones-page .ant-btn {
+    margin-right: 8px;
+  }
+  
+  .admisiones-page .ant-btn:hover,
+  .admisiones-page .ant-btn:focus {
+    color: #40a9ff;
+    border-color: #40a9ff;
+  }
+  
+  /* Modales */
+  .admisiones-page .ant-modal {
+    top: 20px;
+  }
+  
+  .admisiones-page .ant-modal-header {
+    background-color: #fafafa;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  
+  .admisiones-page .ant-modal-title {
+    color: #333;
+  }
+  
+  .admisiones-page .ant-modal-footer {
+    border-top: 1px solid #e8e8e8;
+  }
+  
+  /* Formularios */
+  .admisiones-page .ant-form-item-label > label {
+    color: #333;
+  }
+  
+  .admisiones-page .ant-form-item {
+    margin-bottom: 16px;
+  }
+  
