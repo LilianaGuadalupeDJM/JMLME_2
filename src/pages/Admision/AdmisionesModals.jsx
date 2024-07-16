@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Form, Input, Switch, Button, Space, notification } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
+import './Admisiones.css';
 
 const AdmisionesModals = ({
   isAddModalVisible, setIsAddModalVisible, handleAddAdmision,
@@ -28,30 +29,9 @@ const AdmisionesModals = ({
     });
   };
 
-  const BajaAdmision = async () => {
-    if (selectedAdmision) {
-      try {
-        await handleDeleteAdmision(selectedAdmision._id);
-        notification.success({
-          message: 'Admision Eliminada',
-          description: 'Los datos de la admision han sido eliminados correctamente.',
-        });
-        window.location.reload();
-      } catch (error) {
-        console.error(error);
-        notification.error({
-          message: 'Admision No Eliminada.',
-          description: 'Error al Eliminar Admision.',
-        });
-      }
-    } else {
-      alert("Selecciona una admision para eliminar.");
-    }
+  const handleDeleteOk = () => {
+    handleDeleteAdmision();
   };
-
-  const Reload = () => {
-    window.location.reload();
-  }
 
   return (
     <>
@@ -69,13 +49,13 @@ const AdmisionesModals = ({
         <Button
           type="text"
           icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-          onClick={BajaAdmision}
+          onClick={() => setIsDeleteModalVisible(true)}
           disabled={!selectedAdmision}
         />
         <Button
           type="text"
           icon={<ReloadOutlined style={{ color: '#01859a' }} />}
-          onClick={Reload}
+          onClick={() => window.location.reload()}
         />
       </Space>
 
@@ -126,7 +106,7 @@ const AdmisionesModals = ({
       <Modal
         title="Eliminar Admision"
         visible={isDeleteModalVisible}
-        onOk={handleDeleteAdmision}
+        onOk={handleDeleteOk}
         onCancel={() => setIsDeleteModalVisible(false)}
         okText="Eliminar"
         okType="danger"

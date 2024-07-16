@@ -36,6 +36,7 @@ const Nav = ({ greeting }) => {
        // { key: 'home', label: 'Home', path: '/' },
         { key: 'profesores', label: 'Profesor', path: '/profesores'},
         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
+        { key: 'admisiones', label: 'Admisiones', path: '/admisiones' },
     ];
 
     const tabNamesMenu = [

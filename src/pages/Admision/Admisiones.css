@@ -1,0 +1,30 @@
+/* Estilo general para los modales */
+.admisiones-modal .ant-modal-title {
+    text-align: center;
+  }
+  
+  /* Estilo para los formularios dentro de los modales */
+  .admisiones-modal .ant-form-item {
+    margin-bottom: 16px;
+  }
+  
+  /* Estilo para los botones dentro de los modales */
+  .admisiones-modal .ant-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  /* Estilo para los textos dentro de los modales */
+  .admisiones-modal p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  /* Estilo para el texto fuerte dentro de los modales */
+  .admisiones-modal strong {
+    font-weight: bold;
+  }
+  

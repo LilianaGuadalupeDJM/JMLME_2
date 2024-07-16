@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, message } from 'antd';
+import { Table, message, Button, Space } from 'antd';
 import { getAdmisiones, addAdmision, editAdmision, deleteAdmision } from '../../services/admision';
 import AdmisionesModals from './AdmisionesModals';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import './AdmisionesPage.css';
+import Nav from "../../components/Nav";
 
 const AdmisionesPage = () => {
   const [admisiones, setAdmisiones] = useState([]);
@@ -71,7 +73,6 @@ const AdmisionesPage = () => {
         <span>
           <Button onClick={() => { setSelectedAdmision(record); setIsViewModalVisible(true); }}>Ver</Button>
           <Button onClick={() => { setSelectedAdmision(record); setIsEditModalVisible(true); }}>Editar</Button>
-          <Button onClick={() => { setSelectedAdmision(record); setIsDeleteModalVisible(true); }}>Borrar</Button>
         </span>
       )
     }
@@ -87,8 +88,32 @@ const AdmisionesPage = () => {
 
   return (
     <div>
+      <Nav />
       <h1>Admisiones</h1>
-     
+      <Space style={{ marginBottom: 16 }}>
+        <Button
+          type="text"
+          icon={<PlusOutlined style={{ color: '#01859a' }} />}
+          onClick={() => setIsAddModalVisible(true)}
+        />
+        <Button
+          type="text"
+          icon={<EditOutlined style={{ color: '#01859a' }} />}
+          onClick={() => selectedAdmision ? setIsEditModalVisible(true) : alert("Selecciona una admision para editar.")}
+          disabled={!selectedAdmision}
+        />
+        <Button
+          type="text"
+          icon={<DeleteOutlined style={{ color: '#01859a' }} />}
+          onClick={() => setIsDeleteModalVisible(true)}
+          disabled={!selectedAdmision}
+        />
+        <Button
+          type="text"
+          icon={<ReloadOutlined style={{ color: '#01859a' }} />}
+          onClick={() => window.location.reload()}
+        />
+      </Space>
       <Table 
         dataSource={admisiones} 
         columns={columns} 
