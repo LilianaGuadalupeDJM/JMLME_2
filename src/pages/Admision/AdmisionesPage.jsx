@@ -64,16 +64,17 @@ const AdmisionesPage = () => {
   };
 
   const columns = [
-    { title: 'Nombre', dataIndex: 'nombre', key: 'nombre' },
-    { title: 'Activo', dataIndex: 'activo', key: 'activo', render: (activo) => (activo ? 'Sí' : 'No') },
+    { title: 'Nombre', dataIndex: 'nombre', key: 'nombre', align: 'center' },
+    { title: 'Activo', dataIndex: 'activo', key: 'activo', align: 'center', render: (activo) => (activo ? 'Sí' : 'No') },
     {
       title: 'Acciones',
       key: 'acciones',
+      align: 'center',
       render: (text, record) => (
-        <span>
+        <Space>
           <Button onClick={() => { setSelectedAdmision(record); setIsViewModalVisible(true); }}>Ver</Button>
           <Button onClick={() => { setSelectedAdmision(record); setIsEditModalVisible(true); }}>Editar</Button>
-        </span>
+        </Space>
       )
     }
   ];
@@ -90,7 +91,8 @@ const AdmisionesPage = () => {
     <div>
       <Nav />
       <h1>Admisiones</h1>
-      <Space style={{ marginBottom: 16 }}>
+
+      <Space className="action-buttons">
         <Button
           type="text"
           icon={<PlusOutlined style={{ color: '#01859a' }} />}
@@ -114,12 +116,14 @@ const AdmisionesPage = () => {
           onClick={() => window.location.reload()}
         />
       </Space>
+
       <Table 
         dataSource={admisiones} 
         columns={columns} 
         rowKey="_id" 
         loading={loading} 
         rowSelection={rowSelection} 
+        className="custom-table"
       />
 
       <AdmisionesModals

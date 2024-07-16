@@ -1,7 +1,7 @@
 import React from 'react';
-import { Modal, Form, Input, Switch, Button, Space, notification } from 'antd';
+import { Modal, Form, Input, Switch, Button, Space } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
-import './Admisiones.css';
+import  './Admisiones.css'
 
 const AdmisionesModals = ({
   isAddModalVisible, setIsAddModalVisible, handleAddAdmision,
@@ -60,6 +60,7 @@ const AdmisionesModals = ({
       </Space>
 
       <Modal
+        className="admisiones-modal"
         title="Agregar Admision"
         visible={isAddModalVisible}
         onOk={handleAddOk}
@@ -76,6 +77,7 @@ const AdmisionesModals = ({
       </Modal>
 
       <Modal
+        className="admisiones-modal"
         title="Ver Admision"
         visible={isViewModalVisible}
         onCancel={() => setIsViewModalVisible(false)}
@@ -88,6 +90,7 @@ const AdmisionesModals = ({
       </Modal>
 
       <Modal
+        className="admisiones-modal"
         title="Editar Admision"
         visible={isEditModalVisible}
         onOk={handleEditOk}
@@ -104,6 +107,7 @@ const AdmisionesModals = ({
       </Modal>
 
       <Modal
+        className="admisiones-modal"
         title="Eliminar Admision"
         visible={isDeleteModalVisible}
         onOk={handleDeleteOk}

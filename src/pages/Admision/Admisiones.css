@@ -1,30 +1,78 @@
 /* Estilo general para los modales */
-.admisiones-modal .ant-modal-title {
+.admisiones-modal .ant-modal-content {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #1f666b;
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Título del modal */
+  .admisiones-modal .ant-modal-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #222222;
     text-align: center;
+    font-weight: bold;
   }
   
   /* Estilo para los formularios dentro de los modales */
   .admisiones-modal .ant-form-item {
-    margin-bottom: 16px;
+    margin-bottom: 25px;
+  }
+  
+  .admisiones-modal .ant-form-item-label > label {
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  .admisiones-modal .ant-form-item-control-input {
+    border-color: #bbbbbb;
+    border-radius: 6px;
+  }
+  
+  .admisiones-modal .ant-form-item-control-input-content {
+    border-color: #bbbbbb;
+  }
+  
+  .admisiones-modal .ant-input {
+    height: 45px;
+    padding: 0 15px;
+    font-size: 15px;
+    border-radius: 6px;
   }
   
   /* Estilo para los botones dentro de los modales */
   .admisiones-modal .ant-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 25px;
     width: 100%;
-    margin-top: 10px;
+    height: 45px;
+    font-size: 18px;
+    background-color: #ffffff;
+    border-color: #fdfeff;
+    border-radius: 6px;
   }
   
-  /* Estilo para los textos dentro de los modales */
-  .admisiones-modal p {
-    font-size: 16px;
-    margin-bottom: 8px;
+  .admisiones-modal .ant-btn:hover,
+  .admisiones-modal .ant-btn:focus {
+    background-color: #106ba3;
+    border-color: #106ba3;
   }
   
-  /* Estilo para el texto fuerte dentro de los modales */
-  .admisiones-modal strong {
-    font-weight: bold;
+  .admisiones-modal .ant-btn-primary {
+    background-color: #1d72b8;
+    border-color: #1d72b8;
+  }
+  
+  .admisiones-modal .ant-btn-primary:hover,
+  .admisiones-modal .ant-btn-primary:focus {
+    background-color: #106ba3;
+    border-color: #106ba3;
+  }
+  
+  .uppercase-input {
+    text-transform: uppercase;
   }
   
