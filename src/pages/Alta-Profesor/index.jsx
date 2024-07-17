@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AddProfesor } from '../../services/profesores';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, notification, DatePicker } from 'antd';
+import './index.css';
 
 const AddProfessor = () => {
     const navigate = useNavigate();

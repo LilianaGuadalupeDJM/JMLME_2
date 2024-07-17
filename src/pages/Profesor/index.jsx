@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, notification } from 'antd';
-import { getProfesor, EditProfesor } from '../../services/profesores';
+import { getProfesor, EditProfesor,  } from '../../services/profesores';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
@@ -37,7 +37,7 @@ const EditProfessor = ({ id, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            console.log('Registro exitoso', response.data);
+            console.log('Registro exitoso felicidades ', response.data);
             notification.success({
                 message: 'Profesor actualizado',
                 description: 'Los datos del profesor han sido actualizados correctamente.',

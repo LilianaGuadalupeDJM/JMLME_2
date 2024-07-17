@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Menu, Dropdown, Avatar, Modal } from 'antd';
+import { Button, Avatar, Modal } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
-import logo from '../../assets/logo.png';
-import avatarImage from '../../assets/lili4.jpg'; // Importa la imagen del avatar
+import logo from '../../assets/log.jpeg';
+import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
 import './Nav.css'; // Importa los estilos
 import ChangePassword from '../ChangePassword';
+import DrawerComponent from '../Drawer';
 
 const Nav = ({ greeting }) => {
+    const [drawerVisible, setDrawerVisible] = useState(false); // Estado para controlar el drawer
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
+   
 
     const showModal = () => {
         navigate('/contra');
@@ -24,12 +24,21 @@ const Nav = ({ greeting }) => {
         navigate('/login');
     };
 
-    const handleOpenChangePasswordModal = () => {
-        Modal.info({
-            title: 'Cambiar contraseña',
-            content: <ChangePassword />,
-            width: 650,
-        });
+    const handleLogoutProfile = () => {
+        logout();
+        navigate('/profile'); // Cambiado a '/profile' en minúsculas para coincidir con la ruta definida
+    };
+
+    const handleClick = (path) => {
+        navigate(path);
+    };
+
+    const handleAvatarClick = () => {
+        setDrawerVisible(true); // Abre el drawer
+    };
+
+    const handleDrawerClose = () => {
+        setDrawerVisible(false); // Cierra el drawer
     };
 
     const tabNames = [
@@ -68,16 +77,17 @@ const Nav = ({ greeting }) => {
                 ))}
             </div>
             <div className="header-right">
-                <h2>{greeting}</h2>
+                <h2 className="greeting">{greeting}</h2>
                 {user ? (
-                    <Dropdown overlay={menu} trigger={['click']}>
-                        <div className="avatar-dropdown">
-                            <Avatar size={50} src={avatarImage} />
-                            <span className="username">{user.username}</span>
-                        </div>
-                    </Dropdown>
+                    <div className="avatar-dropdown">
+                        <span className="username">Bienvenido {user.username}</span>
+                        <DrawerComponent
+                            visible={drawerVisible}
+                            onClose={handleDrawerClose}
+                        />
+                    </div>
                 ) : (
-                    <Button className="login-button" onClick={handleLoginClick}>
+                    <Button className="login-button" onClick={() => navigate('/login')}>
                         Iniciar Sesión
                     </Button>
                 )}
@@ -87,3 +97,4 @@ const Nav = ({ greeting }) => {
 };
 
 export default Nav;
+

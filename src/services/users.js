@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 import { ENV } from "../utils/constants";
 import { authFetch } from "../utils/authFetch";
+import axios from 'axios';
+
 
 const getMe = async (token) => {
 
@@ -65,9 +67,42 @@ const getAllUsers = async (token) => {
     }
 };
 
+const updateUser = async (token, userId, data) => {
+    try {
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${userId}`;
+        const response = await authFetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error al actualizar el usuario', error);
+        throw error;
+    }
+};
+
+export const DropUsuario = async (UsuarioId) => {
+    try {
+        const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${UsuarioId}`);
+        console.log("usuario borrasdo: ", response);
+        return response.data;
+
+    } catch (error) {
+        console.error('error al borrar usuario: ', error);
+        throw error;
+    }
+}
 
 export const usersService = {
     getMe,
     changePassword,
     getAllUsers,
-}
+    updateUser, 
+};
