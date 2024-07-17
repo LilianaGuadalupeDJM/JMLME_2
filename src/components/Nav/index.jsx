@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Avatar, Modal } from 'antd';
+import { Button, Avatar, Modal,Menu } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/log.jpeg';
 import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
