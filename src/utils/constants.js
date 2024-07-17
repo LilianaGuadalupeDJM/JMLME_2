@@ -1,11 +1,12 @@
 export const ENV = {
-    //API_URL: 'http://localhost:3000',
-    API_URL: 'https://dwiserver.vercel.app',
+    API_URL: 'http://localhost:3000',
+    //API_URL: 'https://dwiserver.vercel.app',
     ENDPOINTS:{
         LOGIN: 'api/auth/signin',
         REGISTER: 'api/auth/signup',
         USERS: 'api/usuarios',
-        PROFESORES: 'api/profesores'
+        PROFESORES: 'api/profesores',
+        ADMISIONES: 'api/admision'
     },
 
     STORAGE: {

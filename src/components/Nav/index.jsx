@@ -42,17 +42,27 @@ const Nav = ({ greeting }) => {
     };
 
     const tabNames = [
-        // { key: 'home', label: 'Home', path: '/' },
-         { key: 'profesores', label: 'Profesor', path: '/profesores'},
-         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
-     ];
- 
-     const tabNamesMenu = [
-         { key: 'perfil', label: 'Perfil', onClick: showModal },
-         //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
-         { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
-     ];
- 
+       // { key: 'home', label: 'Home', path: '/' },
+        { key: 'profesores', label: 'Profesor', path: '/profesores'},
+        { key: 'usuario', label: 'Usuario', path: '/usuarios' },
+        { key: 'admisiones', label: 'Admisiones', path: '/admisiones' },
+    ];
+
+    const tabNamesMenu = [
+        { key: 'perfil', label: 'Perfil', onClick: showModal },
+        //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
+        { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
+    ];
+
+    const menu = (
+        <Menu>
+            {tabNamesMenu.map(tab => (
+                <Menu.Item key={tab.key} onClick={tab.onClick}>
+                    {tab.label}
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
 
     return (
         <div className="header-content">

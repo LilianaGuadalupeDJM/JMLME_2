@@ -1,0 +1,29 @@
+/* Estilo general para la página de admisiones */
+.admisiones-page {
+    padding: 20px;
+  }
+  
+  /* Título de la página */
+  .admisiones-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Espaciado para los botones antes de la tabla */
+  .admisiones-page .action-buttons {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  /* Estilo para los botones con íconos */
+  .admisiones-page .ant-btn {
+    margin: 0 5px;
+  }
+  
+  /* Estilo para los botones de los modales */
+  .admisiones-page .modal-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
