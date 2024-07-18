@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form, Input, Switch, Button, Space } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
-import  './Admisiones.css'
+import './Admisiones.css';
 
 const AdmisionesModals = ({
   isAddModalVisible, setIsAddModalVisible, handleAddAdmision,
@@ -62,7 +62,7 @@ const AdmisionesModals = ({
       <Modal
         className="admisiones-modal"
         title="Agregar Admision"
-        visible={isAddModalVisible}
+        open={isAddModalVisible}
         onOk={handleAddOk}
         onCancel={() => setIsAddModalVisible(false)}
       >
@@ -79,7 +79,7 @@ const AdmisionesModals = ({
       <Modal
         className="admisiones-modal"
         title="Ver Admision"
-        visible={isViewModalVisible}
+        open={isViewModalVisible}
         onCancel={() => setIsViewModalVisible(false)}
         footer={[
           <Button key="close" onClick={() => setIsViewModalVisible(false)}>Cerrar</Button>
@@ -92,7 +92,7 @@ const AdmisionesModals = ({
       <Modal
         className="admisiones-modal"
         title="Editar Admision"
-        visible={isEditModalVisible}
+        open={isEditModalVisible}
         onOk={handleEditOk}
         onCancel={() => setIsEditModalVisible(false)}
       >
@@ -109,7 +109,7 @@ const AdmisionesModals = ({
       <Modal
         className="admisiones-modal"
         title="Eliminar Admision"
-        visible={isDeleteModalVisible}
+        open={isDeleteModalVisible}
         onOk={handleDeleteOk}
         onCancel={() => setIsDeleteModalVisible(false)}
         okText="Eliminar"

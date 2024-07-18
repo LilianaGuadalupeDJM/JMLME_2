@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Table, message, Button, Space } from 'antd';
+import { message, Button, Space, Table } from 'antd';
 import { getAdmisiones, addAdmision, editAdmision, deleteAdmision } from '../../services/admision';
 import AdmisionesModals from './AdmisionesModals';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import './AdmisionesPage.css';
-import Nav from "../../components/Nav";
+import Nav from '../../components/Nav';
 
 const AdmisionesPage = () => {
   const [admisiones, setAdmisiones] = useState([]);
@@ -117,12 +117,12 @@ const AdmisionesPage = () => {
         />
       </Space>
 
-      <Table 
-        dataSource={admisiones} 
-        columns={columns} 
-        rowKey="_id" 
-        loading={loading} 
-        rowSelection={rowSelection} 
+      <Table
+        dataSource={admisiones}
+        columns={columns}
+        rowKey="_id"
+        loading={loading}
+        rowSelection={rowSelection}
         className="custom-table"
       />
 
@@ -130,7 +130,7 @@ const AdmisionesPage = () => {
         isAddModalVisible={isAddModalVisible}
         setIsAddModalVisible={setIsAddModalVisible}
         handleAddAdmision={handleAddAdmision}
-        
+
         isViewModalVisible={isViewModalVisible}
         setIsViewModalVisible={setIsViewModalVisible}
         selectedAdmision={selectedAdmision}
@@ -138,7 +138,7 @@ const AdmisionesPage = () => {
         isEditModalVisible={isEditModalVisible}
         setIsEditModalVisible={setIsEditModalVisible}
         handleEditAdmision={handleEditAdmision}
-        
+
         isDeleteModalVisible={isDeleteModalVisible}
         setIsDeleteModalVisible={setIsDeleteModalVisible}
         handleDeleteAdmision={handleDeleteAdmision}
