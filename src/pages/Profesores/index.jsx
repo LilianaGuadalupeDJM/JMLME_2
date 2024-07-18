@@ -34,14 +34,13 @@ const Profesores = () => {
     const { user, logout } = useAuth();
     const [profesores, setProfesores] = useState([]);
     const [selectedProfessorId, setSelectedProfessorId] = useState(null);
-    const [selectionType, setSelectionType] = useState('radio'); // Cambiado a radio
+    const [selectionType, setSelectionType] = useState('radio');
 
     const token = storageController.getToken();
 
     const rowSelection = {
         type: selectionType,
         onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             if (selectedRows.length > 0) {
                 setSelectedProfessorId(selectedRows[0]._id);
             } else {
@@ -50,20 +49,20 @@ const Profesores = () => {
         },
     };
 
-    useEffect(() => {
-        const fetchProfesores = async () => {
-            try {
-                const data = await getProfesores();
-                const profesoresWithKey = data.map(profesor => ({
-                    ...profesor,
-                    key: profesor._id,
-                }));
-                setProfesores(profesoresWithKey);
-            } catch (error) {
-                console.error('Error al obtener profesores: ', error)
-            }
-        };
+    const fetchProfesores = async () => {
+        try {
+            const data = await getProfesores();
+            const profesoresWithKey = data.map(profesor => ({
+                ...profesor,
+                key: profesor._id,
+            }));
+            setProfesores(profesoresWithKey);
+        } catch (error) {
+            console.error('Error al obtener profesores: ', error);
+        }
+    };
 
+    useEffect(() => {
         fetchProfesores();
     }, []);
 
@@ -81,7 +80,7 @@ const Profesores = () => {
                     dataSource={profesores}
                     scroll={{ y: 400 }}
                 />
-                {token && <BotonesCrud selectedProfessorId={selectedProfessorId} />}
+                {token && <BotonesCrud selectedProfessorId={selectedProfessorId} refreshProfesores={fetchProfesores} />}
             </div>
         </div>
     );
