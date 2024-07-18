@@ -1,13 +1,10 @@
-import { Divider, Table, Tag } from 'antd';
+import { Divider, Table, Tag, Input, Row, Col } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
-
 import { usersService } from '../../services/users';
-
-
 
 const { Search } = Input;
 
