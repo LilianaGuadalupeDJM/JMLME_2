@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Avatar, Modal } from 'antd';
+import { Button, Avatar, Modal,Menu } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/log.jpeg';
 import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
@@ -42,17 +42,27 @@ const Nav = ({ greeting }) => {
     };
 
     const tabNames = [
-        // { key: 'home', label: 'Home', path: '/' },
-         { key: 'profesores', label: 'Profesor', path: '/profesores'},
-         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
-     ];
- 
-     const tabNamesMenu = [
-         { key: 'perfil', label: 'Perfil', onClick: showModal },
-         //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
-         { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
-     ];
- 
+       // { key: 'home', label: 'Home', path: '/' },
+        { key: 'profesores', label: 'Profesor', path: '/profesores'},
+        { key: 'usuario', label: 'Usuario', path: '/usuarios' },
+        { key: 'admisiones', label: 'Admisiones', path: '/admisiones' },
+    ];
+
+    const tabNamesMenu = [
+        { key: 'perfil', label: 'Perfil', onClick: showModal },
+        //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
+        { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
+    ];
+
+    const menu = (
+        <Menu>
+            {tabNamesMenu.map(tab => (
+                <Menu.Item key={tab.key} onClick={tab.onClick}>
+                    {tab.label}
+                </Menu.Item>
+            ))}
+        </Menu>
+    );
 
     return (
         <div className="header-content">

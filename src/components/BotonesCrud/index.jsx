@@ -102,7 +102,7 @@ const BotonesCrud = ({ selectedProfessorId }) => {
                 />
             </Space>
 
-            <Modal title="Basic Modal" open={isModalalta} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Agregar nuevo profesor" open={isModalalta} onOk={handleOk} onCancel={handleCancel}>
                 <AddProfessor />
             </Modal>
             <Modal title="Editar Profesor" open={isModalcambio} onOk={handlcambioeOk} onCancel={handlecambioCancel}>
