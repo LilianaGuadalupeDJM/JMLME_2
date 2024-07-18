@@ -8,7 +8,7 @@ import { storageController } from '../../services/token';
 import { usersService } from '../../services/users';
 
 
-c
+
 const { Search } = Input;
 
 const Usuarios = () => {
