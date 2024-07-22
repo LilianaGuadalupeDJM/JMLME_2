@@ -5,7 +5,8 @@ export const ENV = {
         LOGIN: 'api/auth/signin',
         REGISTER: 'api/auth/signup',
         USERS: 'api/usuarios',
-        PROFESORES: 'api/profesores'
+        PROFESORES: 'api/profesores',
+        OFERTAS: 'api/oferta' 
     },
 
     STORAGE: {
