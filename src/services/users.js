@@ -99,10 +99,24 @@ export const DropUsuario = async (UsuarioId) => {
         throw error;
     }
 }
+ export const createUser = async (token, userData ) => {
+    const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}`;
+    return authFetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(userData)
+    });
+}
+
+
 
 export const usersService = {
     getMe,
     changePassword,
     getAllUsers,
     updateUser, 
+    createUser,
 };

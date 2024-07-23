@@ -1,5 +1,4 @@
-import { Divider, Table, Tag, Input, Row, Col, Button } from 'antd';
-import { FilePdfOutlined } from '@ant-design/icons';
+import { Divider, Table, Tag, Input, Row, Col } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
@@ -13,11 +12,13 @@ const { Search } = Input;
 const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]); // Estado para usuarios filtrados
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [selectionType] = useState('radio');
     const [searchText, setSearchText] = useState('');
-    const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
+    const [currentPage, setCurrentPage] = useState(1);
+
     const token = storageController.getToken();
 
     const handleRepPDF = () => {
@@ -117,7 +118,7 @@ const Usuarios = () => {
                 roles: user.roles.map(role => ({ _id: role, name: getRoleName(role) }))
             }));
             setUsers(usersWithKey);
-            setFilteredUsers(usersWithKey);
+            setFilteredUsers(usersWithKey); // Inicializar usuarios filtrados con todos los usuarios
         } catch (error) {
             console.error('Error al obtener usuarios', error);
         }
@@ -133,9 +134,7 @@ const Usuarios = () => {
             user.email.toLowerCase().includes(searchText.toLowerCase())
         );
         setFilteredUsers(filteredData);
-
-        // Update pagination based on filtered data
-        setPagination({ ...pagination, current: 1 });
+        setCurrentPage(1); // Resetear la página actual al filtrar
     }, [searchText, users]);
 
     return (
@@ -156,19 +155,16 @@ const Usuarios = () => {
                         />
                     </Col>
                 </Row>
-                <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />  
-                <Button onClick={handleRepPDF} style={{ color: '#01859a' }}>
-                    <FilePdfOutlined /> Generar
-                </Button>
+                <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={filteredUsers}
-                    pagination={{
-                        ...pagination,
-                        onChange: handleTableChange,
+                    pagination={{ 
+                        pageSize: 10, 
+                        current: currentPage,
+                        onChange: (page) => setCurrentPage(page),
                     }}
-                    onChange={handleTableChange}
                     scroll={{ y: 400 }}
                 />
             </div>
