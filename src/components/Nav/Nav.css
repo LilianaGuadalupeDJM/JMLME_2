@@ -1,22 +1,17 @@
+
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    background-color: #01859a;
+    background-color: #000000;
     height: 80px;
 }
 
 .logo {
-    height: 70px;
+    height: 76px;
     width: auto;
     padding-top: 10px;
-}
-
-.header-center {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
 }
 
 .header-right {
@@ -25,7 +20,7 @@
 }
 
 .header-right h2 {
-    margin-left: 10px;
+    margin-left: 20px; /* Aumenta el margen para separar del botón "Profesores" */
     color: #fff;
 }
 
@@ -52,24 +47,13 @@
 }
 
 .profesores-button {
-    background-color: #ffffff;
-    color: #01859a;
+    background-color: transparent; /* Fondo transparente para que el texto se vea sobre el fondo negro */
+    color: #ffffff; /* Color de texto blanco */
     border: none;
-    margin-left: 20px;
+    margin-left: 20px; /* Espacio entre el botón "Profesores" y el saludo */
 }
 
 .profesores-button:hover {
-    background-color: #d1e0e0;
-    color: #01859a;
-}
-
-.avatar-dropdown {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.username {
-    margin-left: 10px;
-    color: #fff; /* Color del texto */
+    background-color: transparent; /* Mantén el fondo transparente en hover */
+    color: #d1e0e0; /* Color de texto al pasar el mouse */
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { notification } from 'antd';
 import { ENV } from "../utils/constants";
 
 export const getProfesores = async () => {
@@ -54,19 +55,35 @@ export const AddProfesor = async (nombre, apellidos, numeroEmpleado, correo, fec
         console.log("add profesor: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al agregar profesor: ', error);
+        console.error('Lo siento no se agrego el usuario: ', error);
         throw error;
     }
 }
 
 export const DropProfesor = async (ProfesorId) => {
     try {
-        const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}/${ProfesorId}`);
-        console.log("borrar profesor profesor: ", response);
-        return response.data;
+        const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este profesor?");
+        if (!confirmDelete) {
+            return; // Si el usuario cancela, no hacer nada
+        }
 
+        const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}/${ProfesorId}`);
+        if (response.status === 200) {
+            console.log("Profesor eliminado correctamente: ", response);
+            notification.success({
+                message: 'Profesor eliminado',
+                description: 'El profesor ha sido eliminado correctamente.',
+            });
+            return response.data;
+        } else {
+            throw new Error('No se pudo eliminar el profesor');
+        }
     } catch (error) {
-        console.error('error al agregar profesor: ', error);
+        console.error('Error al eliminar profesor: ', error);
+        notification.error({
+            message: 'Error al eliminar profesor',
+            description: 'Hubo un problema al eliminar el profesor. Por favor, intenta nuevamente.',
+        });
         throw error;
     }
 }

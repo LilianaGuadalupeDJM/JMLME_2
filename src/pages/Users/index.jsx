@@ -5,6 +5,7 @@ import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
 import { usersService } from '../../services/users';
+import RepPDF from '../../utils/RepPDF';
 
 const { Search } = Input;
 
@@ -20,10 +21,22 @@ const Usuarios = () => {
 
     const token = storageController.getToken();
 
+    const handleRepPDF = () => {
+        RepPDF(filteredUsers, user.username);
+    };
+
+    const handleTableChange = (pagination, filters, sorter) => {
+        const { current, pageSize } = pagination;
+        setPagination({ current, pageSize });
+
+        const startIndex = (current - 1) * pageSize;
+        const endIndex = current * pageSize;
+        setFilteredUsers(users.slice(startIndex, endIndex));
+    };
+
     const rowSelection = {
-        type: selectionType,
+        type: 'radio',
         onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
             if (selectedRows.length > 0) {
                 setSelectedUserId(selectedRows[0]._id);
                 setSelectedUser(selectedRows[0]);

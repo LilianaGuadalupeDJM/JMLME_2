@@ -1,0 +1,67 @@
+/* Estilo para el contenido principal de la página */
+.main-content {
+    padding: 20px; /* Ajusta el espacio interno según sea necesario */
+    background-color: #ffffff;
+    min-height: calc(1000vh - 100px); /* Ajusta según el tamaño de tu barra de navegación; 64px es una estimación para una barra de navegación típica */
+}
+
+/* Estilo para la barra de navegación */
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #001529; /* Color de fondo de la barra */
+    z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+}
+
+/* Estilo para el formulario de edición de usuario */
+.change-user-form {
+    max-width: 400px;
+    margin: 20px auto; /* Centra el formulario horizontalmente */
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.change-user-form h2 {
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los elementos del formulario */
+.ant-form-item {
+    margin-bottom: 16px;
+}
+
+.ant-form-item-label {
+    text-align: left;
+}
+
+.ant-input {
+    border-color: #141212;
+}
+
+.ant-input:focus {
+    border-color: #166a79;
+    box-shadow: 0 0 0 2px rgba(22, 106, 121, 0.2);
+}
+
+.ant-btn-primary {
+    background-color: #166a79;
+    border-color: #166a79;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+    background-color: #12566b;
+    border-color: #12566b;
+}
+
+.ant-btn-primary:active {
+    background-color: #0d4452;
+    border-color: #0d4452;
+}

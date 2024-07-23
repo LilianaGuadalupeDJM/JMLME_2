@@ -133,6 +133,38 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
     const handleCambioCancel = () => {
         setIsModalCambioOpen(false);
     };
+    const confirmDeletion = () => {
+        Modal.confirm({
+            title: '¿Está seguro que desea eliminar este usuario?',
+            content: 'Esta acción no se puede deshacer.',
+            okText: 'Sí, eliminar',
+            okType: 'danger',
+            cancelText: 'Cancelar',
+            onOk: async () => {
+                if (selectedUserId) {
+                    try {
+                        const response = await DropUsuario(selectedUserId);
+                        console.log('Eliminación exitosa');
+                        notification.success({
+                            message: 'Usuario Eliminado',
+                            description: 'Los datos del usuario han sido eliminados correctamente.',
+                        });
+                        window.location.reload();
+                    } catch (error) {
+                        console.error(error);
+                        notification.error({
+                            message: 'Usuario No Eliminado.',
+                            description: 'Error al eliminar usuario.',
+                        });
+                    }
+                } else {
+                    alert("Selecciona un usuario para eliminar.");
+                }
+            },
+        });
+    };
+
+
 
     const handleChange = (value) => {
         setFormData({
