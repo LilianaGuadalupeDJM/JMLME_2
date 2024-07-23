@@ -55,7 +55,7 @@ export const AddProfesor = async (nombre, apellidos, numeroEmpleado, correo, fec
         console.log("add profesor: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al agregar profesor: ', error);
+        console.error('Lo siento no se agrego el usuario: ', error);
         throw error;
     }
 }

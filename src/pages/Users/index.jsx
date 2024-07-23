@@ -1,4 +1,4 @@
-import { Divider, Table, Tag, Button } from 'antd';
+import { Divider, Table, Tag, Input, Row, Col, Button } from 'antd';
 import { FilePdfOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
@@ -8,13 +8,16 @@ import { storageController } from '../../services/token';
 import { usersService } from '../../services/users';
 import RepPDF from '../../utils/RepPDF';
 
+const { Search } = Input;
+
 const Usuarios = () => {
     const { user, logout } = useAuth();
     const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
+    const [searchText, setSearchText] = useState('');
     const [pagination, setPagination] = useState({ current: 1, pageSize: 10 });
-    const [filteredUsers, setFilteredUsers] = useState([]);
     const token = storageController.getToken();
 
     const handleRepPDF = () => {
@@ -114,12 +117,7 @@ const Usuarios = () => {
                 roles: user.roles.map(role => ({ _id: role, name: getRoleName(role) }))
             }));
             setUsers(usersWithKey);
-
-            // Update filteredUsers based on initial pagination
-            const { current, pageSize } = pagination;
-            const startIndex = (current - 1) * pageSize;
-            const endIndex = current * pageSize;
-            setFilteredUsers(usersWithKey.slice(startIndex, endIndex));
+            setFilteredUsers(usersWithKey);
         } catch (error) {
             console.error('Error al obtener usuarios', error);
         }
@@ -129,6 +127,17 @@ const Usuarios = () => {
         fetchUsers();
     }, []);
 
+    useEffect(() => {
+        const filteredData = users.filter(user =>
+            user.username.toLowerCase().includes(searchText.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setFilteredUsers(filteredData);
+
+        // Update pagination based on filtered data
+        setPagination({ ...pagination, current: 1 });
+    }, [searchText, users]);
+
     return (
         <div>
             <Nav
@@ -137,17 +146,28 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
+                <Row justify="center" style={{ marginBottom: 16 }}>
+                    <Col span={12}>
+                        <Search
+                            placeholder="Buscar por nombre o correo electrónico"
+                            enterButton
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                        />
+                    </Col>
+                </Row>
                 <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />  
-               
-                <Button onClick={handleRepPDF}  style={{ color: '#01859a' }} >
-                    <FilePdfOutlined />Generar
+                <Button onClick={handleRepPDF} style={{ color: '#01859a' }}>
+                    <FilePdfOutlined /> Generar
                 </Button>
-
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
-                    dataSource={users}
-                    pagination={pagination}
+                    dataSource={filteredUsers}
+                    pagination={{
+                        ...pagination,
+                        onChange: handleTableChange,
+                    }}
                     onChange={handleTableChange}
                     scroll={{ y: 400 }}
                 />
