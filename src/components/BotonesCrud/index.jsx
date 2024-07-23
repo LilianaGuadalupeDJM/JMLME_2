@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Space, notification, Modal } from 'antd';
+import { Button, Space, notification } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { DropProfesor } from '../../services/profesores';
 import AddProfessor from '../../pages/Alta-Profesor';
 import EditProfessor from '../../pages/Profesor';
 
-const BotonesCrud = ({ selectedProfessorId }) => {
+const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     const navigate = useNavigate();
-
-    const AltaClick = () => {
-        navigate('/alta-professor');
-    };
 
     const handleEditClick = () => {
         if (selectedProfessorId) {
@@ -25,12 +21,12 @@ const BotonesCrud = ({ selectedProfessorId }) => {
         if (selectedProfessorId) {
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                console.log('Eliminacion exitosa', response.data);
+                console.log('Eliminación exitosa', response.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
                 });
-                window.location.reload();
+                refreshProfesores(); // Actualizar la lista de profesores
             } catch (error) {
                 console.error(error);
                 notification.error({
@@ -44,34 +40,28 @@ const BotonesCrud = ({ selectedProfessorId }) => {
     };
 
     const Reload = () => {
-        window.location.reload();
-    }
+        refreshProfesores(); // Actualizar la lista de profesores
+    };
 
-    const [isModalalta, setIsModalOpen] = useState(false);
+    const [isModalalta, setIsModalalta] = useState(false);
     const [isModalcambio, setIsModalcambio] = useState(false);
 
-    const showModal = () => {
-        setIsModalOpen(true);
+    const showAltaModal = () => {
+        setIsModalalta(true);
     };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
+    const handleAltaClose = () => {
+        setIsModalalta(false);
+        refreshProfesores(); // Actualizar la lista de profesores
     };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-    const showcambioModal = () => {
+    const showCambioModal = () => {
         setIsModalcambio(true);
     };
 
-    const handlcambioeOk = () => {
+    const handleCambioClose = () => {
         setIsModalcambio(false);
-    };
-
-    const handlecambioCancel = () => {
-        setIsModalcambio(false);
+        refreshProfesores(); // Actualizar la lista de profesores
     };
 
     return (
@@ -80,13 +70,13 @@ const BotonesCrud = ({ selectedProfessorId }) => {
                 <Button
                     type="text"
                     icon={<PlusOutlined style={{ color: '#01859a' }} />}
-                    onClick={showModal}
+                    onClick={showAltaModal}
                     disabled={!!selectedProfessorId}
                 />
                 <Button
                     type="text"
                     icon={<EditOutlined style={{ color: '#01859a' }} />}
-                    onClick={showcambioModal}
+                    onClick={showCambioModal}
                     disabled={!selectedProfessorId}
                 />
                 <Button
@@ -102,12 +92,8 @@ const BotonesCrud = ({ selectedProfessorId }) => {
                 />
             </Space>
 
-            <Modal title="Agregar nuevo profesor" open={isModalalta} onOk={handleOk} onCancel={handleCancel}>
-                <AddProfessor />
-            </Modal>
-            <Modal title="Editar Profesor" open={isModalcambio} onOk={handlcambioeOk} onCancel={handlecambioCancel}>
-                {selectedProfessorId && <EditProfessor id={selectedProfessorId} onClose={handleCancel} />}
-            </Modal>
+            <AddProfessor isVisible={isModalalta} onClose={handleAltaClose} />
+            {selectedProfessorId && <EditProfessor isVisible={isModalcambio} onClose={handleCambioClose} id={selectedProfessorId} />}
         </>
     );
 };
