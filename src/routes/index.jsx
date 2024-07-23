@@ -9,7 +9,7 @@ import EditProfessor from "../pages/Profesor";
 import AddProfessor from "../pages/Alta-Profesor";
 import ChangePassword from "../components/ChangePassword";
 import Usuarios from "../pages/Users";
-import AdmisionesPage from "../pages/Admision/AdmisionesPage";
+import Oferta from "../pages/Oferta";
 
 
 import { useAuth } from "../hooks/useAuth";
@@ -26,9 +26,7 @@ const AppRoutes = () => {
         { path: '/alta-professor', element: <AddProfessor /> },
         { path: '/contra', element: user ? <ChangePassword  /> : <Login /> },
         { path: '/usuarios', element: <Usuarios /> },
-        { path: '/admisiones', element: <AdmisionesPage /> },
-
-
+        { path: '/oferta-educativa', element: <Oferta /> },
 
       // Asegúrate de que la ruta y la protección de ruta sean correctas
     ]);

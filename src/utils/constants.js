@@ -6,7 +6,7 @@ export const ENV = {
         REGISTER: 'api/auth/signup',
         USERS: 'api/usuarios',
         PROFESORES: 'api/profesores',
-        ADMISIONES: 'api/admision'
+        OFERTAS: 'api/oferta' 
     },
 
     STORAGE: {
