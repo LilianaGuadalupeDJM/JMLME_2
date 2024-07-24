@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Avatar, Modal,Menu } from 'antd';
+import { Button, Avatar, Modal, Menu } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
 import logo from '../../assets/log.jpeg';
 import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
@@ -8,12 +8,10 @@ import './Nav.css'; // Importa los estilos
 import ChangePassword from '../ChangePassword';
 import DrawerComponent from '../Drawer';
 
-const Nav = ({ greeting }) => {
+const Nav = () => {
     const [drawerVisible, setDrawerVisible] = useState(false); // Estado para controlar el drawer
     const navigate = useNavigate();
     const { user, logout } = useAuth();
-
-
 
     const showModal = () => {
         navigate('/contra');
@@ -41,18 +39,20 @@ const Nav = ({ greeting }) => {
         setDrawerVisible(false); // Cierra el drawer
     };
 
+    const isAdmin = user && user.roles && user.roles.includes('666b5995e842a28618ccfc95');
+    const userName = user ? user.username : '';
+
     const tabNames = [
         // { key: 'home', label: 'Home', path: '/' },
         { key: 'profesores', label: 'Profesor', path: '/profesores' },
         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
         { key: 'admisiones', label: 'Admisiones', path: '/admisiones' },
         { key: 'oferta', label: 'Oferta', path: '/oferta-educativa' },
-
     ];
 
     const tabNamesMenu = [
         { key: 'perfil', label: 'Perfil', onClick: showModal },
-        //{ key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
+        // { key: 'cambiarContrasena', label: 'Cambiar Contraseña', onClick: handleOpenChangePasswordModal },
         { key: 'cerrarSesion', label: 'Cerrar Sesión', onClick: handleLogoutClick },
     ];
 
@@ -79,10 +79,12 @@ const Nav = ({ greeting }) => {
                 ))}
             </div>
             <div className="header-right">
-                <h2 className="greeting">{greeting}</h2>
+                <h2 className="greeting">
+                    {isAdmin ? `Bienvenido ${userName}` : 'Bienvenido visitante'}
+                </h2>
                 {user ? (
                     <div className="avatar-dropdown">
-                        <span className="username">Bienvenido {user.username}</span>
+                      
                         <DrawerComponent
                             visible={drawerVisible}
                             onClose={handleDrawerClose}
@@ -99,4 +101,3 @@ const Nav = ({ greeting }) => {
 };
 
 export default Nav;
-
