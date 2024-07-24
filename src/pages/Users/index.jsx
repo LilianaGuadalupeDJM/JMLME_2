@@ -1,5 +1,6 @@
-import { Divider, Table, Tag, Input, Row, Col } from 'antd';
+import { Divider, Table, Tag, Input, Row, Col, Button } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { FilePdfOutlined } from '@ant-design/icons';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/Nav';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
@@ -156,6 +157,10 @@ const Usuarios = () => {
                     </Col>
                 </Row>
                 <BotonesCrudUsuario selectedUserId={selectedUserId} selectedUser={selectedUser} />
+
+                <Button onClick={handleRepPDF}  style={{ color: '#01859a' }} >
+                    <FilePdfOutlined />Generar
+                </Button>
                 <Table
                     rowSelection={rowSelection}
                     columns={columns}
