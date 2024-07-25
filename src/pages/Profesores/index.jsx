@@ -34,7 +34,7 @@ const Profesores = () => {
     const { user, logout } = useAuth();
     const [profesores, setProfesores] = useState([]);
     const [selectedProfessorId, setSelectedProfessorId] = useState(null);
-    const [selectionType, setSelectionType] = useState('radio');
+    const [selectionType] = useState('radio'); // Default to 'radio' selection
 
     const token = storageController.getToken();
 

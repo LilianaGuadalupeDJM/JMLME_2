@@ -13,7 +13,10 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
         if (selectedProfessorId) {
             navigate(`/edit-professor/${selectedProfessorId}`);
         } else {
-            alert("Selecciona un profesor para editar.");
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para editar.',
+            });
         }
     };
 
@@ -30,12 +33,15 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
             } catch (error) {
                 console.error(error);
                 notification.error({
-                    message: 'Profesor No Eliminado.',
-                    description: 'Error al Eliminar Profesor.',
+                    message: 'Error de Eliminación',
+                    description: 'Error al eliminar el profesor.',
                 });
             }
         } else {
-            alert("Selecciona un profesor para eliminar.");
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para eliminar.',
+            });
         }
     };
 
@@ -56,7 +62,14 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     };
 
     const showCambioModal = () => {
-        setIsModalcambio(true);
+        if (selectedProfessorId) {
+            setIsModalcambio(true);
+        } else {
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para editar.',
+            });
+        }
     };
 
     const handleCambioClose = () => {
@@ -71,7 +84,6 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
                     type="text"
                     icon={<PlusOutlined style={{ color: '#01859a' }} />}
                     onClick={showAltaModal}
-                    disabled={!!selectedProfessorId}
                 />
                 <Button
                     type="text"
