@@ -99,4 +99,3 @@ export const deleteAdmision = async (admisionId) => {
     }
 };
 
-
