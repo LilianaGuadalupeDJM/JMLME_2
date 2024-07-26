@@ -86,10 +86,29 @@ const createOferta = async (token, data) => {
     }
 };
 
-
+// Obtener una oferta por ID
+const getOfertaById = async (token, ofertaId) => {
+    try {
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.OFERTAS}/${ofertaId}`;
+        const response = await authFetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`Error al obtener la oferta con ID ${ofertaId}`, error);
+        throw error;
+    }
+};
 export const ofertaService = {
     getAllOferta,
     updateOferta,
     deleteOferta,
     createOferta,
+    getOfertaById,
 };
