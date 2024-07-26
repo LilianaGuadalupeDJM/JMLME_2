@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Space, notification, Modal, Form, Input, Switch } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Button, Space, notification, Modal, Form, Input, Switch, List } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined, UserOutlined } from '@ant-design/icons';
 import { ofertaService } from '../../services/oferta';
+import { getProfesor } from '../../services/profesores';
 import { storageController } from '../../services/token';
 
 const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
     const [isModalCambio, setIsModalCambioOpen] = useState(false);
+    
+    const [isModalProfesores, setIsModalProfesoresOpen] = useState(false);
     const [form] = Form.useForm();
     const token = storageController.getToken();
+    const [profesores, setProfesores] = useState([]);
 
     const showModal = () => {
         setIsModalAltaOpen(true);
@@ -23,9 +27,10 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 description: 'La oferta ha sido creada correctamente.',
             });
             setIsModalAltaOpen(false);
+            window.location.reload();
             form.resetFields();
             // Opcional: Recargar la lista de ofertas aquí si es necesario
-            // fetchOfertas();
+            //fetchOfertas();
         } catch (error) {
             console.error('Error al crear la oferta:', error);
             notification.error({
@@ -58,6 +63,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                                 description: 'Los datos de la oferta han sido actualizados correctamente.',
                             });
                             setIsModalCambioOpen(false);
+                            window.location.reload();
                             // Opcional: Recargar la lista de ofertas aquí si es necesario
                             // fetchOfertas();
                         } catch (error) {
@@ -79,6 +85,35 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
         setIsModalCambioOpen(false);
     };
 
+    const fetchProfesoresDetails = async (profesoresIds) => {
+        const promises = profesoresIds.map(id => getProfesor(id));
+        return await Promise.all(promises);
+    };
+
+    const showProfesoresModal = async () => {
+        if (selectedOfertaId) {
+            try {
+                const oferta = await ofertaService.getOfertaById(token, selectedOfertaId);
+                const profesoresDetails = await fetchProfesoresDetails(oferta.profesores);
+                setProfesores(profesoresDetails);
+                setIsModalProfesoresOpen(true);
+            } catch (error) {
+                console.error('Error al obtener la oferta:', error);
+                notification.error({
+                    message: 'Error al Obtener Profesores',
+                    description: 'Hubo un error al obtener los datos de los profesores.',
+                });
+            }
+        } else {
+            alert("Selecciona una oferta para ver los profesores.");
+        }
+    };
+
+    const handleProfesoresModalCancel = () => {
+        setIsModalProfesoresOpen(false);
+    };
+
+
     const Reload = () => {
         window.location.reload();
     };
@@ -99,6 +134,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                             message: 'Oferta Eliminada',
                             description: 'La oferta ha sido eliminada correctamente.',
                         });
+                        window.location.reload();
                         // Opcional: Recargar la lista de ofertas aquí si es necesario
                         // fetchOfertas();
                     } catch (error) {
@@ -127,6 +163,12 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                     type="text"
                     icon={<EditOutlined style={{ color: '#01859a' }} />}
                     onClick={showCambioModal}
+                    disabled={!selectedOfertaId}
+                />
+                <Button
+                    type="text"
+                    icon={<UserOutlined style={{ color: '#01859a' }} />}
+                    onClick={showProfesoresModal}
                     disabled={!selectedOfertaId}
                 />
                 <Button
@@ -179,6 +221,26 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                         <Switch />
                     </Form.Item>
                 </Form>
+            </Modal>
+            <Modal
+                title="Profesores de la Oferta"
+                open={isModalProfesores}
+                onCancel={handleProfesoresModalCancel}
+                footer={null}
+            >
+                <List
+                    itemLayout="horizontal"
+                    dataSource={profesores}
+                    renderItem={profesor => (
+                        <List.Item>
+                            <List.Item.Meta
+                                avatar={<UserOutlined />}
+                                title={`${profesor.nombre} ${profesor.apellidos}`}
+                                description={`Correo: ${profesor.correo} - Número de Empleado: ${profesor.numeroEmpleado}`}
+                            />
+                        </List.Item>
+                    )}
+                />
             </Modal>
         </>
     );

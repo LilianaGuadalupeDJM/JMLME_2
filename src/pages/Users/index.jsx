@@ -118,14 +118,14 @@ const Usuarios = () => {
             />
             <Divider />
             <div className='usuarios-container'>
-                {user && user.roles.includes('666b5995e842a28618ccfc95') && <BotonesCrudUsuario />}
+                
+                {user && user.roles.includes('666b5995e842a28618ccfc95') && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
                 <Table
                     rowSelection={user && user.roles.includes('666b5995e842a28618ccfc95') ? rowSelection : null}
                     columns={columns}
                     dataSource={users}
                     scroll={{ y: 400 }}
                 />
-                {user && user.roles.includes('666b5995e842a28618ccfc95') && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
             </div>
         </div>
     );
