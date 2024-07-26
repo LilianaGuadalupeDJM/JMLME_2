@@ -23,9 +23,10 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 description: 'La oferta ha sido creada correctamente.',
             });
             setIsModalAltaOpen(false);
+            window.location.reload();
             form.resetFields();
             // Opcional: Recargar la lista de ofertas aquí si es necesario
-            // fetchOfertas();
+            //fetchOfertas();
         } catch (error) {
             console.error('Error al crear la oferta:', error);
             notification.error({
@@ -58,6 +59,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                                 description: 'Los datos de la oferta han sido actualizados correctamente.',
                             });
                             setIsModalCambioOpen(false);
+                            window.location.reload();
                             // Opcional: Recargar la lista de ofertas aquí si es necesario
                             // fetchOfertas();
                         } catch (error) {
@@ -99,6 +101,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                             message: 'Oferta Eliminada',
                             description: 'La oferta ha sido eliminada correctamente.',
                         });
+                        window.location.reload();
                         // Opcional: Recargar la lista de ofertas aquí si es necesario
                         // fetchOfertas();
                     } catch (error) {
