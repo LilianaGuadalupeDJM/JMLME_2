@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Space, notification } from 'antd';
+import { Button, Space, notification, Modal } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { DropProfesor } from '../../services/profesores';
@@ -8,23 +8,20 @@ import EditProfessor from '../../pages/Profesor';
 
 const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     const navigate = useNavigate();
+    const [isModalalta, setIsModalalta] = useState(false);
+    const [isModalcambio, setIsModalcambio] = useState(false);
+    const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
 
-    const handleEditClick = () => {
-        if (selectedProfessorId) {
-            navigate(`/edit-professor/${selectedProfessorId}`);
-        } else {
-            notification.warning({
-                message: 'Selección Requerida',
-                description: 'Selecciona un profesor para editar.',
-            });
-        }
+    const showConfirmModal = () => {
+        setIsConfirmModalVisible(true);
     };
 
-    const BajaProfessor = async () => {
+    const handleConfirmOk = async () => {
+        setIsConfirmModalVisible(false);
         if (selectedProfessorId) {
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                console.log('Eliminación exitosa', response.data);
+                console.log('Eliminación exitosa', response?.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
@@ -45,12 +42,24 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
         }
     };
 
+    const handleConfirmCancel = () => {
+        setIsConfirmModalVisible(false);
+    };
+
+    const BajaProfessor = async () => {
+        if (selectedProfessorId) {
+            showConfirmModal();
+        } else {
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para eliminar.',
+            });
+        }
+    };
+
     const Reload = () => {
         refreshProfesores(); // Actualizar la lista de profesores
     };
-
-    const [isModalalta, setIsModalalta] = useState(false);
-    const [isModalcambio, setIsModalcambio] = useState(false);
 
     const showAltaModal = () => {
         setIsModalalta(true);
@@ -106,6 +115,17 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
 
             <AddProfessor isVisible={isModalalta} onClose={handleAltaClose} />
             {selectedProfessorId && <EditProfessor isVisible={isModalcambio} onClose={handleCambioClose} id={selectedProfessorId} />}
+
+            <Modal
+                title="Confirmación de Eliminación"
+                visible={isConfirmModalVisible}
+                onOk={handleConfirmOk}
+                onCancel={handleConfirmCancel}
+                okText="Sí, eliminar"
+                cancelText="No, cancelar"
+            >
+                <p>¿Estás seguro de que deseas eliminar este profesor?</p>
+            </Modal>
         </>
     );
 };

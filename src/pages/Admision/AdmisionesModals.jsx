@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, Form, Input, Switch, Button, Space } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Form, Input, Switch, Button, Space, notification } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
 import './Admisiones.css';
 
@@ -10,6 +10,7 @@ const AdmisionesModals = ({
   isDeleteModalVisible, setIsDeleteModalVisible, handleDeleteAdmision
 }) => {
   const [form] = Form.useForm();
+  const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
 
   const handleAddOk = () => {
     form.validateFields().then(values => {
@@ -31,6 +32,38 @@ const AdmisionesModals = ({
 
   const handleDeleteOk = () => {
     handleDeleteAdmision();
+    setIsDeleteModalVisible(false);
+  };
+
+  const handleEditClick = () => {
+    if (selectedAdmision) {
+      setIsEditModalVisible(true);
+    } else {
+      notification.warning({
+        message: 'Selección Requerida',
+        description: 'Selecciona una admision para editar.',
+      });
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (selectedAdmision) {
+      setIsConfirmModalVisible(true);
+    } else {
+      notification.warning({
+        message: 'Selección Requerida',
+        description: 'Selecciona una admision para eliminar.',
+      });
+    }
+  };
+
+  const handleConfirmOk = () => {
+    setIsConfirmModalVisible(false);
+    handleDeleteOk();
+  };
+
+  const handleConfirmCancel = () => {
+    setIsConfirmModalVisible(false);
   };
 
   return (
@@ -44,12 +77,12 @@ const AdmisionesModals = ({
         <Button
           type="text"
           icon={<EditOutlined style={{ color: '#01859a' }} />}
-          onClick={() => selectedAdmision ? setIsEditModalVisible(true) : alert("Selecciona una admision para editar.")}
+          onClick={handleEditClick}
         />
         <Button
           type="text"
           icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-          onClick={() => setIsDeleteModalVisible(true)}
+          onClick={handleDeleteClick}
           disabled={!selectedAdmision}
         />
         <Button
@@ -117,6 +150,17 @@ const AdmisionesModals = ({
       >
         <p>¿Estás seguro que quieres eliminar esta admisión?</p>
         <p><strong>Nombre:</strong> {selectedAdmision?.nombre}</p>
+      </Modal>
+
+      <Modal
+        title="Confirmación de Eliminación"
+        visible={isConfirmModalVisible}
+        onOk={handleConfirmOk}
+        onCancel={handleConfirmCancel}
+        okText="Sí, eliminar"
+        cancelText="No, cancelar"
+      >
+        <p>¿Estás seguro que quieres eliminar esta admisión?</p>
       </Modal>
     </>
   );

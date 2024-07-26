@@ -47,13 +47,7 @@ const AddProfessor = ({ isVisible, onClose }) => {
     };
 
     return (
-        <Modal
-            title="Agregar Profesor"
-            visible={isVisible}
-            onCancel={onClose}
-            footer={null}
-        >
-            <div className="add-professor-container">
+        <Modal title="Agregar Profesor" visible={isVisible} onCancel={onClose} footer={null}>
                 <Form form={form} onFinish={handleFormSubmit}>
                     <Form.Item name="nombre" label="Nombre" rules={[{ required: true }]}>
                         <Input className="uppercase-input" />
@@ -76,7 +70,6 @@ const AddProfessor = ({ isVisible, onClose }) => {
                         </Button>
                     </Form.Item>
                 </Form>
-            </div>
         </Modal>
     );
 };
