@@ -8,6 +8,7 @@ import Nav from '../../components/Nav';
 
 const AdmisionesPage = () => {
   const user = JSON.parse(localStorage.getItem('user')); // Asumiendo que los datos del usuario están en localStorage
+  const isAdmin = user && user.roles && user.roles.includes('666b5995e842a28618ccfc95'); // Verifica si el usuario es admin
 
   const [admisiones, setAdmisiones] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,8 +76,12 @@ const AdmisionesPage = () => {
       render: (text, record) => (
         <Space>
           <Button onClick={() => { setSelectedAdmision(record); setIsViewModalVisible(true); }}>Ver</Button>
-          <Button onClick={() => { setSelectedAdmision(record); setIsEditModalVisible(true); }}>Editar</Button>
-
+          {isAdmin && (
+            <>
+              <Button onClick={() => { setSelectedAdmision(record); setIsEditModalVisible(true); }}>Editar</Button>
+              <Button onClick={() => { setSelectedAdmision(record); setIsDeleteModalVisible(true); }}>Eliminar</Button>
+            </>
+          )}
         </Space>
       )
     }
@@ -95,25 +100,27 @@ const AdmisionesPage = () => {
       <Nav />
       <h1>Admisiones</h1>
 
-      <Space className="action-buttons">
-        <Button
-          type="text"
-          icon={<PlusOutlined style={{ color: '#01859a' }} />}
-          onClick={() => setIsAddModalVisible(true)}
-        />
-        <Button
-          type="text"
-          icon={<EditOutlined style={{ color: '#01859a' }} />}
-          onClick={() => selectedAdmision ? setIsEditModalVisible(true) : alert("Selecciona una admision para editar.")}
-          disabled={!selectedAdmision}
-        />
-        <Button
-          type="text"
-          icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-          onClick={() => setIsDeleteModalVisible(true)}
-          disabled={!selectedAdmision}
-        />
-      </Space>
+      {isAdmin && (
+        <Space className="action-buttons">
+          <Button
+            type="text"
+            icon={<PlusOutlined style={{ color: '#01859a' }} />}
+            onClick={() => setIsAddModalVisible(true)}
+          />
+          <Button
+            type="text"
+            icon={<EditOutlined style={{ color: '#01859a' }} />}
+            onClick={() => selectedAdmision ? setIsEditModalVisible(true) : alert("Selecciona una admision para editar.")}
+            disabled={!selectedAdmision}
+          />
+          <Button
+            type="text"
+            icon={<DeleteOutlined style={{ color: '#01859a' }} />}
+            onClick={() => setIsDeleteModalVisible(true)}
+            disabled={!selectedAdmision}
+          />
+        </Space>
+      )}
 
       <div className="scrollable-table-container">
         <Table

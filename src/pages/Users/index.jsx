@@ -54,7 +54,7 @@ const Usuarios = () => {
                             </Tag>
                         ))
                     ) : (
-                        <Tag color="red">sin usuario</Tag>
+                        <Tag color="blue">Customer</Tag>
                     )}
                 </span>
             ),
