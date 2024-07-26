@@ -117,8 +117,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
             {selectedProfessorId && <EditProfessor isVisible={isModalcambio} onClose={handleCambioClose} id={selectedProfessorId} />}
 
             <Modal
-                title="Confirmación de Eliminación"
-                visible={isConfirmModalVisible}
+                title="Confirmación de Eliminación" visible={isConfirmModalVisible}
                 onOk={handleConfirmOk}
                 onCancel={handleConfirmCancel}
                 okText="Sí, eliminar"
