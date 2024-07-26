@@ -21,7 +21,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
         if (selectedProfessorId) {
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                console.log('Eliminación exitosa', response.data);
+                console.log('Eliminación exitosa', response?.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
@@ -117,7 +117,8 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
             {selectedProfessorId && <EditProfessor isVisible={isModalcambio} onClose={handleCambioClose} id={selectedProfessorId} />}
 
             <Modal
-                title="Confirmación de Eliminación" visible={isConfirmModalVisible}
+                title="Confirmación de Eliminación"
+                visible={isConfirmModalVisible}
                 onOk={handleConfirmOk}
                 onCancel={handleConfirmCancel}
                 okText="Sí, eliminar"
