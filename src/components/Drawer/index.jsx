@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Drawer, Avatar, Button, Modal } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import "./index.css"; // Asegúrate de importar el archivo CSS
+import "./index.css";
 import { useAuth } from "../../hooks/useAuth";
 import EditarUsuario from "../../pages/EditarUsuario";
 import FormChangePassword from "../FormChangePassword";
-import avatarImage from '../../assets/user.jpg'; // Importa la imagen del avatar
+import avatarImage from '../../assets/user.jpg'; 
 
 const DrawerComponent = () => {
     const { user, logout } = useAuth();
@@ -49,8 +49,8 @@ const DrawerComponent = () => {
                 title="Mi Perfil"
                 onClose={onClose}
                 open={open}
-                headerStyle={{ backgroundColor: '#000', color: '#fff' }} // Fondo negro y texto blanco para el encabezado
-                bodyStyle={{ backgroundColor: '#000', color: '#fff' }} // Fondo negro y texto blanco para el cuerpo
+                headerStyle={{ backgroundColor: '#000', color: '#fff' }} 
+                bodyStyle={{ backgroundColor: '#000', color: '#fff' }} 
             >
                 <div className="drawer-content">
                     <div className="drawer-main">
@@ -85,7 +85,7 @@ const DrawerComponent = () => {
                 title="Editar Usuario"
                 visible={isEditModalVisible}
                 onCancel={handleEditModalCancel}
-                footer={null} // Para personalizar los botones del modal
+                footer={null} 
             >
                 <EditarUsuario onModalCancel={handleEditModalCancel} />
             </Modal>
@@ -93,7 +93,7 @@ const DrawerComponent = () => {
                 title="Cambiar Contraseña"
                 visible={isChangePasswordModalVisible}
                 onCancel={handleChangePasswordModalCancel}
-                footer={null} // Para personalizar los botones del modal
+                footer={null} l
             >
                 <FormChangePassword closeModal={handleChangePasswordModalCancel} />
             </Modal>

@@ -29,25 +29,24 @@
     }
 
     .ant-table {
-        font-size: 8px; /* Reduces font size further */
+        font-size: 8px; 
     }
 
     .ant-table-thead > tr > th,
     .ant-table-tbody > tr > td {
-        padding: 2px; /* Reduce padding to a minimum */
+        padding: 2px; 
     }
 
     .ant-table-thead > tr > th {
-        font-size: 8px; /* Reduce font size of table headers */
+        font-size: 8px; 
     }
 
     .ant-table-tbody > tr > td {
-        font-size: 8px; /* Reduce font size of table body cells */
+        font-size: 8px; 
     }
 
-    /* Optionally hide additional columns if needed */
     .ant-table-tbody > tr > td:nth-child(2),
     .ant-table-tbody > tr > td:nth-child(3) {
-        display: none; /* Hide additional columns to fit data */
+        display: none; 
     }
 }

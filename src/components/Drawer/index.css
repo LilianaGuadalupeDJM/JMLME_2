@@ -1,5 +1,5 @@
 .drawer-content {
-    color: #fff; /* Cambiado a blanco para mejor contraste */
+    color: #fff; 
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -11,7 +11,7 @@
 
 .drawer-content .label {
     font-weight: bold;
-    color: #fff; /* Asegúrate de que las etiquetas sean blancas */
+    color: #fff; 
 }
 
 .a-button {

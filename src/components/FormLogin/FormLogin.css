@@ -12,16 +12,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e9ecee; /* Fondo principal */
+    background-color: #e9ecee; 
 }
 
 .responsive-card {
     font-size: 24px;
     font-weight: 600;
-    width: 400px; /* Ancho ajustado para una tarjeta más grande */
-    background-color:  #1097a3b1 !important; /* Color de fondo deseado */
+    width: 400px; 
+    background-color:  #1097a3b1 !important; 
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(123, 81, 81, 0.23); /* Sombra 3D */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(123, 81, 81, 0.23);
 }
 
 .login-form {
@@ -31,14 +31,14 @@ body {
 .login-form-item label {
     font-size: 30px;
     font-weight: 100;
-    color: #ffffff; /* Color del texto de etiquetas */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra para las etiquetas */
+    color: #ffffff; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
 }
 
 .login-form-button {
     margin-top: 30px;
     width: 100%;
-    background-color: #0a0909; /* Color de fondo del botón */
+    background-color: #0a0909; 
     padding: 15px 0;
     font-size: 19px;
     font-weight: 600;
