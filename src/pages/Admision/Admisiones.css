@@ -57,19 +57,19 @@
   
   .admisiones-modal .ant-btn:hover,
   .admisiones-modal .ant-btn:focus {
-    background-color: #106ba3;
-    border-color: #106ba3;
+    background-color: #01859a;
+    border-color: #01859a;
   }
   
   .admisiones-modal .ant-btn-primary {
-    background-color: #1d72b8;
-    border-color: #1d72b8;
+    background-color: #01859a;
+    border-color: #01859a;
   }
   
   .admisiones-modal .ant-btn-primary:hover,
   .admisiones-modal .ant-btn-primary:focus {
-    background-color: #106ba3;
-    border-color: #106ba3;
+    background-color: #01859a;
+    border-color: #01859a;
   }
   
   .uppercase-input {

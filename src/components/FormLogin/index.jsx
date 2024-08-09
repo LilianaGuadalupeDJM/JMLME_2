@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Card } from 'antd';
+import { Form, Input, Button, Card, Typography  } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import './FormLogin.css'; // Importando el archivo CSS con los estilos personalizados
+import './FormLogin.css';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/auth.js';
 import { useAuth } from '../../hooks/useAuth.js';
@@ -43,7 +43,7 @@ const FormLogin = () => {
 
     return (
         <div className="login-component">
-            <Card
+            <Card 
                 title="Bienvenido a JMLM"
                 bordered={false}
                 className='responsive-card'

@@ -9,7 +9,7 @@
 }
 
 .logo {
-    height: 76px;
+    height: 50px;
     width: auto;
     padding-top: 10px;
 }
@@ -44,16 +44,4 @@
 
 .nav-link:hover {
     color: #d1e0e0;
-}
-
-.profesores-button {
-    background-color: transparent; /* Fondo transparente para que el texto se vea sobre el fondo negro */
-    color: #ffffff; /* Color de texto blanco */
-    border: none;
-    margin-left: 20px; /* Espacio entre el botón "Profesores" y el saludo */
-}
-
-.profesores-button:hover {
-    background-color: transparent; /* Mantén el fondo transparente en hover */
-    color: #d1e0e0; /* Color de texto al pasar el mouse */
 }

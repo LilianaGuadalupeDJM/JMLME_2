@@ -45,13 +45,19 @@ const DrawerComponent = () => {
                 style={{ backgroundColor: '#040404', cursor: 'pointer' }}
                 icon={<UserOutlined />}
             />
-            <Drawer  title="Mi Perfil" onClose={onClose} open={open}>
+            <Drawer
+                title="Mi Perfil"
+                onClose={onClose}
+                open={open}
+                headerStyle={{ backgroundColor: '#000', color: '#fff' }} // Fondo negro y texto blanco para el encabezado
+                bodyStyle={{ backgroundColor: '#000', color: '#fff' }} // Fondo negro y texto blanco para el cuerpo
+            >
                 <div className="drawer-content">
                     <div className="drawer-main">
                         <p><span className="label">Nombre:</span> {user.username}</p>
                         <p><span className="label">Email:</span> {user.email}</p>
                         <p><Button
-                            type="dark"
+                            type="primary"
                             className="a-button"
                             onClick={showEditModal}
                         >
@@ -59,7 +65,7 @@ const DrawerComponent = () => {
                         </Button></p>
 
                         <p><Button
-                            type="dark"
+                            type="primary"
                             className="a-button"
                             onClick={showChangePasswordModal}
                         >

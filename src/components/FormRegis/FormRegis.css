@@ -66,13 +66,13 @@
 .register-form-register {
     margin-top: 20px;
     font-size: 14px;
-    color: #ffffff; /* Color del texto del enlace de registro */
+    color: #000000; /* Color del texto del enlace de registro */
 }
 
 .register-form-register a {
-    color: #f09819; /* Color del enlace de registro */
+    color: #fefefe; /* Color del enlace de registro */
 }
 
 .register-form-register a:hover {
-    color: #f09819; /* Color del enlace de registro al pasar el mouse */
+    color: #036f99; /* Color del enlace de registro al pasar el mouse */
 }

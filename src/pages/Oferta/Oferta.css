@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.oferta-content {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ant-table {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@media (max-width: 430px) {
+    .oferta-layout {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5px;
+    }
+
+    .oferta-content {
+        padding: 5px;
+        width: 100%;
+    }
+
+    .ant-table {
+        font-size: 8px; /* Reduces font size further */
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+        padding: 2px; /* Reduce padding to a minimum */
+    }
+
+    .ant-table-thead > tr > th {
+        font-size: 8px; /* Reduce font size of table headers */
+    }
+
+    .ant-table-tbody > tr > td {
+        font-size: 8px; /* Reduce font size of table body cells */
+    }
+
+    /* Optionally hide additional columns if needed */
+    .ant-table-tbody > tr > td:nth-child(2),
+    .ant-table-tbody > tr > td:nth-child(3) {
+        display: none; /* Hide additional columns to fit data */
+    }
+}

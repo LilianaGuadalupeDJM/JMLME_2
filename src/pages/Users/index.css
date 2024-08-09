@@ -6,13 +6,13 @@ body {
     text-align: center;
 }
 
-.profesores-page {
+.usuarios-page {
     display: flex;
     height: 100vh;
     overflow: hidden;
 }
 
-.profesores-content {
+.usuarios-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@ body {
     overflow-y: auto;
 }
 
-.profesores-container {
+.usuarios-container {
     flex-grow: 1;
     background-color: #ffffff;
     padding: 8px;
@@ -82,7 +82,7 @@ button:hover {
         padding: 6px 4px;
     }
 
-    .profesores-container {
+    .usuarios-container {
         padding: 4px;
     }
 
@@ -102,7 +102,7 @@ button:hover {
         padding: 4px 2px;
     }
 
-    .profesores-container {
+    .usuarios-container {
         padding: 2px;
     }
 
