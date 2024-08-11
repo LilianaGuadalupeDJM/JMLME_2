@@ -11,6 +11,7 @@ import ChangePassword from "../components/ChangePassword";
 import Usuarios from "../pages/Users";
 import Oferta from "../pages/Oferta";
 import AdmisionesPage from "../pages/Admision/AdmisionesPage";
+import Roles from "../pages/RolesPage";
 
 
 import { useAuth } from "../hooks/useAuth";
@@ -29,6 +30,8 @@ const AppRoutes = () => {
         { path: '/usuarios', element: <Usuarios /> },
         { path: '/oferta-educativa', element: <Oferta /> },
         { path: '/admisiones', element: <AdmisionesPage />},
+        { path: '/roles', element: <Roles/>},
+
 
       // Asegúrate de que la ruta y la protección de ruta sean correctas
     ]);

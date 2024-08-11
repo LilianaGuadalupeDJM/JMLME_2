@@ -48,6 +48,8 @@ const Nav = () => {
         { key: 'usuario', label: 'Usuario', path: '/usuarios' },
         { key: 'admisiones', label: 'Admisiones', path: '/admisiones' },
         { key: 'oferta', label: 'Oferta', path: '/oferta-educativa' },
+        { key: 'roles', label: 'Roles', path: '/roles' },
+
     ];
 
     const tabNamesMenu = [
