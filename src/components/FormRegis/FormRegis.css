@@ -4,14 +4,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff; /* Fondo principal */
+    background-color: #ffffff; 
 }
 
 .responsive-card {
-    width: 400px; /* Ajuste del ancho de la tarjeta */
+    width: 400px; 
     background-color: #166A79;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.23); /* Sombra 3D */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 6px 6px rgba(0, 0, 0, 0.23); 
    
 }
 
@@ -24,8 +24,8 @@
     font-weight: 500;
     line-height: 42px;
     text-align: center;
-    color: #ffffff; /* Texto del título */
-    text-shadow: 2px 2px 5px rgba(223, 208, 208, 0.5); /* Sombra para el texto */
+    color: #ffffff; 
+    text-shadow: 2px 2px 5px rgba(223, 208, 208, 0.5); 
 }
 
 .register-form-item {
@@ -37,42 +37,41 @@
 
 
 .register-form-item input::placeholder {
-    color: #000000; /* Color del placeholder */
+    color: #000000; 
 }
 
 .register-form-button {
     margin-top: 30px;
     width: 100%;
-    background-color: #0a0909; /* Color de fondo del botón */
-    color: #dfddf1; /* Color del texto del botón */
+    background-color: #0a0909; 
+    color: #dfddf1; 
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Sombra para el botón */
-    transition: all 0.3s ease; /* Suavizado para la animación de hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease; 
 }
 
 .register-form-button:hover {
-    background-color: #ffffff; /* Color de fondo del botón al pasar el mouse */
-    color: #080710; /* Color del texto del botón al pasar el mouse */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra aumentada al pasar el mouse */
+    background-color: #ffffff; 
+    color: #080710; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); 
 }
 
 .register-form-error {
-    color: red; /* Color del mensaje de error */
+    color: red; 
 }
 
 .register-form-register {
     margin-top: 20px;
     font-size: 14px;
-    color: #ffffff; /* Color del texto del enlace de registro */
+    color: #000000; 
 }
 
 .register-form-register a {
-    color: #f09819; /* Color del enlace de registro */
+    color: #fefefe; 
 }
 
 .register-form-register a:hover {
-    color: #f09819; /* Color del enlace de registro al pasar el mouse */
-}
+    color: #036f99; }

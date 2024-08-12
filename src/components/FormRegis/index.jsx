@@ -11,7 +11,7 @@ const FormRegis = () => {
     const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
-        setLoading(true); // Establece el estado de carga a true al enviar el formulario
+        setLoading(true); 
         try {
             const response = await authService.register(values.username, values.email, values.password);
             console.log('Registro exitoso', response.data);
@@ -22,7 +22,7 @@ const FormRegis = () => {
             setRegisterError(true);
         }
         finally {
-            setLoading(false); // Establece el estado de carga a false después de recibir la respuesta
+            setLoading(false); 
         }
     };
 

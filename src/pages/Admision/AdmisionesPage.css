@@ -1,38 +1,77 @@
-/* Estilo general para la página de admisiones */
-.admisiones-page {
-    padding: 20px;
+.admisiones-layout {
+  min-height: 100vh;
+}
+
+.admisiones-content {
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.custom-table {
+  width: 100%;
+  font-size: 12px; /* Tamaño de fuente para pantallas grandes */
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  font-size: 12px; /* Tamaño de fuente para las celdas de la tabla */
+}
+
+.custom-table .ant-table-thead > tr > th {
+  font-size: 12px; /* Tamaño de fuente para los encabezados de la tabla */
+}
+
+.action-buttons .ant-btn {
+  font-size: 12px; /* Tamaño de fuente para los botones */
+  margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+  .admisiones-content {
+      padding: 5px;
   }
-  
-  /* Título de la página */
-  .admisiones-page h1 {
-    text-align: center;
-    margin-bottom: 20px;
+
+  .custom-table {
+      font-size: 10px; /* Tamaño de fuente más pequeño en dispositivos móviles */
   }
-  
-  /* Espaciado para los botones antes de la tabla */
-  .admisiones-page .action-buttons {
-    margin-bottom: 16px;
-    text-align: center;
-  }
-  
-  /* Estilo para los botones con íconos */
-  .admisiones-page .ant-btn {
-    margin: 0 5px;
-  }
-  
-  /* Estilo para los botones de los modales */
-  .admisiones-page .modal-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .scrollable-table-container {
-    max-height: 400px; /* Ajusta según tus necesidades */
-    overflow-y: auto;
-  }
-  
+
   .custom-table .ant-table-tbody > tr > td {
-    white-space: nowrap;
+      font-size: 10px; /* Tamaño de fuente para las celdas de la tabla en dispositivos móviles */
   }
-  
-  
+
+  .custom-table .ant-table-thead > tr > th {
+      font-size: 10px; /* Tamaño de fuente para los encabezados de la tabla en dispositivos móviles */
+  }
+
+  .action-buttons .ant-btn {
+      font-size: 10px; /* Tamaño de fuente para los botones en dispositivos móviles */
+  }
+}
+
+@media (max-width: 430px) {
+  .admisiones-content {
+      padding: 5px;
+      font-size: 8px; /* Tamaño de fuente más pequeño en pantallas muy pequeñas */
+  }
+
+  .custom-table {
+      font-size: 8px; /* Tamaño de fuente aún más pequeño en pantallas muy pequeñas */
+  }
+
+  .custom-table .ant-table-tbody > tr > td {
+      font-size: 8px; /* Tamaño de fuente para las celdas de la tabla en pantallas muy pequeñas */
+  }
+
+  .custom-table .ant-table-thead > tr > th {
+      font-size: 8px; /* Tamaño de fuente para los encabezados de la tabla en pantallas muy pequeñas */
+  }
+
+  .action-buttons .ant-btn {
+      font-size: 8px; /* Tamaño de fuente para los botones en pantallas muy pequeñas */
+  }
+}
