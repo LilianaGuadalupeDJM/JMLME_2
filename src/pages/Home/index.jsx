@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, theme } from 'antd';
 import { useAuth } from "../../hooks/useAuth";
-import Nav from "../../components/Nav";
+//import Nav from "../../components/Nav";
 import Sidebar from '../../components/SiderBar';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
