@@ -10,7 +10,7 @@ export const ENV = {
         ADMISIONES: 'api/admision',
         DIVISION: 'api/diviciones',
         CURSOS: 'api/cursos',
-
+        ROLES: 'api/roles'
     },
 
     STORAGE: {

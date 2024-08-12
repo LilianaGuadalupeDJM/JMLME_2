@@ -50,7 +50,9 @@ const Nav = () => {
         { key: 'oferta', label: 'Oferta', path: '/oferta-educativa' },
         { key: 'Login ', label: 'Login ', path: '/login'},
         { key: 'Divicion ', label: 'divicion ', path: '/division'},
-        { key: 'cursos', label: 'Cursos ', path: '/cursos'}
+        { key: 'cursos', label: 'Cursos ', path: '/cursos'},
+        { key: 'roles', label: 'Roles', path: '/roles' },
+
 
     ];
 
