@@ -8,8 +8,6 @@ export const ENV = {
         PROFESORES: 'api/profesores',
         OFERTAS: 'api/oferta',
         ADMISIONES: 'api/admision',
-        DIVISION: 'api/diviciones',
-        CURSOS: 'api/cursos',
         ROLES: 'api/roles'
     },
 
