@@ -1,0 +1,78 @@
+/* Estilos generales para la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e9e9ec;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Contenedor principal de los profesores */
+.profesores-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #f1f3f5;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Estilos específicos para la tabla */
+.ant-table {
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.ant-table-thead > tr > th {
+    background-color: #208bc9;
+    font-weight: bold;
+    text-align: center;
+}
+
+.ant-table-tbody > tr > td {
+    text-align: center;
+}
+
+.ant-divider {
+    border-top: 4px solid #1890ff;
+}
+
+.ant-table-row:hover {
+    background-color: #e6f7ff;
+}
+
+/* Estilos para el componente de navegación */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1890ff;
+    color: white;
+    font-size: 18px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para los botones */
+button {
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #40a9ff;
+}
