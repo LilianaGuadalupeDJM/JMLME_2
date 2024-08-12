@@ -11,6 +11,10 @@ import ChangePassword from "../components/ChangePassword";
 import Usuarios from "../pages/Users";
 import Oferta from "../pages/Oferta";
 import AdmisionesPage from "../pages/Admision/AdmisionesPage";
+
+import Divisiones from "../pages/division/division"
+import Cursos from "../pages/Cursos/cursos";
+
 import Roles from "../pages/RolesPage";
 
 
@@ -30,6 +34,9 @@ const AppRoutes = () => {
         { path: '/usuarios', element: <Usuarios /> },
         { path: '/oferta-educativa', element: <Oferta /> },
         { path: '/admisiones', element: <AdmisionesPage />},
+
+        { path: '/division', element: <Divisiones />},
+        { path: '/cursos', element: <Cursos />},
         { path: '/roles', element: <Roles/>},
 
 
