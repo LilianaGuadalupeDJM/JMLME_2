@@ -10,10 +10,10 @@ const Carrusel = () => (
                 <img src="src/assets/a.jpg" alt="Imagen 1" />
             </div>
             <div className="carousel-item">
-                <img src="src/assets/c.jpg" alt="Imagen 2" />
+                <img src="src/assets/b.jpg" alt="Imagen 2" />
             </div>
             <div className="carousel-item">
-                <img src="src/assets/b.jpg" alt="Imagen 3" />
+                <img src="src/assets/c.jpg" alt="Imagen 3" />
             </div>           
         </Carousel>                 
     </div>

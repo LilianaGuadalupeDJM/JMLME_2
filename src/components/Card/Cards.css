@@ -1,0 +1,55 @@
+.card-background, .card-lili, .card-lili2 {
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Ajusta la altura de las tarjetas según sea necesario */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 20px; /* Espacio interno para el contenido */
+    color: rgb(0, 0, 0);
+}
+
+ .card-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* Fondo negro transparente */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+.card-lili .ant-card-body, .card-background .ant-card-body {
+    z-index: 1; /* Coloca el contenido por encima del fondo */
+    color: rgb(0, 0, 0); /* Color del texto */
+    font-size: 18px; /* Tamaño de la letra del contenido */
+}
+
+.card-lili h1, .card-background h1 {
+    font-weight: bold; /* Negritas para el título */
+    font-size: 28px; /* Tamaño de la letra del título */
+    color: rgb(0, 0, 0); /* Color del título */
+    margin-bottom: 20px; /* Espacio inferior del título */
+}
+
+.card-lili p, .card-background p {
+    font-size: 20px; /* Tamaño de la letra del texto */
+    color: rgb(0, 0, 0); /* Color del texto */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
+.card-lili2 {
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Ajusta la altura de las tarjetas según sea necesario */
+    width: 800px;
+    display: flex;
+   
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 20px; /* Espacio interno para el contenido */
+    color: rgb(0, 0, 0);
+}

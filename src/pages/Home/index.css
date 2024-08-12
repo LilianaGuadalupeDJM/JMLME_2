@@ -23,6 +23,7 @@ body, html {
     .carousel img {
         width: 100%; /* Asegurarse de que las imágenes ocupen el 100% del ancho del carrusel */
         height: auto; /* Mantener la proporción de la imagen */
+        background: rgba(0, 0, 0, 0.5); /* Color negro con 50% de opacidad */
     }
     
     /* Ajustes para los botones */
@@ -104,3 +105,21 @@ body, html {
     width: 80px; /* Tamaño del logo en Nav */
     height: auto; /* Mantener la proporción */
 }
+/* Ocultar la barra de desplazamiento en navegadores WebKit */
+div {
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none;  /* Para Internet Explorer y Edge */
+}
+
+div::-webkit-scrollbar {
+    display: none; /* Para Chrome, Safari y Opera */
+}
+.card-background {
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    border-radius: 8px;
+}
+
+
+
