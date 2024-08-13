@@ -1,11 +1,13 @@
-import { Divider, Table } from 'antd';
+import { Divider, Table ,Layout} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getCursos } from '../../services/Cursos';
 import { useAuth } from '../../hooks/useAuth';
-import Nav from '../../components/Nav';
+import Nav from '../../components/SiderBar';
 import BotonesCrudCursos from '../../components/BotonesCrudCursos';
 import { storageController } from '../../services/token';
 import './index.css'
+
+const { Content } = Layout;
 
 const columns = [
     {
@@ -68,22 +70,21 @@ const Cursos = () => {
     }, []);
 
     return (
-        <div>
-            <Nav
-                greeting={`Hola, ${user ? user.username : 'Visitante'}`}
-                logoutButton={user ? { label: "Cerrar Sesión", onClick: logout } : { label: "Iniciar Sesión", onClick: () => navigate('/login') }}
-            />
-            <Divider />
-            <div className='cursos-container'>
-                <Table
-                    rowSelection={rowSelection}
-                    columns={columns}
-                    dataSource={cursos}
-                    scroll={{ y: 400 }}
-                />
-                {token && <BotonesCrudCursos selectedCursoId={selectedCursoId} refreshCursos={fetchCursos} />}
-            </div>
-        </div>
+        <Layout>
+            <Nav/>
+            <Content style={{ padding: '0 24px', minHeight: 280 }}>
+                <Divider />
+                <div className='cursos-container'>
+                    <Table
+                        rowSelection={rowSelection}
+                        columns={columns}
+                        dataSource={cursos}
+                        scroll={{ y: 400 }}
+                    />
+                    {token && <BotonesCrudCursos selectedCursoId={selectedCursoId} refreshCursos={fetchCursos} />}
+                </div>
+            </Content>
+        </Layout>
     );
 };
 

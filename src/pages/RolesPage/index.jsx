@@ -1,12 +1,13 @@
-import { Divider, Table } from 'antd';
+import { Divider, Table,Layout } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getRoles } from '../../services/Roles';
 import { useAuth } from '../../hooks/useAuth';
-import Nav from '../../components/Nav';
+import SiderBar from '../../components/SiderBar';
 import BotonesCrudRoles from '../../components/BotonesCrudRoles'; // Cambiado el nombre del componente
 import { storageController } from '../../services/token';
 import './index.css'
 
+const { Content } = Layout;
 const columns = [
     {
         title: 'ID',
@@ -55,22 +56,21 @@ const Roles = () => {
     }, []);
 
     return (
-        <div>
-            <Nav
-                greeting={`Hola, ${user ? user.username : 'Visitante'}`}
-                logoutButton={user ? { label: "Cerrar Sesión", onClick: logout } : { label: "Iniciar Sesión", onClick: () => navigate('/login') }}
-            />
-            <Divider />
-            <div className='roles-container'>
-                <Table
-                    rowSelection={rowSelection}
-                    columns={columns}
-                    dataSource={roles}
-                    scroll={{ y: 400 }}
-                />
-                {token && <BotonesCrudRoles selectedRolId={selectedRolId} refreshRoles={fetchRoles} />}
-            </div>
-        </div>
+        <Layout>
+            <SiderBar/>
+            <Content style={{ padding: '0 24px', minHeight: 280 }}>
+                <Divider />
+                <div className='roles-container'>
+                    <Table
+                        rowSelection={rowSelection}
+                        columns={columns}
+                        dataSource={roles}
+                        scroll={{ y: 400 }}
+                    />
+                    {token && <BotonesCrudRoles selectedRolId={selectedRolId} refreshRoles={fetchRoles} />}
+                </div>
+                </Content>
+        </Layout>
     );
 };
 

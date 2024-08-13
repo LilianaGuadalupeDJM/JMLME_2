@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Divider, notification, Layout } from 'antd';
 import { getDivisions, getAllOfertas } from '../../services/divicion'; // Asegúrate de que la ruta del servicio sea correcta
 import BotonesCrudDivision from '../../components/BotonesCrudDivision'; // Asegúrate de que la ruta del componente sea correcta
-import Nav from '../../components/Nav'; // Asegúrate de que la ruta del componente de navegación sea correcta
+import Nav from '../../components/SiderBar'; // Asegúrate de que la ruta del componente de navegación sea correcta
 import { storageController } from '../../services/token'; // Asegúrate de que la ruta del token sea correcta
 
 const { Content } = Layout;

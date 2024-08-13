@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Carousel } from 'antd';
-import './carrusel.css'; // Asegúrate de tener este archivo para los estilos
+import './carrusel.css'; 
 
 const Carrusel = () => (
     <div className="carousel-container"> {/* Contenedor del carrusel */}

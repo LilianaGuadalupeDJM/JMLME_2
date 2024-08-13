@@ -1,21 +1,18 @@
 .carousel-container {
-    width: 80%; /* Ajusta el ancho del contenedor según sea necesario */
-    max-width: 700px; /* Ancho máximo para el contenedor del carrusel */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro con 70% de opacidad */
+    width: 80%; 
+    max-width: 700px; 
+    margin: 0 auto;
 }
 
 .carousel .slick-slide {
     display: flex;
-    justify-content: center; /* Centra los items del carrusel */
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro con 70% de opacidad */
+    justify-content: center;
 }
 
 .carousel-item img {
-    width: 100%; /* Ajusta la imagen al ancho del contenedor */
-    height: auto; /* Mantiene la relación de aspecto */
-    object-fit: cover; /* Mantiene la calidad y recorta si es necesario */
-    border-radius: 8px; /* Bordes redondeados (opcional) */
-    background: rgba(0, 0, 0, 0.8); /* Fondo negro con 70% de opacidad */
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 8px; 
 }
 

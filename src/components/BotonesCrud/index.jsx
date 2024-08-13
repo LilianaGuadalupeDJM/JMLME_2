@@ -26,7 +26,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
                 });
-                window.location.reload(); // Recargar la página entera
+                window.location.reload(); 
             } catch (error) {
                 console.error(error);
                 notification.error({
@@ -58,7 +58,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     };
 
     const Reload = () => {
-        window.location.reload(); // Recargar la página entera
+        window.location.reload(); 
     };
     
 
@@ -68,7 +68,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
 
     const handleAltaClose = () => {
         setIsModalalta(false);
-        window.location.reload(); // Recargar la página entera
+        window.location.reload(); 
     };
 
     const showCambioModal = () => {
@@ -84,7 +84,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
 
     const handleCambioClose = () => {
         setIsModalcambio(false);
-        window.location.reload(); // Recargar la página entera
+        window.location.reload(); 
     };
 
     return (

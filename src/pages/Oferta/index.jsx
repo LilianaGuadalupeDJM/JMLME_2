@@ -1,10 +1,12 @@
-import { Divider, Table, Tag } from 'antd';
+import { Layout, Table, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import Nav from '../../components/Nav';
 import BotonesCrudOferta from '../../components/BotonesCrudOferta';
 import { storageController } from '../../services/token';
 import { ofertaService } from '../../services/oferta';
+import Sidebar from '../../components/SiderBar';
+
+const { Content } = Layout;
 
 const Oferta = () => {
     const { user, logout } = useAuth();
@@ -90,25 +92,24 @@ const Oferta = () => {
     };
 
     return (
-        <div>
-            <Nav
-                greeting={`Hola, ${user ? user.username : 'Visitante'}`}
-                logoutButton={user ? { label: "Cerrar Sesión", onClick: logout } : { label: "Iniciar Sesión", onClick: () => navigate('/login') }}
-            />
-            <Divider />
-            <div className='ofertas-container'>
-                <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />
-                <Table
-                    rowSelection={rowSelection}
-                    columns={columns}
-                    dataSource={filteredOfertas}
-                    pagination={pagination}
-                    onChange={handleTableChange}
-                    scroll={{ y: 400 }}
-                    rowKey="_id" // Añadir rowKey para mejorar el rendimiento
-                />
-            </div>
-        </div>
+        <Layout style={{ minHeight: '100vh' }}>
+            <Sidebar />
+            <Layout className="oferta-layout">
+                <Content className="oferta-content">
+                    <h1></h1>
+                    <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />
+                    <Table
+                        rowSelection={rowSelection}
+                        columns={columns}
+                        dataSource={filteredOfertas}
+                        pagination={pagination}
+                        onChange={handleTableChange}
+                        scroll={{ y: 400 }}
+                        rowKey="_id"
+                    />
+                </Content>
+            </Layout>
+        </Layout>
     );
 };
 

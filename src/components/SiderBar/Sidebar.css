@@ -1,0 +1,62 @@
+/* components/Sidebar/Sidebar.css */
+
+.sidebar-logo {
+  text-align: center;
+  padding: 10px; /* Alineado con el padding de oferta-content */
+  background: #000; /* Fondo negro */
+}
+
+.sidebar-logo img {
+  width: 100px; /* Tamaño del logo */
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px; /* Alineado con el padding de oferta-content */
+  background: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; /* Tamaño de fuente para el pie de página */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff; /* Texto blanco */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; /* Tamaño de fuente de la información del usuario */
+  padding: 10px; /* Espaciado interno */
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-greeting {
+  margin-top: 8px;
+  font-size: 12px; /* Tamaño de fuente para el saludo del usuario */
+}
+
+.ant-menu {
+  background: #000; /* Fondo negro para el menú */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; /* Tamaño de fuente del menú */
+}
+
+.ant-menu-item {
+  color: #fff; /* Texto blanco para los ítems del menú */
+}
+
+.ant-menu-item-selected {
+  background: #333; /* Color de fondo para el ítem seleccionado */
+}
+
+.ant-menu-item:hover {
+  background: #333; /* Color de fondo al pasar el mouse */
+}
