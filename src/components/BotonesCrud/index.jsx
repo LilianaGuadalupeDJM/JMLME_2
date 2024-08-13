@@ -5,73 +5,91 @@ import { useNavigate } from 'react-router-dom';
 import { DropProfesor } from '../../services/profesores';
 import AddProfessor from '../../pages/Alta-Profesor';
 import EditProfessor from '../../pages/Profesor';
+import { storageController } from '../../services/token'; // Importamos el storageController para verificar el token
 
-const BotonesCrud = ({ selectedProfessorId }) => {
+const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     const navigate = useNavigate();
+    const [isModalalta, setIsModalalta] = useState(false);
+    const [isModalcambio, setIsModalcambio] = useState(false);
+    const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
 
-    const AltaClick = () => {
-        navigate('/alta-professor');
+    const token = storageController.getToken(); // Obtenemos el token
+
+    const showConfirmModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
+        setIsConfirmModalVisible(true);
     };
 
-    const handleEditClick = () => {
-        if (selectedProfessorId) {
-            navigate(`/edit-professor/${selectedProfessorId}`);
-        } else {
-            alert("Selecciona un profesor para editar.");
-        }
-    };
-
-    const BajaProfessor = async () => {
-        if (selectedProfessorId) {
+    const handleConfirmOk = async () => {
+        setIsConfirmModalVisible(false);
+        if (selectedProfessorId && token) { // Verificamos que haya un token
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                console.log('Eliminacion exitosa', response.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
                 });
-                window.location.reload();
+                refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
             } catch (error) {
-                console.error(error);
                 notification.error({
-                    message: 'Profesor No Eliminado.',
-                    description: 'Error al Eliminar Profesor.',
+                    message: 'Error de Eliminación',
+                    description: 'Error al eliminar el profesor.',
                 });
             }
         } else {
-            alert("Selecciona un profesor para eliminar.");
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para eliminar.',
+            });
+        }
+    };
+
+    const handleConfirmCancel = () => {
+        setIsConfirmModalVisible(false);
+    };
+
+    const BajaProfessor = async () => {
+        if (!token) return; // Si no hay token, no hacer nada
+        if (selectedProfessorId) {
+            showConfirmModal();
+        } else {
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para eliminar.',
+            });
         }
     };
 
     const Reload = () => {
-        window.location.reload();
-    }
-
-    const [isModalalta, setIsModalOpen] = useState(false);
-    const [isModalcambio, setIsModalcambio] = useState(false);
-
-    const showModal = () => {
-        setIsModalOpen(true);
+        if (!token) return; // Si no hay token, no hacer nada
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
 
-    const handleOk = () => {
-        setIsModalOpen(false);
+    const showAltaModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
+        setIsModalalta(true);
     };
 
-    const handleCancel = () => {
-        setIsModalOpen(false);
+    const handleAltaClose = () => {
+        setIsModalalta(false);
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
 
-    const showcambioModal = () => {
-        setIsModalcambio(true);
+    const showCambioModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
+        if (selectedProfessorId) {
+            setIsModalcambio(true);
+        } else {
+            notification.warning({
+                message: 'Selección Requerida',
+                description: 'Selecciona un profesor para editar.',
+            });
+        }
     };
 
-    const handlcambioeOk = () => {
+    const handleCambioClose = () => {
         setIsModalcambio(false);
-    };
-
-    const handlecambioCancel = () => {
-        setIsModalcambio(false);
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
 
     return (
@@ -80,33 +98,41 @@ const BotonesCrud = ({ selectedProfessorId }) => {
                 <Button
                     type="text"
                     icon={<PlusOutlined style={{ color: '#01859a' }} />}
-                    onClick={showModal}
-                    disabled={!!selectedProfessorId}
+                    onClick={showAltaModal}
+                    disabled={!token} // Deshabilita el botón si no hay token
                 />
                 <Button
                     type="text"
                     icon={<EditOutlined style={{ color: '#01859a' }} />}
-                    onClick={showcambioModal}
-                    disabled={!selectedProfessorId}
+                    onClick={showCambioModal}
+                    disabled={!selectedProfessorId || !token} // Deshabilita el botón si no hay selección o token
                 />
                 <Button
                     type="text"
                     icon={<DeleteOutlined style={{ color: '#01859a' }} />}
                     onClick={BajaProfessor}
-                    disabled={!selectedProfessorId}
+                    disabled={!selectedProfessorId || !token} // Deshabilita el botón si no hay selección o token
                 />
                 <Button
                     type="text"
                     icon={<ReloadOutlined style={{ color: '#01859a' }} />}
                     onClick={Reload}
+                    disabled={!token} // Deshabilita el botón si no hay token
                 />
             </Space>
 
-            <Modal title="Basic Modal" open={isModalalta} onOk={handleOk} onCancel={handleCancel}>
-                <AddProfessor />
-            </Modal>
-            <Modal title="Editar Profesor" open={isModalcambio} onOk={handlcambioeOk} onCancel={handlecambioCancel}>
-                {selectedProfessorId && <EditProfessor id={selectedProfessorId} onClose={handleCancel} />}
+            <AddProfessor isVisible={isModalalta} onClose={handleAltaClose} />
+            {selectedProfessorId && <EditProfessor isVisible={isModalcambio} onClose={handleCambioClose} id={selectedProfessorId} />}
+
+            <Modal
+                title="Confirmación de Eliminación"
+                visible={isConfirmModalVisible}
+                onOk={handleConfirmOk}
+                onCancel={handleConfirmCancel}
+                okText="Sí, eliminar"
+                cancelText="No, cancelar"
+            >
+                <p>¿Estás seguro de que deseas eliminar este profesor?</p>
             </Modal>
         </>
     );

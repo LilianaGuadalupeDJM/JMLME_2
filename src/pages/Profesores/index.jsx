@@ -1,87 +1,93 @@
 import { Divider, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getProfesores } from '../../services/profesores';
-import { useAuth } from '../../hooks/useAuth';
-import Nav from '../../components/Nav';
 import BotonesCrud from '../../components/BotonesCrud';
 import { storageController } from '../../services/token';
-import './index.css'
+import './index.css';
+import Sidebar from '../../components/SiderBar';
 
 const columns = [
     {
         title: 'Nombre',
-        dataIndex: 'nombre'
+        dataIndex: 'nombre',
+        align: 'center',
     },
     {
         title: 'Apellidos',
-        dataIndex: 'apellidos'
+        dataIndex: 'apellidos',
+        align: 'center',
     },
     {
         title: 'Número de Empleado',
-        dataIndex: 'numeroEmpleado'
+        dataIndex: 'numeroEmpleado',
+        align: 'center',
     },
     {
         title: 'Correo',
-        dataIndex: 'correo'
+        dataIndex: 'correo',
+        align: 'center',
     },
     {
         title: 'Fecha de Nacimiento',
-        dataIndex: 'fechaNacimiento'
+        dataIndex: 'fechaNacimiento',
+        align: 'center',
+        render: (text) => {
+            const date = new Date(text);
+            return date.toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        },
     },
 ];
 
 const Profesores = () => {
-    const { user, logout } = useAuth();
     const [profesores, setProfesores] = useState([]);
     const [selectedProfessorId, setSelectedProfessorId] = useState(null);
-    const [selectionType, setSelectionType] = useState('radio'); // Cambiado a radio
 
     const token = storageController.getToken();
 
     const rowSelection = {
-        type: selectionType,
+        type: 'radio',
         onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            if (selectedRows.length > 0) {
-                setSelectedProfessorId(selectedRows[0]._id);
-            } else {
-                setSelectedProfessorId(null);
-            }
+            setSelectedProfessorId(selectedRows.length > 0 ? selectedRows[0]._id : null);
         },
     };
 
-    useEffect(() => {
-        const fetchProfesores = async () => {
-            try {
-                const data = await getProfesores();
-                const profesoresWithKey = data.map(profesor => ({
-                    ...profesor,
-                    key: profesor._id,
-                }));
-                setProfesores(profesoresWithKey);
-            } catch (error) {
-                console.error('Error al obtener profesores: ', error)
-            }
-        };
+    const fetchProfesores = async () => {
+        try {
+            const data = await getProfesores();
+            const profesoresWithKey = data.map(profesor => ({
+                ...profesor,
+                key: profesor._id,
+            }));
+            setProfesores(profesoresWithKey);
+        } catch (error) {
+            //.error('Error al obtener profesores: ', error);
+        }
+    };
 
+    useEffect(() => {
         fetchProfesores();
     }, []);
 
     return (
-        <div>
-            <Nav
-                greeting={`Hola, ${user ? user.username : 'Visitante'}`}
-                logoutButton={user ? { label: "Cerrar Sesión", onClick: logout } : { label: "Iniciar Sesión", onClick: () => navigate('/login') }}
-            />
-            <Divider />
-            <div className='profesores-container'>
-                <Table
-                    rowSelection={rowSelection}
-                    columns={columns}
-                    dataSource={profesores}
-                    scroll={{ y: 400 }}
-                />
-                {token && <BotonesCrud selectedProfessorId={selectedProfessorId} />}
+        <div className="profesores-page">
+            <Sidebar />
+            <div className="profesores-content">
+                <h3></h3>
+                <div className='profesores-container'>
+                    {token && <BotonesCrud selectedProfessorId={selectedProfessorId} refreshProfesores={fetchProfesores} />}
+                    <Table
+                        rowSelection={rowSelection}
+                        columns={columns}
+                        dataSource={profesores}
+                        pagination={{ position: ['bottomCenter'] }}
+                        scroll={{ x: true, y: 400 }}
+                        size="small"
+                    />
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,73 @@
+.admisiones-modal .ant-modal-content {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border: 1px solid #5d5c5c;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.admisiones-modal .ant-modal-title {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #222222;
+  text-align: center;
+  font-weight: bold;
+}
+
+.admisiones-modal .ant-form-item {
+  margin-bottom: 25px;
+}
+
+.admisiones-modal .ant-form-item-label > label {
+  font-weight: 600;
+  color: #000000;
+}
+
+.admisiones-modal .ant-form-item-control-input {
+  border-color: #bbbbbb;
+  border-radius: 6px;
+}
+
+.admisiones-modal .ant-form-item-control-input-content {
+  border-color: #bbbbbb;
+}
+
+.admisiones-modal .ant-input {
+  height: 45px;
+  padding: 0 15px;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+.admisiones-modal .ant-btn {
+  margin-top: 25px;
+  width: 100%;
+  height: 45px;
+  font-size: 18px;
+  background-color: #ffffff;
+  border-color: #fdfeff;
+  border-radius: 6px;
+}
+
+.admisiones-modal .ant-btn:hover,
+.admisiones-modal .ant-btn:focus {
+  background-color: #01859a;
+  border-color: #01859a;
+}
+
+.admisiones-modal .ant-btn-primary {
+  background-color: #01859a;
+  border-color: #01859a;
+}
+
+.admisiones-modal .ant-btn-primary:hover,
+.admisiones-modal .ant-btn-primary:focus {
+  background-color: #01859a;
+  border-color: #01859a;
+}
+
+.uppercase-input {
+  text-transform: uppercase;
+}

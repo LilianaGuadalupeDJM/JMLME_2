@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, notification } from 'antd';
-import { getProfesor, EditProfesor } from '../../services/profesores';
+import { Form, Input, Button, notification, Modal } from 'antd';
+import { getProfesor, EditProfesor,  } from '../../services/profesores';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
-const EditProfessor = ({ id, onClose }) => {
+const EditProfessor = ({isVisible, id, onClose }) => {
     const [professorData, setProfessorData] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [form] = Form.useForm();
 
     useEffect(() => {
         const fetchProfessorData = async () => {
@@ -37,15 +38,15 @@ const EditProfessor = ({ id, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            console.log('Registro exitoso', response.data);
+            //.log('Registro exitoso ', response.data);
             notification.success({
                 message: 'Profesor actualizado',
                 description: 'Los datos del profesor han sido actualizados correctamente.',
             });
-            onClose();  // Cierra el modal después de guardar
+            onClose();  
             navigate('/profesores');
         } catch (error) {
-            console.error(error);
+            //.error(error);
             notification.error({
                 message: 'Profesor no actualizado.',
                 description: 'Error al actualizar profesor.',
@@ -58,8 +59,7 @@ const EditProfessor = ({ id, onClose }) => {
     }
 
     return (
-        <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px' }}>
-            <h2>Editar Profesor</h2>
+            <Modal title="Editar Profesor" visible={isVisible} onCancel={onClose} footer={null}>
             {professorData ? (
                 <Form initialValues={professorData} onFinish={handleFormSubmit}>
                     <Form.Item name="nombre" label="Nombre" rules={[{ required: true }]}>
@@ -86,7 +86,7 @@ const EditProfessor = ({ id, onClose }) => {
             ) : (
                 <p>No se encontraron datos del profesor.</p>
             )}
-        </div>
+         </Modal>   
     );
 };
 

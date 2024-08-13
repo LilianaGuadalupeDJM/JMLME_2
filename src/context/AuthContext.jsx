@@ -34,15 +34,15 @@ export const AuthProvider = (props) => {
 
     const login = async (token) => {
         try{
-            console.log('Obteniendo...', token);
+            //.log('Obteniendo...', token);
             await storageController.setToken(token);
             const response = await usersService.getMe(token);
-            console.log('Usuario obtenido:', response);
+            //.log('Usuario obtenido:', response);
             setUser(response);
             setLoading(false);
-            console.log(false);
+            //.log(false);
         } catch (error){
-            console.error(error);
+            //.error(error);
             setLoading(false);
         }
     }
@@ -60,7 +60,7 @@ export const AuthProvider = (props) => {
             setUser(null);
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            //.log(error);
             setLoading(false);
         }
     }

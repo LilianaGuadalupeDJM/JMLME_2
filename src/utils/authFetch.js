@@ -31,7 +31,7 @@ export const authFetch = async (url, params) => {
                 }
                 return response;
             } catch (error) {
-                console.error('Fetch error:', error);
+                //.error('Fetch error:', error);
                 throw new Error("Network error or invalid response");
             }
         }

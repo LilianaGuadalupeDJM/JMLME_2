@@ -1,38 +1,53 @@
-/* Estilos generales para la página */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #e9e9ec;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* Contenedor principal de los profesores */
-.profesores-container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #f1f3f5;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
+.profesores-page {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* Estilos específicos para la tabla */
-.ant-table {
+.profesores-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #f1f3f5;
+    overflow-y: auto;
+}
+
+.profesores-container {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 8px;
     border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+}
+
+.ant-table {
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
 }
 
 .ant-table-thead > tr > th {
     background-color: #208bc9;
-    font-weight: bold;
+    color: white;
     text-align: center;
+    font-size: 14px;
+    padding: 8px;
 }
 
 .ant-table-tbody > tr > td {
     text-align: center;
+    font-size: 14px;
+    padding: 8px;
 }
 
 .ant-divider {
@@ -43,27 +58,6 @@ body {
     background-color: #e6f7ff;
 }
 
-/* Estilos para el componente de navegación */
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #1890ff;
-    color: white;
-    font-size: 18px;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-}
-
-.nav a:hover {
-    text-decoration: underline;
-}
-
-/* Estilos para los botones */
 button {
     background-color: #1890ff;
     color: white;
@@ -75,4 +69,55 @@ button {
 
 button:hover {
     background-color: #40a9ff;
+}
+
+@media (max-width: 768px) {
+    .ant-table {
+        font-size: 12px;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+        font-size: 12px;
+        padding: 6px 4px;
+    }
+
+    .profesores-container {
+        padding: 4px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ant-table {
+        font-size: 10px;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+        font-size: 10px;
+        padding: 4px 2px;
+    }
+
+    .profesores-container {
+        padding: 2px;
+    }
+
+    button {
+        padding: 6px 12px;
+    }
+}
+
+.ant-table-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-tbody > tr > td {
+    max-width: 150px; 
 }
