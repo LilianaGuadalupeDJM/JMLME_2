@@ -17,6 +17,7 @@ const DrawerComponent = () => {
         setOpen(true);
     };
 
+    
     const onClose = () => {
         setOpen(false);
     };
@@ -75,7 +76,7 @@ const DrawerComponent = () => {
                     <Button
                         type="secondary"
                         className="logout-button"
-                        onClick={logout}
+                        onClick={() => { logout(); navigate('/login'); }}
                     >
                         Cerrar sesión
                     </Button>
