@@ -17,7 +17,7 @@ const getAllOferta = async (token) => {
         }
         return await response.json();
     } catch (error) {
-        console.error('Error al traer las ofertas', error);
+        //.error('Error al traer las ofertas', error);
         throw error;
     }
 };
@@ -39,7 +39,7 @@ const updateOferta = async (token, ofertaId, data) => {
         }
         return await response.json();
     } catch (error) {
-        console.error('Error al actualizar la oferta', error);
+        //.error('Error al actualizar la oferta', error);
         throw error;
     }
 };
@@ -60,7 +60,7 @@ const deleteOferta = async (token, ofertaId) => {
         }
         return await response.json();
     } catch (error) {
-        console.error('Error al eliminar oferta', error);
+        //.error('Error al eliminar oferta', error);
         throw error;
     }
 };
@@ -81,7 +81,7 @@ const createOferta = async (token, data) => {
         }
         return await response.json();
     } catch (error) {
-        console.error('Error al crear oferta', error);
+        //.error('Error al crear oferta', error);
         throw error;
     }
 };
@@ -101,7 +101,7 @@ const getOfertaById = async (token, ofertaId) => {
         }
         return await response.json();
     } catch (error) {
-        console.error(`Error al obtener la oferta con ID ${ofertaId}`, error);
+        //.error(`Error al obtener la oferta con ID ${ofertaId}`, error);
         throw error;
     }
 };

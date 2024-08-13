@@ -26,7 +26,7 @@ const Oferta = () => {
             const endIndex = current * pageSize;
             setFilteredOfertas(data.slice(startIndex, endIndex));
         } catch (error) {
-            console.error('Error al obtener ofertas', error);
+            //.error('Error al obtener ofertas', error);
         }
     };
 

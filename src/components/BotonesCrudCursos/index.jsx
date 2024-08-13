@@ -18,7 +18,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
                 const data = await cursosService.getProfesores();
                 setProfesores(data);
             } catch (error) {
-                console.error('Error al obtener profesores: ', error);
+                //.error('Error al obtener profesores: ', error);
             }
         };
 
@@ -27,7 +27,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
 
     useEffect(() => {
         if (selectedCurso && isModalCambio) {
-            console.log('Configurando valores del formulario:', selectedCurso);
+            //.log('Configurando valores del formulario:', selectedCurso);
             form.setFieldsValue({
                 nombre: selectedCurso.nombre,
                 descripcion: selectedCurso.descripcion,
@@ -54,7 +54,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
             form.resetFields();
             // Call refreshCursos to refresh the list
         } catch (error) {
-            console.error('Error al crear el curso:', error);
+            //.error('Error al crear el curso:', error);
             notification.error({
                 message: 'Error al Crear Curso',
                 description: 'Hubo un error al crear el curso.',
@@ -73,7 +73,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
                 setSelectedCurso(curso);
                 setIsModalCambioOpen(true);
             } catch (error) {
-                console.error('Error al obtener el curso:', error);
+                //.error('Error al obtener el curso:', error);
                 notification.error({
                     message: 'Error al Obtener Curso',
                     description: 'Hubo un error al obtener los datos del curso.',
@@ -105,7 +105,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
                         form.resetFields(); // Limpiar campos del formulario después de la actualización
                         // Call refreshCursos to refresh the list
                     } catch (error) {
-                        console.error('Error al actualizar el curso:', error);
+                        //.error('Error al actualizar el curso:', error);
                         notification.error({
                             message: 'Error al Actualizar Curso',
                             description: 'Hubo un error al actualizar los datos del curso.',
@@ -114,7 +114,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
                 },
             });
         } catch (error) {
-            console.error('Error en la validación:', error);
+            //.error('Error en la validación:', error);
         }
     };
 
@@ -139,7 +139,7 @@ const BotonesCrudCursos = ({ selectedCursoId }) => {
                         });
                         // Call refreshCursos to refresh the list
                     } catch (error) {
-                        console.error('Error al eliminar el curso:', error);
+                        //.error('Error al eliminar el curso:', error);
                         notification.error({
                             message: 'Error al Eliminar Curso',
                             description: 'Hubo un error al eliminar el curso.',

@@ -61,7 +61,7 @@ const Cursos = () => {
             }));
             setCursos(cursosWithKey);
         } catch (error) {
-            console.error('Error al obtener cursos: ', error);
+            //.error('Error al obtener cursos: ', error);
         }
     };
 

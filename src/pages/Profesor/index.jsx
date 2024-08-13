@@ -38,7 +38,7 @@ const EditProfessor = ({isVisible, id, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            console.log('Registro exitoso ', response.data);
+            //.log('Registro exitoso ', response.data);
             notification.success({
                 message: 'Profesor actualizado',
                 description: 'Los datos del profesor han sido actualizados correctamente.',
@@ -46,7 +46,7 @@ const EditProfessor = ({isVisible, id, onClose }) => {
             onClose();  
             navigate('/profesores');
         } catch (error) {
-            console.error(error);
+            //.error(error);
             notification.error({
                 message: 'Profesor no actualizado.',
                 description: 'Error al actualizar profesor.',

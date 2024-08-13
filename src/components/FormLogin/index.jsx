@@ -17,19 +17,19 @@ const FormLogin = () => {
         setLoginError(false);
         try {
             const response = await authService.loginF(values.username, values.password);
-            console.log('Response:', response);
+            //.log('Response:', response);
             if (response && response.data && response.data.generatedToken) {
                 const token = response.data.generatedToken;
-                console.log("inicio correcto");
+                //.log("inicio correcto");
                 localStorage.setItem('token', response.data.generatedToken);
                 login(response.data.generatedToken);
                 navigate('/');
             } else {
-                console.log('Error de inicio inesperado');
+                //.log('Error de inicio inesperado');
                 setLoginError(true);
             }
         } catch (error) {
-            console.error('Error en el login', error.response ? error.response.data : error.message);
+            //.error('Error en el login', error.response ? error.response.data : error.message);
             setLoginError(true);
         } finally {
             setLoading(false);
@@ -37,7 +37,7 @@ const FormLogin = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed: ', errorInfo);
+        //.log('Failed: ', errorInfo);
         setLoginError(true);
     };
 

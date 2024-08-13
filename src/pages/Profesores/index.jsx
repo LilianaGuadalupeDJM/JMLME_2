@@ -64,7 +64,7 @@ const Profesores = () => {
             }));
             setProfesores(profesoresWithKey);
         } catch (error) {
-            console.error('Error al obtener profesores: ', error);
+            //.error('Error al obtener profesores: ', error);
         }
     };
 

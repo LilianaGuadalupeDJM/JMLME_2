@@ -9,7 +9,7 @@ export const getDivisions = async () => {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.DIVISION}`);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener divisiones: ', error);
+        //.error('Error al obtener divisiones: ', error);
         throw error;
     }
 };
@@ -20,7 +20,7 @@ export const getDivision = async (divisionId) => {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.DIVISION}/${divisionId}`);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener división: ', error);
+        //.error('Error al obtener división: ', error);
         throw error;
     }
 };
@@ -39,7 +39,7 @@ export const addDivision = async (data) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error al agregar división: ', error);
+        //.error('Error al agregar división: ', error);
         throw error;
     }
 };
@@ -56,7 +56,7 @@ export const editDivision = async (divisionId, data) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error al editar división: ', error);
+        //.error('Error al editar división: ', error);
         throw error;
     }
 };
@@ -73,7 +73,7 @@ export const deleteDivision = async (divisionId) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error al eliminar división: ', error);
+        //.error('Error al eliminar división: ', error);
         throw error;
     }
 };
@@ -89,7 +89,7 @@ export const getAllOfertas = async () => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error al obtener ofertas educativas:', error);
+        //.error('Error al obtener ofertas educativas:', error);
         throw error;
     }
 };

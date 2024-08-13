@@ -27,7 +27,7 @@ const BotonesCrudRoles = ({ selectedRolId, selectedRol }) => {
             window.location.reload();
             form.resetFields();
         } catch (error) {
-            console.error('Error al crear el rol:', error);
+            //.error('Error al crear el rol:', error);
             notification.error({
                 message: 'Error al Crear Rol',
                 description: 'Hubo un error al crear el rol.',
@@ -61,7 +61,7 @@ const BotonesCrudRoles = ({ selectedRolId, selectedRol }) => {
                             setIsModalCambioOpen(false);
                             window.location.reload();
                         } catch (error) {
-                            console.error('Error al actualizar el rol:', error);
+                            //.error('Error al actualizar el rol:', error);
                             notification.error({
                                 message: 'Error al Actualizar Rol',
                                 description: 'Hubo un error al actualizar los datos del rol.',
@@ -71,7 +71,7 @@ const BotonesCrudRoles = ({ selectedRolId, selectedRol }) => {
                 });
             })
             .catch(info => {
-                console.log('Validación fallida:', info);
+                //.log('Validación fallida:', info);
             });
     };
 
@@ -96,7 +96,7 @@ const BotonesCrudRoles = ({ selectedRolId, selectedRol }) => {
                         });
                         window.location.reload();
                     } catch (error) {
-                        console.error('Error al eliminar el rol:', error);
+                        //.error('Error al eliminar el rol:', error);
                         notification.error({
                             message: 'Error al Eliminar Rol',
                             description: 'Hubo un error al eliminar el rol.',

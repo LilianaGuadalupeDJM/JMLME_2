@@ -21,14 +21,14 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
         if (selectedProfessorId) {
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                console.log('Eliminación exitosa', response?.data);
+                ////.log('Eliminación exitosa', response?.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
                 });
                 window.location.reload(); 
             } catch (error) {
-                console.error(error);
+               ////.error(error);
                 notification.error({
                     message: 'Error de Eliminación',
                     description: 'Error al eliminar el profesor.',

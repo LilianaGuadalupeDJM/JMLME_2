@@ -14,11 +14,11 @@ const FormRegis = () => {
         setLoading(true); 
         try {
             const response = await authService.register(values.username, values.email, values.password);
-            console.log('Registro exitoso', response.data);
+            //.log('Registro exitoso', response.data);
             navigate('/login');
         }
         catch (error) {
-            console.error('Error en el registro', error.response.data);
+            //.error('Error en el registro', error.response.data);
             setRegisterError(true);
         }
         finally {
@@ -27,7 +27,7 @@ const FormRegis = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed', errorInfo);
+        //.log('Failed', errorInfo);
         setRegisterError(true);
     };
 

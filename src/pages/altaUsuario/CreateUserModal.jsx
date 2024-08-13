@@ -18,7 +18,7 @@ const CreateUserModal = ({ isVisible, handleCancel, fetchUsers }) => {
             const rolesData = await usersService.getRoles();
             setRoles(rolesData);
         } catch (error) {
-            console.error('Error al obtener los roles:', error);
+            //.error('Error al obtener los roles:', error);
         }
     };
 
@@ -33,7 +33,7 @@ const CreateUserModal = ({ isVisible, handleCancel, fetchUsers }) => {
                 description: 'Usuario agregado correctamente.',
             });
         } catch (error) {
-            console.error('Error al agregar el usuario:', error);
+            //.error('Error al agregar el usuario:', error);
             notification.error({
                 message: 'Error',
                 description: 'Error al agregar el usuario.',

@@ -16,7 +16,7 @@ const EditarUsuario = ({ onModalCancel }) => {
     const onFinish = async (values) => {
         const token = await storageController.getToken();
         if (!user || !user._id) {
-            console.error('ID de usuario no disponible');
+            //.error('ID de usuario no disponible');
             return;
         }
         setLoading(true);
@@ -35,7 +35,7 @@ const EditarUsuario = ({ onModalCancel }) => {
                 }, 3000); // Tiempo en milisegundos antes de cerrar sesión automáticamente
             }
         } catch (error) {
-            console.error('Error actualizando el usuario:', error);
+            //.error('Error actualizando el usuario:', error);
             setLoading(false);
             message.error('Hubo un problema al guardar los cambios. Por favor, intenta nuevamente.');
         }

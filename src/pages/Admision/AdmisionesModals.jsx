@@ -17,7 +17,7 @@ const AdmisionesModals = ({
       handleAddAdmision(values);
       form.resetFields();
     }).catch(info => {
-      console.log('Validate Failed:', info);
+      //.log('Validate Failed:', info);
     });
   };
 
@@ -26,7 +26,7 @@ const AdmisionesModals = ({
       handleEditAdmision(values);
       form.resetFields();
     }).catch(info => {
-      console.log('Validate Failed:', info);
+      //.log('Validate Failed:', info);
     });
   };
 

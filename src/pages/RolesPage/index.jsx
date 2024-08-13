@@ -47,7 +47,7 @@ const Roles = () => {
             }));
             setRoles(rolesWithKey);
         } catch (error) {
-            console.error('Error al obtener roles: ', error);
+            //.error('Error al obtener roles: ', error);
         }
     };
 

@@ -61,7 +61,7 @@ const Sidebar = () => {
       <Menu.Item key="profile" onClick={() => navigate('/profile')}>
         Perfil
       </Menu.Item>
-      <Menu.Item key="logout" onClick={() => { logout(); navigate('/login'); }}>
+      <Menu.Item key="logout" onClick={() => { logout(); navigate('/'); }}>
         Cerrar Sesión
       </Menu.Item>
     </Menu>

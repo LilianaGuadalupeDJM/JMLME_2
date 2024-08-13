@@ -6,10 +6,10 @@ import { ENV } from "../utils/constants";
 export const getRoles = async () => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.ROLES}`);
-        console.log("url roles: ", response);
+        //.log("url roles: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al obtener roles: ', error);
+        //.error('error al obtener roles: ', error);
         throw error;
     }
 }
@@ -18,10 +18,10 @@ export const getRoles = async () => {
 export const getRol = async (RolId) => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.ROLES}/${RolId}`);
-        console.log("url rol: ", response);
+        //.log("url rol: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al obtener rol: ', error);
+        //.error('error al obtener rol: ', error);
         throw error;
     }
 }
@@ -40,10 +40,10 @@ export const editRol = async (RolId, data, token) => {
             }
         );
 
-        console.log("actualizar rol: ", response);
+        //.log("actualizar rol: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al editar rol: ', error);
+        //.error('error al editar rol: ', error);
         throw error;
     }
 }
@@ -63,10 +63,10 @@ export const addRol = async (name, token) => {
             }
         );
 
-        console.log("add rol: ", response);
+        //.log("add rol: ", response);
         return response.data;
     } catch (error) {
-        console.error('Lo siento no se agrego el rol: ', error);
+        //.error('Lo siento no se agrego el rol: ', error);
         throw error;
     }
 }
@@ -87,7 +87,7 @@ export const dropRol = async (token, RolId) => {
             }
         );
         if (response.status === 200) {
-            console.log("Rol eliminado correctamente: ", response);
+            //.log("Rol eliminado correctamente: ", response);
             notification.success({
                 message: 'Rol eliminado',
                 description: 'El Rol ha sido eliminado correctamente.',
@@ -97,7 +97,7 @@ export const dropRol = async (token, RolId) => {
             throw new Error('No se pudo eliminar el Rol');
         }
     } catch (error) {
-        console.error('Error al eliminar Rol: ', error);
+        //.error('Error al eliminar Rol: ', error);
         notification.error({
             message: 'Error al eliminar Rol',
             description: 'Hubo un problema al eliminar el Rol. Por favor, intenta nuevamente.',

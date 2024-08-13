@@ -18,7 +18,7 @@ const BotonesCrudDivision = ({ selectedDivisionId, refreshDivisions }) => {
                 const data = await getAllOfertas();
                 setOfertas(data);
             } catch (error) {
-                console.error('Error al obtener ofertas educativas:', error);
+                //.error('Error al obtener ofertas educativas:', error);
             }
         };
         fetchOfertas();
@@ -35,7 +35,7 @@ const BotonesCrudDivision = ({ selectedDivisionId, refreshDivisions }) => {
                         ofertasEducativas: division.ofertasEducativas,
                     });
                 } catch (error) {
-                    console.error('Error al obtener la división:', error);
+                    //.error('Error al obtener la división:', error);
                 }
             };
             fetchDivision();
@@ -131,7 +131,7 @@ const BotonesCrudDivision = ({ selectedDivisionId, refreshDivisions }) => {
                 });
             })
             .catch(info => {
-                console.log('Validación fallida:', info);
+                //.log('Validación fallida:', info);
             });
     };
 

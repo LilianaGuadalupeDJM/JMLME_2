@@ -8,17 +8,17 @@ const getMe = async (token) => {
 
     try{
         const decoded = jwtDecode(token);
-        console.log('decoded: ', decoded)
+        //.log('decoded: ', decoded)
         const userId = decoded.id;
-        console.log('id: ',userId)
+        //.log('id: ',userId)
         const url = `${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${userId}`
         const response = await authFetch(url)
-        console.log('url: ', url)
+        //.log('url: ', url)
         return await response.json();
-        console.log('response: ',response)
+        //.log('response: ',response)
         
     } catch (error){
-        console.log(error)
+        //.log(error)
     }
 }
 const changePassword = async (token, currentPassword, newPassword) => {
@@ -43,7 +43,7 @@ const changePassword = async (token, currentPassword, newPassword) => {
 
         return await response.json();
     } catch (error) {
-        console.error('Error en changePassword', error);
+        //.error('Error en changePassword', error);
         throw error;
     }
 }
@@ -62,7 +62,7 @@ const getAllUsers = async (token) => {
 
         return await response.json();
     } catch (error) {
-        console.error('Error al traer los usuarios', error); // Corregido aquí
+        //.error('Error al traer los usuarios', error); // Corregido aquí
         throw error;
     }
 };
@@ -83,7 +83,7 @@ const updateUser = async (token, userId, data) => {
         }
         return await response.json();
     } catch (error) {
-        console.error('Error al actualizar el usuario', error);
+        //.error('Error al actualizar el usuario', error);
         throw error;
     }
 };
@@ -91,11 +91,11 @@ const updateUser = async (token, userId, data) => {
 export const DropUsuario = async (UsuarioId) => {
     try {
         const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.USERS}/${UsuarioId}`);
-        console.log("usuario borrasdo: ", response);
+        //.log("usuario borrasdo: ", response);
         return response.data;
 
     } catch (error) {
-        console.error('error al borrar usuario: ', error);
+        //.error('error al borrar usuario: ', error);
         throw error;
     }
 }

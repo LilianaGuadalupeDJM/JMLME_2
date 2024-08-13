@@ -28,7 +28,7 @@ const AddProfessor = ({ isVisible, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            console.log('Registro exitoso', response.data);
+            //.log('Registro exitoso', response.data);
             notification.success({
                 message: 'Profesor agregado',
                 description: 'El nuevo profesor ha sido agregado correctamente.',
@@ -37,7 +37,7 @@ const AddProfessor = ({ isVisible, onClose }) => {
             onClose();
             navigate('/profesores');
         } catch (error) {
-            console.error(error);
+            //.error(error);
             notification.error({
                 message: 'Error al agregar profesor.',
                 description: 'Ha ocurrido un error al intentar agregar al nuevo profesor.',

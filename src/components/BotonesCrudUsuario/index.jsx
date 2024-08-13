@@ -39,14 +39,14 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 if (selectedUserId) {
                     try {
                         const response = await DropUsuario(selectedUserId);
-                        console.log('Eliminación exitosa');
+                        //.log('Eliminación exitosa');
                         notification.success({
                             message: 'Usuario Eliminado',
                             description: 'Los datos del usuario han sido eliminados correctamente.',
                         });
                         window.location.reload();
                     } catch (error) {
-                        console.error(error);
+                        //.error(error);
                         notification.error({
                             message: 'Usuario No Eliminado.',
                             description: 'Error al eliminar usuario.',
@@ -70,7 +70,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
     const handleOk = async () => {
         try {
             const response = await usersService.createUser(token, formData);
-            console.log('Usuario agregado:', response);
+            //.log('Usuario agregado:', response);
             notification.success({
                 message: 'Usuario Agregado',
                 description: 'El usuario ha sido agregado correctamente.',
@@ -83,7 +83,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 password: ''
             });
         } catch (error) {
-            console.error('Error al agregar usuario:', error);
+            //.error('Error al agregar usuario:', error);
             notification.error({
                 message: 'Error al Agregar Usuario',
                 description: 'Hubo un problema al intentar agregar el usuario.',
@@ -116,7 +116,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                             setIsModalCambioOpen(false);
                             window.location.reload();
                         } catch (error) {
-                            console.error('Error al actualizar usuario:', error);
+                            //.error('Error al actualizar usuario:', error);
                             notification.error({
                                 message: 'Error al Actualizar Usuario',
                                 description: 'Hubo un error al actualizar los datos del usuario.',
@@ -126,7 +126,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 });
             })
             .catch(info => {
-                console.log('Validación fallida:', info);
+                //.log('Validación fallida:', info);
             });
     };
 

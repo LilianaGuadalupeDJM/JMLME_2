@@ -6,10 +6,10 @@ import { storageController } from './token';
 export const getAdmisiones = async () => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.ADMISIONES}`);
-        console.log("url admisiones: ", response);
+        //.log("url admisiones: ", response);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener admisiones: ', error);
+        //.error('Error al obtener admisiones: ', error);
         throw error;
     }
 };
@@ -18,10 +18,10 @@ export const getAdmisiones = async () => {
 export const getAdmision = async (admisionId) => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.ADMISIONES}/${admisionId}`);
-        console.log("url admision: ", response);
+        //.log("url admision: ", response);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener admisión: ', error);
+        //.error('Error al obtener admisión: ', error);
         throw error;
     }
 };
@@ -47,10 +47,10 @@ export const addAdmision = async (nombre, activo) => {
             }
         });
 
-        console.log("add admision: ", response);
+        //.log("add admision: ", response);
         return response.data;
     } catch (error) {
-        console.error('Error al agregar admisión: ', error);
+        //.error('Error al agregar admisión: ', error);
         throw error;
     }
 };
@@ -69,10 +69,10 @@ export const editAdmision = async (admisionId, nombre, activo) => {
                 
             }
         });
-        console.log("actualizar admision: ", response);
+        //.log("actualizar admision: ", response);
         return response.data;
     } catch (error) {
-        console.error('Error al editar admisión: ', error);
+        //.error('Error al editar admisión: ', error);
         throw error;
     }
 };
@@ -90,10 +90,10 @@ export const deleteAdmision = async (admisionId) => {
                 
             }
         });
-        console.log("borrar admision: ", response);
+        //.log("borrar admision: ", response);
         return response.data;
     } catch (error) {
-        console.error('Error al eliminar admisión: ', error);
+        //.error('Error al eliminar admisión: ', error);
         throw error;
         //cambio
     }

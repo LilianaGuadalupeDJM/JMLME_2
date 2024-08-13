@@ -102,7 +102,7 @@ const Usuarios = () => {
             }));
             setUsers(usersWithKey);
         } catch (error) {
-            console.error('Error al obtener usuarios', error);
+            //.error('Error al obtener usuarios', error);
         }
     };
 

@@ -5,10 +5,10 @@ import { ENV } from "../utils/constants";
 export const getProfesores = async () => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}`);
-        console.log("url profesores: ", response);
+        //.log("url profesores: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al obtener profesores: ', error);
+        //.error('error al obtener profesores: ', error);
         throw error;
     }
 }
@@ -16,10 +16,10 @@ export const getProfesores = async () => {
 export const getProfesor = async (ProfesorId) => {
     try {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}/${ProfesorId}`);
-        console.log("url profesor: ", response);
+        //.log("url profesor: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al obtener profesor: ', error);
+        //.error('error al obtener profesor: ', error);
         throw error;
     }
 }
@@ -34,10 +34,10 @@ export const EditProfesor = async (ProfesorId, nombre, apellidos, numeroEmpleado
             fechaNacimiento
         });
 
-        console.log("actualizar profesor: ", response);
+        //.log("actualizar profesor: ", response);
         return response.data;
     } catch (error) {
-        console.error('error al editar profesor: ', error);
+        //.error('error al editar profesor: ', error);
         throw error;
     }
 }
@@ -52,10 +52,10 @@ export const AddProfesor = async (nombre, apellidos, numeroEmpleado, correo, fec
             fechaNacimiento
         });
 
-        console.log("add profesor: ", response);
+        //.log("add profesor: ", response);
         return response.data;
     } catch (error) {
-        console.error('Lo siento no se agrego el usuario: ', error);
+        //.error('Lo siento no se agrego el usuario: ', error);
         throw error;
     }
 }
@@ -69,7 +69,7 @@ export const DropProfesor = async (ProfesorId) => {
 
         const response = await axios.delete(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}/${ProfesorId}`);
         if (response.status === 200) {
-            console.log("Profesor eliminado correctamente: ", response);
+            //.log("Profesor eliminado correctamente: ", response);
             notification.success({
                 message: 'Profesor eliminado',
                 description: 'El profesor ha sido eliminado correctamente.',
@@ -79,7 +79,7 @@ export const DropProfesor = async (ProfesorId) => {
             throw new Error('No se pudo eliminar el profesor');
         }
     } catch (error) {
-        console.error('Error al eliminar profesor: ', error);
+        //.error('Error al eliminar profesor: ', error);
         notification.error({
             message: 'Error al eliminar profesor',
             description: 'Hubo un problema al eliminar el profesor. Por favor, intenta nuevamente.',

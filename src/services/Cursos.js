@@ -7,7 +7,7 @@ export const getCursos = async () => {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.CURSOS}?populate=profesor`);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener cursos: ', error);
+        //.error('Error al obtener cursos: ', error);
         throw error;
     }
 }
@@ -18,7 +18,7 @@ export const getCurso = async (cursoId) => {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.CURSOS}/${cursoId}?populate=profesor`);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener curso: ', error);
+        //.error('Error al obtener curso: ', error);
         throw error;
     }
 }
@@ -38,7 +38,7 @@ export const addCurso = async (data, token) => {
         );
         return response.data;
     } catch (error) {
-        console.error('Error al agregar curso: ', error);
+        //.error('Error al agregar curso: ', error);
         throw error;
     }
 }
@@ -58,7 +58,7 @@ export const editCurso = async (cursoId, data, token) => {
         );
         return response.data;
     } catch (error) {
-        console.error('Error al editar curso: ', error);
+        //.error('Error al editar curso: ', error);
         throw error;
     }
 }
@@ -77,7 +77,7 @@ export const deleteCurso = async (cursoId, token) => {
         );
         return response.data;
     } catch (error) {
-        console.error('Error al eliminar curso: ', error);
+        //.error('Error al eliminar curso: ', error);
         throw error;
     }
 }
@@ -88,7 +88,7 @@ export const getProfesores = async () => {
         const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}`);
         return response.data;
     } catch (error) {
-        console.error('Error al obtener profesores: ', error);
+        //.error('Error al obtener profesores: ', error);
         throw error;
     }
 }

@@ -32,7 +32,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
             // Opcional: Recargar la lista de ofertas aquí si es necesario
             //fetchOfertas();
         } catch (error) {
-            console.error('Error al crear la oferta:', error);
+            //.error('Error al crear la oferta:', error);
             notification.error({
                 message: 'Error al Crear Oferta',
                 description: 'Hubo un error al crear la oferta.',
@@ -67,7 +67,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                             // Opcional: Recargar la lista de ofertas aquí si es necesario
                             // fetchOfertas();
                         } catch (error) {
-                            console.error('Error al actualizar la oferta:', error);
+                            //.error('Error al actualizar la oferta:', error);
                             notification.error({
                                 message: 'Error al Actualizar Oferta',
                                 description: 'Hubo un error al actualizar los datos de la oferta.',
@@ -77,7 +77,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 });
             })
             .catch(info => {
-                console.log('Validación fallida:', info);
+                //.log('Validación fallida:', info);
             });
     };
 
@@ -98,7 +98,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 setProfesores(profesoresDetails);
                 setIsModalProfesoresOpen(true);
             } catch (error) {
-                console.error('Error al obtener la oferta:', error);
+                //.error('Error al obtener la oferta:', error);
                 notification.error({
                     message: 'Error al Obtener Profesores',
                     description: 'Hubo un error al obtener los datos de los profesores.',
@@ -138,7 +138,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                         // Opcional: Recargar la lista de ofertas aquí si es necesario
                         // fetchOfertas();
                     } catch (error) {
-                        console.error('Error al eliminar la oferta:', error);
+                        //.error('Error al eliminar la oferta:', error);
                         notification.error({
                             message: 'Error al Eliminar Oferta',
                             description: 'Hubo un error al eliminar la oferta.',

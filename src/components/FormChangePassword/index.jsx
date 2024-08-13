@@ -17,16 +17,16 @@ const ChangePasswordForm = ({ userId, closeModal }) => {
             const token = await storageController.getToken();
 
             const { "password-actual": currentPassword, "password-repet": newPassword } = values;
-            console.log('Values form', values)
+            //.log('Values form', values)
 
             const response = await usersService.changePassword(token, currentPassword, newPassword);
-            console.log('Password changed successfully', response);
+            //.log('Password changed successfully', response);
             message.success('Contraseña cambiada correctamente');
             closeModal()
             formRef.current.resetFields();
 
         } catch (error) {
-            console.error('Error changing password', error);
+            //.error('Error changing password', error);
             setChangeError(true);
         } finally {
             setLoading(false);
@@ -36,7 +36,7 @@ const ChangePasswordForm = ({ userId, closeModal }) => {
 
 
     const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
+        //.log("Failed:", errorInfo);
         setChangeError(true);
     };
 
