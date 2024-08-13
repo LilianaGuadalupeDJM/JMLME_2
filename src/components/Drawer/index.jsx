@@ -17,7 +17,6 @@ const DrawerComponent = () => {
         setOpen(true);
     };
 
-    
     const onClose = () => {
         setOpen(false);
     };
@@ -54,50 +53,69 @@ const DrawerComponent = () => {
                 bodyStyle={{ backgroundColor: '#000', color: '#fff' }} 
             >
                 <div className="drawer-content">
-                    <div className="drawer-main">
-                        <p><span className="label">Nombre:</span> {user.username}</p>
-                        <p><span className="label">Email:</span> {user.email}</p>
-                        <p><Button
-                            type="primary"
-                            className="a-button"
-                            onClick={showEditModal}
-                        >
-                            Editar usuario
-                        </Button></p>
+                    {user ? (
+                        <div className="drawer-main">
+                            <p><span className="label">Nombre:</span> {user.username}</p>
+                            <p><span className="label">Email:</span> {user.email}</p>
+                            <p><Button
+                                type="primary"
+                                className="a-button"
+                                onClick={showEditModal}
+                            >
+                                Editar usuario
+                            </Button></p>
 
-                        <p><Button
-                            type="primary"
-                            className="a-button"
-                            onClick={showChangePasswordModal}
+                            <p><Button
+                                type="primary"
+                                className="a-button"
+                                onClick={showChangePasswordModal}
+                            >
+                                Cambiar contraseña
+                            </Button></p>
+                        </div>
+                    ) : (
+                        <div className="drawer-main">
+                            <p>No has iniciado sesión</p>
+                            <Button
+                                type="primary"
+                                className="a-button"
+                                onClick={() => navigate('/login')}
+                            >
+                                Iniciar sesión
+                            </Button>
+                        </div>
+                    )}
+                    {user && (
+                        <Button
+                            type="secondary"
+                            className="logout-button"
+                            onClick={() => { logout(); navigate('/login'); }}
                         >
-                            Cambiar contraseña
-                        </Button></p>
-                    </div>
-                    <Button
-                        type="secondary"
-                        className="logout-button"
-                        onClick={() => { logout(); navigate('/login'); }}
-                    >
-                        Cerrar sesión
-                    </Button>
+                            Cerrar sesión
+                        </Button>
+                    )}
                 </div>
             </Drawer>
-            <Modal
-                title="Editar Usuario"
-                visible={isEditModalVisible}
-                onCancel={handleEditModalCancel}
-                footer={null} 
-            >
-                <EditarUsuario onModalCancel={handleEditModalCancel} />
-            </Modal>
-            <Modal
-                title="Cambiar Contraseña"
-                visible={isChangePasswordModalVisible}
-                onCancel={handleChangePasswordModalCancel}
-                footer={null} l
-            >
-                <FormChangePassword closeModal={handleChangePasswordModalCancel} />
-            </Modal>
+            {user && (
+                <>
+                    <Modal
+                        title="Editar Usuario"
+                        visible={isEditModalVisible}
+                        onCancel={handleEditModalCancel}
+                        footer={null} 
+                    >
+                        <EditarUsuario onModalCancel={handleEditModalCancel} />
+                    </Modal>
+                    <Modal
+                        title="Cambiar Contraseña"
+                        visible={isChangePasswordModalVisible}
+                        onCancel={handleChangePasswordModalCancel}
+                        footer={null} 
+                    >
+                        <FormChangePassword closeModal={handleChangePasswordModalCancel} />
+                    </Modal>
+                </>
+            )}
         </>
     );
 };

@@ -30,7 +30,7 @@ const AdmisionesPage = () => {
             setAdmisiones(data.map(admision => ({ ...admision, key: admision._id })));
             setLoading(false);
         } catch (error) {
-            //.error('Error al obtener admisiones', error);
+            console.error('Error al obtener admisiones', error);
             setLoading(false);
         }
     };
@@ -41,7 +41,7 @@ const AdmisionesPage = () => {
             fetchAdmisiones();
             setIsAddModalVisible(false);
         } catch (error) {
-            //.error('Error al agregar admision', error);
+            console.error('Error al agregar admision', error);
         }
     };
 
@@ -51,7 +51,7 @@ const AdmisionesPage = () => {
             fetchAdmisiones();
             setIsEditModalVisible(false);
         } catch (error) {
-            //.error('Error al editar admision', error);
+            console.error('Error al editar admision', error);
         }
     };
 
@@ -61,7 +61,7 @@ const AdmisionesPage = () => {
             fetchAdmisiones();
             setIsDeleteModalVisible(false);
         } catch (error) {
-            //.error('Error al eliminar admision', error);
+            console.error('Error al eliminar admision', error);
         }
     };
 

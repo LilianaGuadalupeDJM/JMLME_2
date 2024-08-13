@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { DropProfesor } from '../../services/profesores';
 import AddProfessor from '../../pages/Alta-Profesor';
 import EditProfessor from '../../pages/Profesor';
+import { storageController } from '../../services/token'; // Importamos el storageController para verificar el token
 
 const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     const navigate = useNavigate();
@@ -12,23 +13,24 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     const [isModalcambio, setIsModalcambio] = useState(false);
     const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
 
+    const token = storageController.getToken(); // Obtenemos el token
+
     const showConfirmModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
         setIsConfirmModalVisible(true);
     };
 
     const handleConfirmOk = async () => {
         setIsConfirmModalVisible(false);
-        if (selectedProfessorId) {
+        if (selectedProfessorId && token) { // Verificamos que haya un token
             try {
                 const response = await DropProfesor(selectedProfessorId);
-                ////.log('Eliminación exitosa', response?.data);
                 notification.success({
                     message: 'Profesor Eliminado',
                     description: 'Los datos del profesor han sido eliminados correctamente.',
                 });
-                window.location.reload(); 
+                refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
             } catch (error) {
-               ////.error(error);
                 notification.error({
                     message: 'Error de Eliminación',
                     description: 'Error al eliminar el profesor.',
@@ -47,6 +49,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     };
 
     const BajaProfessor = async () => {
+        if (!token) return; // Si no hay token, no hacer nada
         if (selectedProfessorId) {
             showConfirmModal();
         } else {
@@ -58,20 +61,22 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
     };
 
     const Reload = () => {
-        window.location.reload(); 
+        if (!token) return; // Si no hay token, no hacer nada
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
-    
 
     const showAltaModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
         setIsModalalta(true);
     };
 
     const handleAltaClose = () => {
         setIsModalalta(false);
-        window.location.reload(); 
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
 
     const showCambioModal = () => {
+        if (!token) return; // Si no hay token, no hacer nada
         if (selectedProfessorId) {
             setIsModalcambio(true);
         } else {
@@ -84,7 +89,7 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
 
     const handleCambioClose = () => {
         setIsModalcambio(false);
-        window.location.reload(); 
+        refreshProfesores(); // Refresca la lista de profesores en lugar de recargar la página
     };
 
     return (
@@ -94,23 +99,25 @@ const BotonesCrud = ({ selectedProfessorId, refreshProfesores }) => {
                     type="text"
                     icon={<PlusOutlined style={{ color: '#01859a' }} />}
                     onClick={showAltaModal}
+                    disabled={!token} // Deshabilita el botón si no hay token
                 />
                 <Button
                     type="text"
                     icon={<EditOutlined style={{ color: '#01859a' }} />}
                     onClick={showCambioModal}
-                    disabled={!selectedProfessorId}
+                    disabled={!selectedProfessorId || !token} // Deshabilita el botón si no hay selección o token
                 />
                 <Button
                     type="text"
                     icon={<DeleteOutlined style={{ color: '#01859a' }} />}
                     onClick={BajaProfessor}
-                    disabled={!selectedProfessorId}
+                    disabled={!selectedProfessorId || !token} // Deshabilita el botón si no hay selección o token
                 />
                 <Button
                     type="text"
                     icon={<ReloadOutlined style={{ color: '#01859a' }} />}
                     onClick={Reload}
+                    disabled={!token} // Deshabilita el botón si no hay token
                 />
             </Space>
 
