@@ -32,7 +32,7 @@ const items = [
   getItem('Admisiones', 'admisiones', <ProfileOutlined />),
   getItem('Oferta Educativa', 'oferta-educativa', <PieChartOutlined />),
   getItem('Cursos', 'cursos', <PieChartOutlined />),
-  getItem('Diviciona', 'division', <PieChartOutlined />),
+  getItem('Division', 'division', <PieChartOutlined />),
   getItem('Roles', 'roles', <PieChartOutlined />),
   //getItem('Files', 'files', <FileOutlined />),
 ];
