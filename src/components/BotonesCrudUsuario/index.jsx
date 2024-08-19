@@ -3,7 +3,6 @@ import { Button, Space, notification, Modal, Form, Input, Select } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { usersService } from '../../services/users';
 import { storageController } from '../../services/token';
-import { DropUsuario } from '../../services/users';
 
 const { Option } = Select;
 
@@ -11,19 +10,43 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
     const [isModalCambio, setIsModalCambioOpen] = useState(false);
     const [form] = Form.useForm();
-    const token = storageController.getToken();
+    const [roles, setRoles] = useState([]);
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         roles: [],
         password: ''
     });
+    const token = storageController.getToken();
+
+    useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const rolesData = await usersService.getRoles();
+                setRoles(rolesData); // Asegúrate de que rolesData sea el array de roles
+            } catch (error) {
+                notification.error({
+                    message: 'Error al Cargar Roles',
+                    description: 'No se pudo cargar la lista de roles.',
+                });
+            }
+        };
+
+        fetchRoles();
+    }, []);
 
     useEffect(() => {
         if (selectedUser) {
             form.setFieldsValue({
                 username: selectedUser.username,
                 email: selectedUser.email,
+                roles: selectedUser.roles || [],
+            });
+            setFormData({
+                username: selectedUser.username,
+                email: selectedUser.email,
+                roles: selectedUser.roles || [],
+                password: ''
             });
         }
     }, [selectedUser, form]);
@@ -38,22 +61,23 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
             onOk: async () => {
                 if (selectedUserId) {
                     try {
-                        const response = await DropUsuario(selectedUserId);
-                        //.log('Eliminación exitosa');
+                        await usersService.DropUsuario(selectedUserId);
                         notification.success({
                             message: 'Usuario Eliminado',
-                            description: 'Los datos del usuario han sido eliminados correctamente.',
+                            description: 'El usuario ha sido eliminado correctamente.',
                         });
                         window.location.reload();
                     } catch (error) {
-                        //.error(error);
                         notification.error({
-                            message: 'Usuario No Eliminado.',
-                            description: 'Error al eliminar usuario.',
+                            message: 'Error al Eliminar Usuario',
+                            description: 'Hubo un problema al eliminar el usuario.',
                         });
                     }
                 } else {
-                    alert("Selecciona un usuario para eliminar.");
+                    notification.warning({
+                        message: 'Selecciona un usuario',
+                        description: 'Para eliminar, selecciona un usuario de la lista.',
+                    });
                 }
             },
         });
@@ -69,8 +93,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
 
     const handleOk = async () => {
         try {
-            const response = await usersService.createUser(token, formData);
-            //.log('Usuario agregado:', response);
+            await usersService.createUser(token, formData);
             notification.success({
                 message: 'Usuario Agregado',
                 description: 'El usuario ha sido agregado correctamente.',
@@ -83,7 +106,6 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 password: ''
             });
         } catch (error) {
-            //.error('Error al agregar usuario:', error);
             notification.error({
                 message: 'Error al Agregar Usuario',
                 description: 'Hubo un problema al intentar agregar el usuario.',
@@ -116,26 +138,22 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                             setIsModalCambioOpen(false);
                             window.location.reload();
                         } catch (error) {
-                            //.error('Error al actualizar usuario:', error);
                             notification.error({
                                 message: 'Error al Actualizar Usuario',
-                                description: 'Hubo un error al actualizar los datos del usuario.',
+                                description: 'Hubo un problema al actualizar los datos del usuario.',
                             });
                         }
                     },
                 });
             })
             .catch(info => {
-                //.log('Validación fallida:', info);
+                console.log('Validación fallida:', info);
             });
     };
 
     const handleCambioCancel = () => {
         setIsModalCambioOpen(false);
     };
-  
-
-
 
     const handleChange = (value) => {
         setFormData({
@@ -201,8 +219,11 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                             value={formData.roles}
                             onChange={handleChange}
                         >
-                            <Option value="admin">Administrador</Option>
-                            <Option value="user">Estudiante</Option>
+                            {roles.map(role => (
+                                <Option key={role.id} value={role.id}>
+                                    {role.name}
+                                </Option>
+                            ))}
                         </Select>
                     </Form.Item>
                 </Form>
@@ -226,6 +247,21 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                         ]}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="roles"
+                        label="Roles"
+                    >
+                        <Select
+                            placeholder="Selecciona roles"
+                            mode="multiple"
+                        >
+                            {roles.map(role => (
+                                <Option key={role.id} value={role.id}>
+                                    {role.name}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Form>
             </Modal>
