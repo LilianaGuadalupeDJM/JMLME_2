@@ -21,7 +21,7 @@ const Usuarios = () => {
             setSelectedUserId(selectedRows.length > 0 ? selectedRows[0]._id : null);
         },
         getCheckboxProps: record => ({
-            disabled: !isAdmin // Deshabilitar selección para no administradores
+            disabled: !isAdmin, // Deshabilitar selección para no administradores
         }),
     };
 
@@ -99,7 +99,7 @@ const Usuarios = () => {
             const usersWithKey = data.map(user => ({
                 ...user,
                 key: user._id,
-                roles: user.roles.map(role => ({ _id: role, name: [role] }))
+                roles: user.roles.map(role => ({ _id: role, name: getRoleName(role) })) // Asegúrate de que roles sea un array de objetos con `_id` y `name`
             }));
             setUsers(usersWithKey);
         } catch (error) {
@@ -109,7 +109,7 @@ const Usuarios = () => {
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [token]);
 
     return (
         <div className="usuarios-page">
