@@ -20,13 +20,17 @@ const Oferta = () => {
     const fetchOfertas = async () => {
         try {
             const data = await ofertaService.getAllOferta(token);
-            setOfertas(data);
-            const { current, pageSize } = pagination;
-            const startIndex = (current - 1) * pageSize;
-            const endIndex = current * pageSize;
-            setFilteredOfertas(data.slice(startIndex, endIndex));
+            if (data && Array.isArray(data)) {
+                setOfertas(data);
+                const { current, pageSize } = pagination;
+                const startIndex = (current - 1) * pageSize;
+                const endIndex = current * pageSize;
+                setFilteredOfertas(data.slice(startIndex, endIndex));
+            } else {
+                console.error('Datos de ofertas inválidos', data);
+            }
         } catch (error) {
-            //.error('Error al obtener ofertas', error);
+            console.error('Error al obtener ofertas', error);
         }
     };
 
@@ -96,7 +100,7 @@ const Oferta = () => {
             <Sidebar />
             <Layout className="oferta-layout">
                 <Content className="oferta-content">
-                    <h1></h1>
+                    <h1>Gestión de Ofertas</h1>
                     <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />
                     <Table
                         rowSelection={rowSelection}

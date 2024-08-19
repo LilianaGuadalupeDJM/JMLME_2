@@ -14,13 +14,15 @@ const Usuarios = () => {
 
     const token = storageController.getToken();
 
+    const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95');
+
     const rowSelection = {
         type: 'radio',
         onChange: (selectedRowKeys, selectedRows) => {
             setSelectedUserId(selectedRows.length > 0 ? selectedRows[0]._id : null);
         },
         getCheckboxProps: record => ({
-            disabled: !user || !user.roles.includes('666b5995e842a28618ccfc95') // Deshabilitar selección para no administradores
+            disabled: !isAdmin // Deshabilitar selección para no administradores
         }),
     };
 
@@ -102,7 +104,7 @@ const Usuarios = () => {
             }));
             setUsers(usersWithKey);
         } catch (error) {
-            //.error('Error al obtener usuarios', error);
+            console.error('Error al obtener usuarios', error);
         }
     };
 
@@ -114,11 +116,11 @@ const Usuarios = () => {
         <div className="usuarios-page">
             <Sidebar />
             <div className="usuarios-content">
-                <h1></h1>
+                <h1>Usuarios</h1>
                 <div className='usuarios-container'>
-                    {user && user.roles.includes('666b5995e842a28618ccfc95') && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
+                    {isAdmin && selectedUserId && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
                     <Table
-                        rowSelection={user && user.roles.includes('666b5995e842a28618ccfc95') ? rowSelection : null}
+                        rowSelection={isAdmin ? rowSelection : null}
                         columns={columns}
                         dataSource={users}
                         pagination={{ position: ['bottomCenter'] }}
