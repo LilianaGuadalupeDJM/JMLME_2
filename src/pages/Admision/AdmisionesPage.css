@@ -75,3 +75,7 @@
       font-size: 8px; /* Tamaño de fuente para los botones en pantallas muy pequeñas */
   }
 }
+.admisiones-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}

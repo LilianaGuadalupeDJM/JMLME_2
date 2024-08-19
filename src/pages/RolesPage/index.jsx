@@ -1,13 +1,14 @@
-import { Divider, Table,Layout } from 'antd';
+import { Divider, Table, Layout } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getRoles } from '../../services/Roles';
 import { useAuth } from '../../hooks/useAuth';
 import SiderBar from '../../components/SiderBar';
 import BotonesCrudRoles from '../../components/BotonesCrudRoles'; // Cambiado el nombre del componente
 import { storageController } from '../../services/token';
-import './index.css'
+import './index.css';
 
 const { Content } = Layout;
+
 const columns = [
     {
         title: 'ID',
@@ -47,7 +48,7 @@ const Roles = () => {
             }));
             setRoles(rolesWithKey);
         } catch (error) {
-            //.error('Error al obtener roles: ', error);
+            console.error('Error al obtener roles: ', error);
         }
     };
 
@@ -60,6 +61,7 @@ const Roles = () => {
             <SiderBar/>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
                 <Divider />
+                <h1>Roles</h1> {/* Título agregado */}
                 <div className='roles-container'>
                     <Table
                         rowSelection={rowSelection}
@@ -69,7 +71,7 @@ const Roles = () => {
                     />
                     {token && <BotonesCrudRoles selectedRolId={selectedRolId} refreshRoles={fetchRoles} />}
                 </div>
-                </Content>
+            </Content>
         </Layout>
     );
 };

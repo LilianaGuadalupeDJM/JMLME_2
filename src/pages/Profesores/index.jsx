@@ -64,7 +64,7 @@ const Profesores = () => {
             }));
             setProfesores(profesoresWithKey);
         } catch (error) {
-            //.error('Error al obtener profesores: ', error);
+            console.error('Error al obtener profesores: ', error);
         }
     };
 
@@ -76,7 +76,7 @@ const Profesores = () => {
         <div className="profesores-page">
             <Sidebar />
             <div className="profesores-content">
-                <h3></h3>
+                <h1>Profesores</h1> {/* Título agregado aquí */}
                 <div className='profesores-container'>
                     {token && <BotonesCrud selectedProfessorId={selectedProfessorId} refreshProfesores={fetchProfesores} />}
                     <Table

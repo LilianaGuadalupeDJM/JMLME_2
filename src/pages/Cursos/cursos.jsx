@@ -1,11 +1,11 @@
-import { Divider, Table ,Layout} from 'antd';
+import { Divider, Table, Layout } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getCursos } from '../../services/Cursos';
 import { useAuth } from '../../hooks/useAuth';
 import Nav from '../../components/SiderBar';
 import BotonesCrudCursos from '../../components/BotonesCrudCursos';
 import { storageController } from '../../services/token';
-import './index.css'
+import './index.css';
 
 const { Content } = Layout;
 
@@ -33,6 +33,7 @@ const columns = [
     },
     // Agrega más columnas según sea necesario
 ];
+
 const Cursos = () => {
     const { user, logout } = useAuth();
     const [cursos, setCursos] = useState([]);
@@ -61,7 +62,7 @@ const Cursos = () => {
             }));
             setCursos(cursosWithKey);
         } catch (error) {
-            //.error('Error al obtener cursos: ', error);
+            console.error('Error al obtener cursos: ', error);
         }
     };
 
@@ -71,10 +72,10 @@ const Cursos = () => {
 
     return (
         <Layout>
-            <Nav/>
+            <Nav />
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
                 <Divider />
-                <h1>Gestión de cursos</h1>  {/* Aquí cambiamos el título */}
+                <h1>Gestión de Cursos</h1>  {/* Título agregado */}
                 <div className='cursos-container'>
                     <Table
                         rowSelection={rowSelection}

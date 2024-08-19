@@ -76,3 +76,7 @@ button {
 button:hover {
     background-color: #40a9ff;
 }
+.roles-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
