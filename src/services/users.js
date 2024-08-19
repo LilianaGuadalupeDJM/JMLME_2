@@ -110,6 +110,18 @@ export const DropUsuario = async (UsuarioId) => {
         body: JSON.stringify(userData)
     });
 }
+// Obtener todos los roles
+export const getRoles = async () => {
+    try {
+        const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.ROLES}`);
+        //.log("url roles: ", response);
+        return response.data;
+    } catch (error) {
+        //.error('error al obtener roles: ', error);
+        throw error;
+    }
+}
+
 
 
 
@@ -119,4 +131,5 @@ export const usersService = {
     getAllUsers,
     updateUser, 
     createUser,
+    getRoles,
 };
