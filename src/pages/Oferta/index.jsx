@@ -113,7 +113,7 @@ const Oferta = () => {
             <Layout className="oferta-layout">
                 <Content className="oferta-content">
                     <h1>Gestión de oferta educativa</h1>
-                    {<BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />}
+                    {token && <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />}
                     <Table
                         rowSelection={rowSelection}
                         columns={columns}
