@@ -3,30 +3,123 @@ import { Button, Space, notification, Modal, Form, Input, Select } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { usersService } from '../../services/users';
 import { storageController } from '../../services/token';
-import { DropUsuario } from '../../services/users';
 
 const { Option } = Select;
 
-const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
+const BotonesCrudUsuario = ({ selectedUserId }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
     const [isModalCambio, setIsModalCambioOpen] = useState(false);
     const [form] = Form.useForm();
+    const [roles, setRoles] = useState([]);
+    const [selectedUser, setSelectedUser] = useState(null);
     const token = storageController.getToken();
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        roles: [],
-        password: ''
-    });
 
     useEffect(() => {
-        if (selectedUser) {
+        const fetchRoles = async () => {
+            try {
+                const data = await usersService.getRoles();
+                setRoles(data);
+            } catch (error) {
+                console.error('Error al obtener roles:', error);
+            }
+        };
+
+        fetchRoles();
+    }, []);
+
+    useEffect(() => {
+        if (selectedUser && isModalCambio) {
             form.setFieldsValue({
                 username: selectedUser.username,
                 email: selectedUser.email,
+                roles: selectedUser.roles.map(role => role._id),
             });
         }
-    }, [selectedUser, form]);
+    }, [selectedUser, isModalCambio]);
+
+    const showModal = () => {
+        setIsModalAltaOpen(true);
+    };
+
+    const handleCreateOk = async () => {
+        try {
+            const values = await form.validateFields();
+            await usersService.createUser(token, values);
+            notification.success({
+                message: 'Usuario Creado',
+                description: 'El usuario ha sido creado correctamente.',
+            });
+            setIsModalAltaOpen(false);
+            form.resetFields();
+            // Lógica para refrescar la lista de usuarios
+        } catch (error) {
+            console.error('Error al crear el usuario:', error);
+            notification.error({
+                message: 'Error al Crear Usuario',
+                description: 'Hubo un error al crear el usuario.',
+            });
+        }
+    };
+
+    const handleCreateCancel = () => {
+        setIsModalAltaOpen(false);
+    };
+
+    const showCambioModal = async () => {
+        if (selectedUserId) {
+            try {
+                const user = await usersService.getUser(selectedUserId);
+                setSelectedUser(user);
+                setIsModalCambioOpen(true);
+            } catch (error) {
+                console.error('Error al obtener el usuario:', error);
+                notification.error({
+                    message: 'Error al Obtener Usuario',
+                    description: 'Hubo un error al obtener los datos del usuario.',
+                });
+            }
+        } else {
+            notification.warning({
+                message: 'Selecciona un usuario',
+                description: 'Para editar, selecciona un usuario de la lista.',
+            });
+        }
+    };
+
+    const handleCambioOk = async () => {
+        try {
+            const values = await form.validateFields();
+            Modal.confirm({
+                title: 'Confirmar actualización',
+                icon: <ExclamationCircleOutlined />,
+                content: '¿Estás seguro de que deseas actualizar este usuario?',
+                onOk: async () => {
+                    try {
+                        await usersService.updateUser(selectedUserId, values, token);
+                        notification.success({
+                            message: 'Usuario Actualizado',
+                            description: 'Los datos del usuario han sido actualizados correctamente.',
+                        });
+                        setIsModalCambioOpen(false);
+                        form.resetFields();
+                        // Lógica para refrescar la lista de usuarios
+                    } catch (error) {
+                        console.error('Error al actualizar el usuario:', error);
+                        notification.error({
+                            message: 'Error al Actualizar Usuario',
+                            description: 'Hubo un error al actualizar los datos del usuario.',
+                        });
+                    }
+                },
+            });
+        } catch (error) {
+            console.error('Error en la validación:', error);
+        }
+    };
+
+    const handleCambioCancel = () => {
+        setIsModalCambioOpen(false);
+    };
 
     const confirmDeletion = () => {
         Modal.confirm({
@@ -38,22 +131,24 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
             onOk: async () => {
                 if (selectedUserId) {
                     try {
-                        const response = await DropUsuario(selectedUserId);
-                        //.log('Eliminación exitosa');
+                        await usersService.deleteUser(selectedUserId, token);
                         notification.success({
                             message: 'Usuario Eliminado',
-                            description: 'Los datos del usuario han sido eliminados correctamente.',
+                            description: 'El usuario ha sido eliminado correctamente.',
                         });
-                        window.location.reload();
+                        // Lógica para refrescar la lista de usuarios
                     } catch (error) {
-                        //.error(error);
+                        console.error('Error al eliminar el usuario:', error);
                         notification.error({
-                            message: 'Usuario No Eliminado.',
-                            description: 'Error al eliminar usuario.',
+                            message: 'Error al Eliminar Usuario',
+                            description: 'Hubo un error al eliminar el usuario.',
                         });
                     }
                 } else {
-                    alert("Selecciona un usuario para eliminar.");
+                    notification.warning({
+                        message: 'Selecciona un usuario',
+                        description: 'Para eliminar, selecciona un usuario de la lista.',
+                    });
                 }
             },
         });
@@ -61,87 +156,6 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
 
     const Reload = () => {
         window.location.reload();
-    };
-
-    const showModal = () => {
-        setIsModalAltaOpen(true);
-    };
-
-    const handleOk = async () => {
-        try {
-            const response = await usersService.createUser(token, formData);
-            //.log('Usuario agregado:', response);
-            notification.success({
-                message: 'Usuario Agregado',
-                description: 'El usuario ha sido agregado correctamente.',
-            });
-            setIsModalAltaOpen(false);
-            setFormData({
-                username: '',
-                email: '',
-                roles: [],
-                password: ''
-            });
-        } catch (error) {
-            //.error('Error al agregar usuario:', error);
-            notification.error({
-                message: 'Error al Agregar Usuario',
-                description: 'Hubo un problema al intentar agregar el usuario.',
-            });
-        }
-    };
-
-    const handleCancel = () => {
-        setIsModalAltaOpen(false);
-    };
-
-    const showCambioModal = () => {
-        setIsModalCambioOpen(true);
-    };
-
-    const handleCambioOk = () => {
-        form.validateFields()
-            .then(values => {
-                Modal.confirm({
-                    title: 'Confirmar actualización',
-                    icon: <ExclamationCircleOutlined />,
-                    content: '¿Estás seguro de que deseas actualizar este usuario?',
-                    onOk: async () => {
-                        try {
-                            await usersService.updateUser(token, selectedUserId, values);
-                            notification.success({
-                                message: 'Usuario Actualizado',
-                                description: 'Los datos del usuario han sido actualizados correctamente.',
-                            });
-                            setIsModalCambioOpen(false);
-                            window.location.reload();
-                        } catch (error) {
-                            //.error('Error al actualizar usuario:', error);
-                            notification.error({
-                                message: 'Error al Actualizar Usuario',
-                                description: 'Hubo un error al actualizar los datos del usuario.',
-                            });
-                        }
-                    },
-                });
-            })
-            .catch(info => {
-                //.log('Validación fallida:', info);
-            });
-    };
-
-    const handleCambioCancel = () => {
-        setIsModalCambioOpen(false);
-    };
-  
-
-
-
-    const handleChange = (value) => {
-        setFormData({
-            ...formData,
-            roles: value,
-        });
     };
 
     return (
@@ -171,45 +185,8 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                 />
             </Space>
 
-            <Modal title="Alta de Usuario" open={isModalAlta} onOk={handleOk} onCancel={handleCancel}>
-                <Form layout="vertical">
-                    <Form.Item label="Nombre de Usuario">
-                        <Input
-                            placeholder="Nombre de usuario"
-                            value={formData.username}
-                            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Correo Electrónico">
-                        <Input
-                            placeholder="Correo electrónico"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Contraseña">
-                        <Input.Password
-                            placeholder="Contraseña"
-                            value={formData.password}
-                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Roles">
-                        <Select
-                            placeholder="Selecciona roles"
-                            mode="multiple"
-                            value={formData.roles}
-                            onChange={handleChange}
-                        >
-                            <Option value="admin">Administrador</Option>
-                            <Option value="user">Estudiante</Option>
-                        </Select>
-                    </Form.Item>
-                </Form>
-            </Modal>
-
-            <Modal title="Editar Usuario" open={isModalCambio} onOk={handleCambioOk} onCancel={handleCambioCancel}>
-                <Form form={form} layout="vertical" name="form_in_modal">
+            <Modal title="Alta de Usuario" open={isModalAlta} onOk={handleCreateOk} onCancel={handleCreateCancel}>
+                <Form form={form} layout="vertical">
                     <Form.Item
                         name="username"
                         label="Nombre de Usuario"
@@ -226,6 +203,57 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                         ]}
                     >
                         <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        label="Contraseña"
+                        rules={[{ required: true, message: 'Por favor ingresa la contraseña' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item
+                        name="roles"
+                        label="Roles"
+                        rules={[{ required: true, message: 'Por favor selecciona al menos un rol' }]}
+                    >
+                        <Select mode="multiple" placeholder="Selecciona roles">
+                            {roles.map(role => (
+                                <Option key={role._id} value={role._id}>{role.name}</Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal title="Editar Usuario" open={isModalCambio} onOk={handleCambioOk} onCancel={handleCambioCancel}>
+                <Form form={form} layout="vertical">
+                    <Form.Item
+                        name="username"
+                        label="Nombre de Usuario"
+                        rules={[{ required: true, message: 'Por favor ingresa el nombre de usuario' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="email"
+                        label="Correo Electrónico"
+                        rules={[
+                            { required: true, message: 'Por favor ingresa el correo electrónico' },
+                            { type: 'email', message: 'Por favor ingresa un correo electrónico válido' },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        name="roles"
+                        label="Roles"
+                        rules={[{ required: true, message: 'Por favor selecciona al menos un rol' }]}
+                    >
+                        <Select mode="multiple" placeholder="Selecciona roles">
+                            {roles.map(role => (
+                                <Option key={role._id} value={role._id}>{role.name}</Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Form>
             </Modal>
