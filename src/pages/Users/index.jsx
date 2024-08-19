@@ -11,15 +11,10 @@ const Usuarios = () => {
     const { user } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     const token = storageController.getToken();
-    const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95'); // Verifica el ID de administrador
 
-    // Verifica el estado de isAdmin y selectedUserId
-    console.log('User:', user);
-    console.log('isAdmin:', isAdmin);
-    console.log('Selected User ID:', selectedUserId);
+    const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95');
 
     const rowSelection = {
         type: 'radio',
@@ -32,9 +27,21 @@ const Usuarios = () => {
     };
 
     const columns = [
-        { title: 'ID', dataIndex: '_id', align: 'center' },
-        { title: 'Nombre de Usuario', dataIndex: 'username', align: 'center' },
-        { title: 'Correo Electrónico', dataIndex: 'email', align: 'center' },
+        {
+            title: 'ID',
+            dataIndex: '_id',
+            align: 'center',
+        },
+        {
+            title: 'Nombre de Usuario',
+            dataIndex: 'username',
+            align: 'center',
+        },
+        {
+            title: 'Correo Electrónico',
+            dataIndex: 'email',
+            align: 'center',
+        },
         {
             title: 'Roles',
             dataIndex: 'roles',
@@ -53,8 +60,16 @@ const Usuarios = () => {
                 </span>
             ),
         },
-        { title: 'Fecha de Creación', dataIndex: 'createdAt', align: 'center' },
-        { title: 'Fecha de Actualización', dataIndex: 'updatedAt', align: 'center' },
+        {
+            title: 'Fecha de Creación',
+            dataIndex: 'createdAt',
+            align: 'center',
+        },
+        {
+            title: 'Fecha de Actualización',
+            dataIndex: 'updatedAt',
+            align: 'center',
+        },
     ];
 
     const getRoleName = (roleId) => {
@@ -80,33 +95,22 @@ const Usuarios = () => {
     };
 
     const fetchUsers = async () => {
-        setLoading(true);
         try {
-            if (token) {
-                const data = await usersService.getAllUsers(token);
-                const usersWithKey = data.map(user => ({
-                    ...user,
-                    key: user._id,
-                    roles: user.roles.map(role => ({ _id: role, name: [role] }))
-                }));
-                setUsers(usersWithKey);
-            } else {
-                console.error('Token no disponible');
-            }
+            const data = await usersService.getAllUsers(token);
+            const usersWithKey = data.map(user => ({
+                ...user,
+                key: user._id,
+                roles: user.roles.map(role => ({ _id: role, name: [role] }))
+            }));
+            setUsers(usersWithKey);
         } catch (error) {
             console.error('Error al obtener usuarios', error);
-        } finally {
-            setLoading(false);
         }
     };
 
     useEffect(() => {
         fetchUsers();
-    }, [token]);
-
-    if (loading) {
-        return <div>Cargando usuarios...</div>;
-    }
+    }, []);
 
     return (
         <div className="usuarios-page">
@@ -114,9 +118,7 @@ const Usuarios = () => {
             <div className="usuarios-content">
                 <h1>Usuarios</h1>
                 <div className='usuarios-container'>
-                    {isAdmin && selectedUserId && (
-                        <BotonesCrudUsuario selectedUserId={selectedUserId} />
-                    )}
+                    {isAdmin && selectedUserId && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
                     <Table
                         rowSelection={isAdmin ? rowSelection : null}
                         columns={columns}
