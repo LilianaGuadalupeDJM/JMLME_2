@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Space, notification, Modal, Form, Input, Select } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { Button, Space, notification, Modal, Form, Input, List } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, UserOutlined } from '@ant-design/icons';
 import { ofertaService } from '../../services/oferta';
 import { getProfesor } from '../../services/profesores';
 import { storageController } from '../../services/token';
