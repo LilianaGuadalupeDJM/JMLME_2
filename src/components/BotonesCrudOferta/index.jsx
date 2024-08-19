@@ -8,11 +8,15 @@ import { storageController } from '../../services/token';
 const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
     const [isModalCambio, setIsModalCambioOpen] = useState(false);
-    
     const [isModalProfesores, setIsModalProfesoresOpen] = useState(false);
     const [form] = Form.useForm();
     const token = storageController.getToken();
     const [profesores, setProfesores] = useState([]);
+
+    // Obtener el rol del usuario desde el token o almacenamiento
+    const userRole = storageController.getRole(); // Asumiendo que tienes un método para obtener el rol
+
+    const isAdmin = userRole === 'Administrador'; // Asegúrate de que coincida con el rol que tienes definido
 
     const showModal = () => {
         setIsModalAltaOpen(true);
@@ -21,7 +25,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
     const handleCreateOk = async () => {
         try {
             const values = await form.validateFields();
-            const response = await ofertaService.createOferta(token, values);
+            await ofertaService.createOferta(token, values);
             notification.success({
                 message: 'Oferta Creada',
                 description: 'La oferta ha sido creada correctamente.',
@@ -29,10 +33,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
             setIsModalAltaOpen(false);
             window.location.reload();
             form.resetFields();
-            // Opcional: Recargar la lista de ofertas aquí si es necesario
-            //fetchOfertas();
         } catch (error) {
-            //.error('Error al crear la oferta:', error);
             notification.error({
                 message: 'Error al Crear Oferta',
                 description: 'Hubo un error al crear la oferta.',
@@ -64,10 +65,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                             });
                             setIsModalCambioOpen(false);
                             window.location.reload();
-                            // Opcional: Recargar la lista de ofertas aquí si es necesario
-                            // fetchOfertas();
                         } catch (error) {
-                            //.error('Error al actualizar la oferta:', error);
                             notification.error({
                                 message: 'Error al Actualizar Oferta',
                                 description: 'Hubo un error al actualizar los datos de la oferta.',
@@ -98,7 +96,6 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 setProfesores(profesoresDetails);
                 setIsModalProfesoresOpen(true);
             } catch (error) {
-                //.error('Error al obtener la oferta:', error);
                 notification.error({
                     message: 'Error al Obtener Profesores',
                     description: 'Hubo un error al obtener los datos de los profesores.',
@@ -113,12 +110,10 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
         setIsModalProfesoresOpen(false);
     };
 
-
     const Reload = () => {
         window.location.reload();
     };
 
-    
     const confirmDeletion = () => {
         Modal.confirm({
             title: '¿Está seguro que desea eliminar esta oferta?',
@@ -135,10 +130,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                             description: 'La oferta ha sido eliminada correctamente.',
                         });
                         window.location.reload();
-                        // Opcional: Recargar la lista de ofertas aquí si es necesario
-                        // fetchOfertas();
                     } catch (error) {
-                        //.error('Error al eliminar la oferta:', error);
                         notification.error({
                             message: 'Error al Eliminar Oferta',
                             description: 'Hubo un error al eliminar la oferta.',
@@ -153,36 +145,38 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
 
     return (
         <>
-            <Space>
-                <Button
-                    type="text"
-                    icon={<PlusOutlined style={{ color: '#01859a' }} />}
-                    onClick={showModal}
-                />
-                <Button
-                    type="text"
-                    icon={<EditOutlined style={{ color: '#01859a' }} />}
-                    onClick={showCambioModal}
-                    disabled={!selectedOfertaId}
-                />
-                <Button
-                    type="text"
-                    icon={<UserOutlined style={{ color: '#01859a' }} />}
-                    onClick={showProfesoresModal}
-                    disabled={!selectedOfertaId}
-                />
-                <Button
-                    type="text"
-                    icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-                    onClick={confirmDeletion}
-                    disabled={!selectedOfertaId}
-                />
-               <Button
-                    type="text"
-                    icon={<ReloadOutlined style={{ color: '#01859a' }} />}
-                    onClick={Reload}
-                />
-            </Space>
+            {isAdmin && (
+                <Space>
+                    <Button
+                        type="text"
+                        icon={<PlusOutlined style={{ color: '#01859a' }} />}
+                        onClick={showModal}
+                    />
+                    <Button
+                        type="text"
+                        icon={<EditOutlined style={{ color: '#01859a' }} />}
+                        onClick={showCambioModal}
+                        disabled={!selectedOfertaId}
+                    />
+                    <Button
+                        type="text"
+                        icon={<UserOutlined style={{ color: '#01859a' }} />}
+                        onClick={showProfesoresModal}
+                        disabled={!selectedOfertaId}
+                    />
+                    <Button
+                        type="text"
+                        icon={<DeleteOutlined style={{ color: '#01859a' }} />}
+                        onClick={confirmDeletion}
+                        disabled={!selectedOfertaId}
+                    />
+                    <Button
+                        type="text"
+                        icon={<ReloadOutlined style={{ color: '#01859a' }} />}
+                        onClick={Reload}
+                    />
+                </Space>
+            )}
 
             <Modal title="Crear Nueva Oferta" open={isModalAlta} onOk={handleCreateOk} onCancel={handleCreateCancel}>
                 <Form form={form} layout="vertical" name="form_create_oferta">
@@ -222,6 +216,7 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                     </Form.Item>
                 </Form>
             </Modal>
+
             <Modal
                 title="Profesores de la Oferta"
                 open={isModalProfesores}
