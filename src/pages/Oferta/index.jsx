@@ -17,9 +17,10 @@ const Oferta = () => {
     const [filteredOfertas, setFilteredOfertas] = useState([]);
     const token = storageController.getToken();
 
+    // Cargar ofertas sin importar el token
     const fetchOfertas = async () => {
         try {
-            const data = await ofertaService.getAllOferta(token);
+            const data = await ofertaService.getAllOferta(); // Sin token aquí
             if (data && Array.isArray(data)) {
                 setOfertas(data);
                 const { current, pageSize } = pagination;
@@ -95,17 +96,13 @@ const Oferta = () => {
         },
     };
 
-    // Determine if the user is an admin
-    const isAdmin = user?.role === '666b5995e842a28618ccfc95'; // Assuming admin role ID
-
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sidebar />
             <Layout className="oferta-layout">
                 <Content className="oferta-content">
                     <h1>Gestión de oferta educativa</h1>
-                    {/* Conditionally render BotonesCrudOferta based on user role */}
-                    {isAdmin && <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />}
+                    {<BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />}
                     <Table
                         rowSelection={rowSelection}
                         columns={columns}
