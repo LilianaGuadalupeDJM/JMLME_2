@@ -3,63 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
-import { usersService } from '../../services/users'; // Asegúrate de importar usersService
+import { usersService } from '../../services/users';
 import Sidebar from '../../components/SiderBar';
 import './index.css';
 
 const { Content } = Layout;
-
-const columns = [
-    {
-        title: 'ID',
-        dataIndex: '_id',
-        key: 'id',
-        align: 'center',
-    },
-    {
-        title: 'Nombre de Usuario',
-        dataIndex: 'username',
-        key: 'username',
-        align: 'center',
-    },
-    {
-        title: 'Correo Electrónico',
-        dataIndex: 'email',
-        key: 'email',
-        align: 'center',
-    },
-    {
-        title: 'Roles',
-        dataIndex: 'roles',
-        key: 'roles',
-        align: 'center',
-        render: (roles, record) => (
-            <span>
-                {roles.length > 0 ? (
-                    roles.map(role => (
-                        <Tag color={getColor(role._id)} key={role._id}>
-                            {getRoleName(role._id)}
-                        </Tag>
-                    ))
-                ) : (
-                    <Tag color="blue">Customer</Tag>
-                )}
-            </span>
-        ),
-    },
-    {
-        title: 'Fecha de Creación',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
-        align: 'center',
-    },
-    {
-        title: 'Fecha de Actualización',
-        dataIndex: 'updatedAt',
-        key: 'updatedAt',
-        align: 'center',
-    },
-];
 
 const Usuarios = () => {
     const { user } = useAuth();
@@ -99,7 +47,7 @@ const Usuarios = () => {
 
     const fetchRoles = async () => {
         try {
-            const data = await usersService.getRoles(); // Llama a usersService.getRoles sin token
+            const data = await usersService.getRoles(); // Asegúrate de tener esta función en el servicio
             setRoles(data);
         } catch (error) {
             console.error('Error al obtener roles', error);
@@ -120,6 +68,58 @@ const Usuarios = () => {
         const role = roles.find(role => role._id === roleId);
         return role ? role.color : 'default';
     };
+
+    const columns = [
+        {
+            title: 'ID',
+            dataIndex: '_id',
+            key: 'id',
+            align: 'center',
+        },
+        {
+            title: 'Nombre de Usuario',
+            dataIndex: 'username',
+            key: 'username',
+            align: 'center',
+        },
+        {
+            title: 'Correo Electrónico',
+            dataIndex: 'email',
+            key: 'email',
+            align: 'center',
+        },
+        {
+            title: 'Roles',
+            dataIndex: 'roles',
+            key: 'roles',
+            align: 'center',
+            render: (roles) => (
+                <span>
+                    {roles.length > 0 ? (
+                        roles.map(role => (
+                            <Tag color={getColor(role._id)} key={role._id}>
+                                {getRoleName(role._id)}
+                            </Tag>
+                        ))
+                    ) : (
+                        <Tag color="blue">Customer</Tag>
+                    )}
+                </span>
+            ),
+        },
+        {
+            title: 'Fecha de Creación',
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            align: 'center',
+        },
+        {
+            title: 'Fecha de Actualización',
+            dataIndex: 'updatedAt',
+            key: 'updatedAt',
+            align: 'center',
+        },
+    ];
 
     return (
         <Layout>
