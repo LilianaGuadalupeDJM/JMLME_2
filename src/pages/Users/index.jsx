@@ -11,6 +11,7 @@ const Usuarios = () => {
     const { user } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
+    const [loading, setLoading] = useState(true); // Estado de carga
 
     const token = storageController.getToken();
 
@@ -95,22 +96,33 @@ const Usuarios = () => {
     };
 
     const fetchUsers = async () => {
+        setLoading(true); // Comienza la carga
         try {
-            const data = await usersService.getAllUsers(token);
-            const usersWithKey = data.map(user => ({
-                ...user,
-                key: user._id,
-                roles: user.roles.map(role => ({ _id: role, name: [role] }))
-            }));
-            setUsers(usersWithKey);
+            if (token) { // Verificar que el token exista
+                const data = await usersService.getAllUsers(token);
+                const usersWithKey = data.map(user => ({
+                    ...user,
+                    key: user._id,
+                    roles: user.roles.map(role => ({ _id: role, name: [role] }))
+                }));
+                setUsers(usersWithKey);
+            } else {
+                console.error('Token no disponible');
+            }
         } catch (error) {
             console.error('Error al obtener usuarios', error);
+        } finally {
+            setLoading(false); // Finaliza la carga
         }
     };
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [token]); // Vuelve a cargar si cambia el token
+
+    if (loading) {
+        return <div>Cargando usuarios...</div>; // Mostrar mensaje de carga
+    }
 
     return (
         <div className="usuarios-page">
