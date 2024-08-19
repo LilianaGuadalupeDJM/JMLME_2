@@ -97,6 +97,7 @@ const AdmisionesPage = () => {
         <Layout style={{ minHeight: '100vh' }}>
             <Sidebar />
             <Layout className="admisiones-layout">
+            <h1>Admisiones</h1>  {/* Aquí cambiamos el título */}
                 <Content className="admisiones-content">
                     {isAdmin && (
                         <div className="action-buttons">

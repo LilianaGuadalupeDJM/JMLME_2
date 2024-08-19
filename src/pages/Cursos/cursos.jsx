@@ -74,6 +74,7 @@ const Cursos = () => {
             <Nav/>
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
                 <Divider />
+                <h1>Gestión de cursos</h1>  {/* Aquí cambiamos el título */}
                 <div className='cursos-container'>
                     <Table
                         rowSelection={rowSelection}
