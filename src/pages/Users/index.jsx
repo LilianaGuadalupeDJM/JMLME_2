@@ -14,7 +14,12 @@ const Usuarios = () => {
     const [loading, setLoading] = useState(true);
 
     const token = storageController.getToken();
-    const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95');
+    const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95'); // Verifica el ID de administrador
+
+    // Verifica el estado de isAdmin y selectedUserId
+    console.log('User:', user);
+    console.log('isAdmin:', isAdmin);
+    console.log('Selected User ID:', selectedUserId);
 
     const rowSelection = {
         type: 'radio',
