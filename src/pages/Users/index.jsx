@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import BotonesCrudUsuario from '../../components/BotonesCrudUsuario';
 import { storageController } from '../../services/token';
-import { usersService } from '../../services/users';
+import { usersService } from '../../services/users'; // Asegúrate de importar usersService
 import Sidebar from '../../components/SiderBar';
 import './index.css';
 
@@ -99,7 +99,7 @@ const Usuarios = () => {
 
     const fetchRoles = async () => {
         try {
-            const data = await rolesService.getRoles(token);
+            const data = await usersService.getRoles(); // Llama a usersService.getRoles sin token
             setRoles(data);
         } catch (error) {
             console.error('Error al obtener roles', error);
