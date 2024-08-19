@@ -99,7 +99,7 @@ const AdmisionesPage = () => {
             <Layout className="admisiones-layout">
                 <Content className="admisiones-content">
                     <h1>Admisiones</h1>  {/* Aquí está el título */}
-                    {isAdmin && (
+                    {token  && (
                         <div className="action-buttons">
                             <Space size="small">
                                 <Button
