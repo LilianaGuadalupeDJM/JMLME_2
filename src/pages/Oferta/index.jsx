@@ -65,10 +65,10 @@ const Oferta = () => {
             key: 'descripcion',
         },
         {
-            title: 'Profesor Asignado',
-            dataIndex: 'profesor', // Asegúrate de que este sea el campo correcto
+            title: 'Profesor',
+            dataIndex: 'profesor',
             key: 'profesor',
-            render: (profesor) => profesor ? `${profesor.nombre} ${profesor.apellido}` : 'Sin asignar',
+            render: (text, record) => record.profesor ? record.profesor.nombre : 'Desconocido',
         },
         {
             title: 'Activo',
