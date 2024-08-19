@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Space, notification, Modal, Form, Input, Switch, List } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import { Button, Space, notification, Modal, Form, Input, Select } from 'antd';
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { ofertaService } from '../../services/oferta';
 import { getProfesor } from '../../services/profesores';
 import { storageController } from '../../services/token';
 
-const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
+const BotonesCrudOferta = ({ selectedOfertaId }) => {
     const [isModalAlta, setIsModalAltaOpen] = useState(false);
     const [isModalCambio, setIsModalCambioOpen] = useState(false);
     const [isModalProfesores, setIsModalProfesoresOpen] = useState(false);
@@ -13,10 +13,22 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
     const token = storageController.getToken();
     const [profesores, setProfesores] = useState([]);
 
-    // Obtener el rol del usuario desde el token o almacenamiento
-    const userRole = storageController.getRole(); // Asumiendo que tienes un método para obtener el rol
-
-    const isAdmin = userRole === 'Administrador'; // Asegúrate de que coincida con el rol que tienes definido
+    useEffect(() => {
+        if (selectedOfertaId && isModalCambio) {
+            const fetchOferta = async () => {
+                try {
+                    const oferta = await ofertaService.getOfertaById(token, selectedOfertaId);
+                    form.setFieldsValue(oferta);
+                } catch (error) {
+                    notification.error({
+                        message: 'Error al Obtener Oferta',
+                        description: 'Hubo un error al obtener los datos de la oferta.',
+                    });
+                }
+            };
+            fetchOferta();
+        }
+    }, [selectedOfertaId, isModalCambio]);
 
     const showModal = () => {
         setIsModalAltaOpen(true);
@@ -31,8 +43,8 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 description: 'La oferta ha sido creada correctamente.',
             });
             setIsModalAltaOpen(false);
-            window.location.reload();
             form.resetFields();
+            window.location.reload();
         } catch (error) {
             notification.error({
                 message: 'Error al Crear Oferta',
@@ -49,34 +61,23 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
         setIsModalCambioOpen(true);
     };
 
-    const handleCambioOk = () => {
-        form.validateFields()
-            .then(values => {
-                Modal.confirm({
-                    title: 'Confirmar actualización',
-                    icon: <ExclamationCircleOutlined />,
-                    content: '¿Estás seguro de que deseas actualizar esta oferta?',
-                    onOk: async () => {
-                        try {
-                            await ofertaService.updateOferta(token, selectedOfertaId, values);
-                            notification.success({
-                                message: 'Oferta Actualizada',
-                                description: 'Los datos de la oferta han sido actualizados correctamente.',
-                            });
-                            setIsModalCambioOpen(false);
-                            window.location.reload();
-                        } catch (error) {
-                            notification.error({
-                                message: 'Error al Actualizar Oferta',
-                                description: 'Hubo un error al actualizar los datos de la oferta.',
-                            });
-                        }
-                    },
-                });
-            })
-            .catch(info => {
-                //.log('Validación fallida:', info);
+    const handleCambioOk = async () => {
+        try {
+            const values = await form.validateFields();
+            await ofertaService.updateOferta(token, selectedOfertaId, values);
+            notification.success({
+                message: 'Oferta Actualizada',
+                description: 'Los datos de la oferta han sido actualizados correctamente.',
             });
+            setIsModalCambioOpen(false);
+            form.resetFields();
+            window.location.reload();
+        } catch (error) {
+            notification.error({
+                message: 'Error al Actualizar Oferta',
+                description: 'Hubo un error al actualizar los datos de la oferta.',
+            });
+        }
     };
 
     const handleCambioCancel = () => {
@@ -102,16 +103,15 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                 });
             }
         } else {
-            alert("Selecciona una oferta para ver los profesores.");
+            notification.warning({
+                message: 'Selecciona una oferta',
+                description: 'Para ver los profesores, selecciona una oferta de la lista.',
+            });
         }
     };
 
     const handleProfesoresModalCancel = () => {
         setIsModalProfesoresOpen(false);
-    };
-
-    const Reload = () => {
-        window.location.reload();
     };
 
     const confirmDeletion = () => {
@@ -137,49 +137,55 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                         });
                     }
                 } else {
-                    alert("Selecciona una oferta para eliminar.");
+                    notification.warning({
+                        message: 'Selecciona una oferta',
+                        description: 'Para eliminar, selecciona una oferta de la lista.',
+                    });
                 }
             },
         });
     };
 
+    const Reload = () => {
+        window.location.reload();
+    };
+
     return (
         <>
-            {isAdmin && (
-                <Space>
-                    <Button
-                        type="text"
-                        icon={<PlusOutlined style={{ color: '#01859a' }} />}
-                        onClick={showModal}
-                    />
-                    <Button
-                        type="text"
-                        icon={<EditOutlined style={{ color: '#01859a' }} />}
-                        onClick={showCambioModal}
-                        disabled={!selectedOfertaId}
-                    />
-                    <Button
-                        type="text"
-                        icon={<UserOutlined style={{ color: '#01859a' }} />}
-                        onClick={showProfesoresModal}
-                        disabled={!selectedOfertaId}
-                    />
-                    <Button
-                        type="text"
-                        icon={<DeleteOutlined style={{ color: '#01859a' }} />}
-                        onClick={confirmDeletion}
-                        disabled={!selectedOfertaId}
-                    />
-                    <Button
-                        type="text"
-                        icon={<ReloadOutlined style={{ color: '#01859a' }} />}
-                        onClick={Reload}
-                    />
-                </Space>
-            )}
+            <Space>
+                <Button
+                    type="text"
+                    icon={<PlusOutlined style={{ color: '#01859a' }} />}
+                    onClick={showModal}
+                />
+                <Button
+                    type="text"
+                    icon={<EditOutlined style={{ color: '#01859a' }} />}
+                    onClick={showCambioModal}
+                    disabled={!selectedOfertaId}
+                />
+                <Button
+                    type="text"
+                    icon={<DeleteOutlined style={{ color: '#01859a' }} />}
+                    onClick={confirmDeletion}
+                    disabled={!selectedOfertaId}
+                />
+                <Button
+                    type="text"
+                    icon={<ReloadOutlined style={{ color: '#01859a' }} />}
+                    onClick={Reload}
+                />
+                <Button
+                    type="text"
+                    icon={<UserOutlined style={{ color: '#01859a' }} />}
+                    onClick={showProfesoresModal}
+                    disabled={!selectedOfertaId}
+                />
+            </Space>
 
             <Modal title="Crear Nueva Oferta" open={isModalAlta} onOk={handleCreateOk} onCancel={handleCreateCancel}>
                 <Form form={form} layout="vertical" name="form_create_oferta">
+                    {/* Campos específicos de la oferta */}
                     <Form.Item
                         name="nombre"
                         label="Nombre de la Oferta"
@@ -187,19 +193,13 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item
-                        name="activo"
-                        label="Activo"
-                        valuePropName="checked"
-                        initialValue={true}
-                    >
-                        <Switch />
-                    </Form.Item>
+                    {/* Más campos aquí */}
                 </Form>
             </Modal>
 
             <Modal title="Editar Oferta" open={isModalCambio} onOk={handleCambioOk} onCancel={handleCambioCancel}>
                 <Form form={form} layout="vertical" name="form_edit_oferta">
+                    {/* Campos de edición */}
                     <Form.Item
                         name="nombre"
                         label="Nombre de la Oferta"
@@ -207,31 +207,19 @@ const BotonesCrudOferta = ({ selectedOfertaId, selectedOferta }) => {
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item
-                        name="activo"
-                        label="Activo"
-                        valuePropName="checked"
-                    >
-                        <Switch />
-                    </Form.Item>
+                    {/* Más campos aquí */}
                 </Form>
             </Modal>
 
-            <Modal
-                title="Profesores de la Oferta"
-                open={isModalProfesores}
-                onCancel={handleProfesoresModalCancel}
-                footer={null}
-            >
+            <Modal title="Profesores Asignados" open={isModalProfesores} onCancel={handleProfesoresModalCancel} footer={null}>
                 <List
                     itemLayout="horizontal"
                     dataSource={profesores}
                     renderItem={profesor => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<UserOutlined />}
-                                title={`${profesor.nombre} ${profesor.apellidos}`}
-                                description={`Correo: ${profesor.correo} - Número de Empleado: ${profesor.numeroEmpleado}`}
+                                title={profesor.nombre}
+                                description={profesor.email}
                             />
                         </List.Item>
                     )}
