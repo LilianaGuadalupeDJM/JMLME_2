@@ -11,10 +11,9 @@ const Usuarios = () => {
     const { user } = useAuth();
     const [users, setUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const [loading, setLoading] = useState(true);
 
     const token = storageController.getToken();
-
     const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95');
 
     const rowSelection = {
@@ -28,21 +27,9 @@ const Usuarios = () => {
     };
 
     const columns = [
-        {
-            title: 'ID',
-            dataIndex: '_id',
-            align: 'center',
-        },
-        {
-            title: 'Nombre de Usuario',
-            dataIndex: 'username',
-            align: 'center',
-        },
-        {
-            title: 'Correo Electrónico',
-            dataIndex: 'email',
-            align: 'center',
-        },
+        { title: 'ID', dataIndex: '_id', align: 'center' },
+        { title: 'Nombre de Usuario', dataIndex: 'username', align: 'center' },
+        { title: 'Correo Electrónico', dataIndex: 'email', align: 'center' },
         {
             title: 'Roles',
             dataIndex: 'roles',
@@ -61,16 +48,8 @@ const Usuarios = () => {
                 </span>
             ),
         },
-        {
-            title: 'Fecha de Creación',
-            dataIndex: 'createdAt',
-            align: 'center',
-        },
-        {
-            title: 'Fecha de Actualización',
-            dataIndex: 'updatedAt',
-            align: 'center',
-        },
+        { title: 'Fecha de Creación', dataIndex: 'createdAt', align: 'center' },
+        { title: 'Fecha de Actualización', dataIndex: 'updatedAt', align: 'center' },
     ];
 
     const getRoleName = (roleId) => {
@@ -96,9 +75,9 @@ const Usuarios = () => {
     };
 
     const fetchUsers = async () => {
-        setLoading(true); // Comienza la carga
+        setLoading(true);
         try {
-            if (token) { // Verificar que el token exista
+            if (token) {
                 const data = await usersService.getAllUsers(token);
                 const usersWithKey = data.map(user => ({
                     ...user,
@@ -112,16 +91,16 @@ const Usuarios = () => {
         } catch (error) {
             console.error('Error al obtener usuarios', error);
         } finally {
-            setLoading(false); // Finaliza la carga
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         fetchUsers();
-    }, [token]); // Vuelve a cargar si cambia el token
+    }, [token]);
 
     if (loading) {
-        return <div>Cargando usuarios...</div>; // Mostrar mensaje de carga
+        return <div>Cargando usuarios...</div>;
     }
 
     return (
@@ -130,7 +109,9 @@ const Usuarios = () => {
             <div className="usuarios-content">
                 <h1>Usuarios</h1>
                 <div className='usuarios-container'>
-                    {isAdmin && selectedUserId && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
+                    {isAdmin && selectedUserId && (
+                        <BotonesCrudUsuario selectedUserId={selectedUserId} />
+                    )}
                     <Table
                         rowSelection={isAdmin ? rowSelection : null}
                         columns={columns}
