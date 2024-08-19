@@ -14,8 +14,8 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
+        password: '',
         roles: [],
-        password: ''
     });
     const token = storageController.getToken();
 
@@ -93,6 +93,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
 
     const handleOk = async () => {
         try {
+            // Asegúrate de que formData esté en el formato correcto
             await usersService.createUser(token, formData);
             notification.success({
                 message: 'Usuario Agregado',
@@ -220,7 +221,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                             onChange={handleChange}
                         >
                             {roles.map(role => (
-                                <Option key={role.id} value={role.id}>
+                                <Option key={role._id} value={role._id}>
                                     {role.name}
                                 </Option>
                             ))}
@@ -257,7 +258,7 @@ const BotonesCrudUsuario = ({ selectedUserId, selectedUser }) => {
                             mode="multiple"
                         >
                             {roles.map(role => (
-                                <Option key={role.id} value={role.id}>
+                                <Option key={role._id} value={role._id}>
                                     {role.name}
                                 </Option>
                             ))}
