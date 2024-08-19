@@ -100,7 +100,7 @@ const Oferta = () => {
             <Sidebar />
             <Layout className="oferta-layout">
                 <Content className="oferta-content">
-                    <h1>Gestión de Ofertas</h1>
+                    <h1>Gestión de Profesores</h1>  {/* Aquí cambiamos el título */}
                     <BotonesCrudOferta selectedOfertaId={selectedOfertaId} selectedOferta={selectedOferta} />
                     <Table
                         rowSelection={rowSelection}

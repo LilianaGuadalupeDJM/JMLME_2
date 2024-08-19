@@ -62,6 +62,7 @@ const DivisionesPage = () => {
             <Nav /> {/* Componente de navegación */}
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
                 <Divider />
+                <h1>Division</h1>  {/* Aquí cambiamos el título */}
                 <div className='divisiones-container'>
                     <Table
                         rowSelection={rowSelection}
