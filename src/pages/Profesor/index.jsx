@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, notification, Modal } from 'antd';
-import { getProfesor, EditProfesor,  } from '../../services/profesores';
+import { getProfesor, EditProfesor } from '../../services/profesores';
 import { useNavigate } from 'react-router-dom';
 import './index.css';
 
-const EditProfessor = ({isVisible, id, onClose }) => {
+const EditProfessor = ({ isVisible, id, onClose }) => {
     const [professorData, setProfessorData] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
     useEffect(() => {
-        const fetchProfessorData = async () => {
-            try {
-                const data = await getProfesor(id);
-                setProfessorData(data);
-            } catch (error) {
-                notification.error({
-                    message: 'Error al obtener profesor',
-                    description: error.message,
-                });
-            } finally {
-                setLoading(false);
-            }
-        };
+        if (id) {
+            const fetchProfessorData = async () => {
+                try {
+                    const data = await getProfesor(id);
+                    setProfessorData(data);
+                    form.setFieldsValue(data); // Establece los valores del formulario
+                } catch (error) {
+                    notification.error({
+                        message: 'Error al obtener profesor',
+                        description: error.message,
+                    });
+                } finally {
+                    setLoading(false);
+                }
+            };
 
-        fetchProfessorData();
-    }, [id]);
+            fetchProfessorData();
+        }
+    }, [id, form]);
 
     const handleFormSubmit = async (values) => {
         try {
-            const response = await EditProfesor(
+            await EditProfesor(
                 id,
                 values.nombre.toUpperCase(),
                 values.apellidos.toUpperCase(),
@@ -38,7 +41,6 @@ const EditProfessor = ({isVisible, id, onClose }) => {
                 values.correo.toUpperCase(),
                 values.fechaNacimiento
             );
-            //.log('Registro exitoso ', response.data);
             notification.success({
                 message: 'Profesor actualizado',
                 description: 'Los datos del profesor han sido actualizados correctamente.',
@@ -46,7 +48,6 @@ const EditProfessor = ({isVisible, id, onClose }) => {
             onClose();  
             navigate('/profesores');
         } catch (error) {
-            //.error(error);
             notification.error({
                 message: 'Profesor no actualizado.',
                 description: 'Error al actualizar profesor.',
@@ -54,14 +55,12 @@ const EditProfessor = ({isVisible, id, onClose }) => {
         }
     };
 
-    if (loading) {
-        return <p>Cargando datos del profesor...</p>;
-    }
-
     return (
-            <Modal title="Editar Profesor" visible={isVisible} onCancel={onClose} footer={null}>
-            {professorData ? (
-                <Form initialValues={professorData} onFinish={handleFormSubmit}>
+        <Modal title="Editar Profesor" visible={isVisible} onCancel={onClose} footer={null}>
+            {loading ? (
+                <p>Cargando datos del profesor...</p>
+            ) : professorData ? (
+                <Form form={form} onFinish={handleFormSubmit}>
                     <Form.Item name="nombre" label="Nombre" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
@@ -86,7 +85,7 @@ const EditProfessor = ({isVisible, id, onClose }) => {
             ) : (
                 <p>No se encontraron datos del profesor.</p>
             )}
-         </Modal>   
+        </Modal>
     );
 };
 
