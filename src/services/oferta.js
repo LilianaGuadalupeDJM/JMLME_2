@@ -105,10 +105,22 @@ const getOfertaById = async (token, ofertaId) => {
         throw error;
     }
 };
+// Obtener la lista de profesores
+export const getProfesores = async () => {
+    try {
+        const response = await axios.get(`${ENV.API_URL}/${ENV.ENDPOINTS.PROFESORES}`);
+        return response.data;
+    } catch (error) {
+        //.error('Error al obtener profesores: ', error);
+        throw error;
+    }
+}
+
 export const ofertaService = {
     getAllOferta,
     updateOferta,
     deleteOferta,
     createOferta,
     getOfertaById,
+    getProfesores,
 };

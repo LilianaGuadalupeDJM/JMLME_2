@@ -17,10 +17,10 @@ const Oferta = () => {
     const [filteredOfertas, setFilteredOfertas] = useState([]);
     const token = storageController.getToken();
 
-    // Cargar ofertas sin importar el token
+    // Cargar ofertas con profesor asignado
     const fetchOfertas = async () => {
         try {
-            const data = await ofertaService.getAllOferta(); // Sin token aquí
+            const data = await ofertaService.getAllOferta(token); // Asegúrate de que los datos incluyan todos los campos necesarios
             if (data && Array.isArray(data)) {
                 setOfertas(data);
                 const { current, pageSize } = pagination;
@@ -58,6 +58,17 @@ const Oferta = () => {
             title: 'Nombre',
             dataIndex: 'nombre',
             key: 'nombre',
+        },
+        {
+            title: 'Descripción',
+            dataIndex: 'descripcion',
+            key: 'descripcion',
+        },
+        {
+            title: 'Profesor Asignado',
+            dataIndex: 'profesor', // Asegúrate de que este sea el campo correcto
+            key: 'profesor',
+            render: (profesor) => profesor ? `${profesor.nombre} ${profesor.apellido}` : 'Sin asignar',
         },
         {
             title: 'Activo',
