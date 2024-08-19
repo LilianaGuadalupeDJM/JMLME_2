@@ -13,7 +13,6 @@ const Usuarios = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
 
     const token = storageController.getToken();
-
     const isAdmin = user?.roles?.includes('666b5995e842a28618ccfc95');
 
     const rowSelection = {
@@ -118,7 +117,6 @@ const Usuarios = () => {
             <div className="usuarios-content">
                 <h1>Usuarios</h1>
                 <div className='usuarios-container'>
-                    {isAdmin && selectedUserId && <BotonesCrudUsuario selectedUserId={selectedUserId} />}
                     <Table
                         rowSelection={isAdmin ? rowSelection : null}
                         columns={columns}
@@ -127,6 +125,9 @@ const Usuarios = () => {
                         scroll={{ x: true, y: 400 }}
                         size="small"
                     />
+                    {token && (
+                        <BotonesCrudUsuario selectedUserId={selectedUserId} />
+                    )}
                 </div>
             </div>
         </div>
